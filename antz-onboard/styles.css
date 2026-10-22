@@ -120,10 +120,58 @@ button { font: inherit; color: inherit; }
 }
 .primary-nav { display: flex; align-items: center; gap: 30px; }
 .primary-nav a:not(.btn) { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--ink); transition: color .2s var(--ease); }
-/* Menu items never wrap; on smaller laptops they sit closer so longer translations still fit */
+/* Menu items never wrap; on smaller laptops they sit closer so longer translations still fit.
+   Below 1040px (with the Ready to Onboard? button the row no longer fits) the links fold into the menu button */
 .primary-nav a:not(.btn) { white-space: nowrap; }
-@media (min-width: 901px) and (max-width: 1200px) { .primary-nav { gap: 18px; } .primary-nav a:not(.btn) { font-size: 14px; } .brand-label { font-size: 17px; } }
+@media (min-width: 1041px) and (max-width: 1200px) { .primary-nav { gap: 18px; } .primary-nav a:not(.btn) { font-size: 14px; } .brand-label { font-size: 17px; } }
 .primary-nav a:not(.btn):hover { color: var(--green-strong); }
+/* "Ready to Onboard?" in the menu: a white pill that bounces up on hover. A dark half-pixel outline and soft
+   shadow keep it visible on the white glass bar; over the hero photo it sits clean */
+.nav-cta {
+  height: 40px; padding: 0 20px; border-radius: 999rem; white-space: nowrap;
+  background: #fff; color: var(--text); font-weight: 600; letter-spacing: .01em;
+  border: .5px solid var(--text); box-shadow: 0 2px 8px rgba(14,40,34,.08);
+  transition: transform .45s cubic-bezier(.4,0,.2,1), box-shadow .45s cubic-bezier(.4,0,.2,1), color .14s var(--ease);
+}
+.on-dark .nav-cta { border-color: transparent; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+/* Holographic film inside the pill: pastel foil colours drift across it, and a bright sheen glints past
+   every few seconds. Both sit behind the label (isolation keeps z-index -1 inside the button) */
+.nav-cta { position: relative; overflow: hidden; isolation: isolate; }
+.nav-cta::before, .nav-cta::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; }
+.nav-cta::before {
+  background: linear-gradient(115deg, #FFD9EC 0%, #E3D9FF 16%, #CDEBFF 32%, #C8F7E6 48%, #F6F7C8 64%, #FFDCCF 80%, #FFD9EC 100%) 0 50% / 300% 100%;
+  opacity: .85; animation: nav-cta-holo 6s linear infinite;
+}
+.nav-cta::after {
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.95) 50%, transparent 65%) -150% 0 / 60% 100% no-repeat;
+  mix-blend-mode: soft-light; animation: nav-cta-sheen 3.6s cubic-bezier(.4,0,.2,1) infinite;
+}
+.nav-cta:hover::before { animation-duration: 2.4s; opacity: 1; }
+@keyframes nav-cta-holo { to { background-position: 300% 50%; } }
+@keyframes nav-cta-sheen { 0%, 55% { background-position: -150% 0; } 100% { background-position: 250% 0; } }
+@media (prefers-reduced-motion: reduce) { .nav-cta::before, .nav-cta::after { animation: none; } }
+/* The outward arrow (the link opens the onboarding kiosk in a new tab) nudges up and out on hover */
+.nav-cta { gap: 6px; padding-inline-end: 16px; }
+.nav-cta-arrow { flex: none; transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
+.nav-cta:hover .nav-cta-arrow, .nav-cta:focus-visible .nav-cta-arrow { transform: translate(2px, -2px); }
+[dir="rtl"] .nav-cta-arrow { transform: scaleX(-1); }
+[dir="rtl"] .nav-cta:hover .nav-cta-arrow, [dir="rtl"] .nav-cta:focus-visible .nav-cta-arrow { transform: scaleX(-1) translate(2px, -2px); }
+@media (prefers-reduced-motion: reduce) { .nav-cta-arrow { transition: none; } }
+/* Smaller laptops: a tighter pill so long translations leave room for the brand */
+@media (min-width: 1041px) and (max-width: 1200px) { .nav-cta { height: 38px; padding-inline: 14px 12px; font-size: 14px; gap: 4px; } .nav-cta-arrow { width: 14px; height: 14px; } }
+.nav-cta:hover, .nav-cta:focus-visible {
+  transform: translateY(-4px); animation: nav-cta-bounce .7s cubic-bezier(.28,.84,.42,1) both;
+  box-shadow: 0 14px 24px -10px rgba(14,40,34,.45), 0 3px 6px rgba(14,40,34,.08);
+}
+.nav-cta:active { transform: translateY(-1px); animation: none; }
+@keyframes nav-cta-bounce {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(-7px); }
+  60%  { transform: translateY(-2px); }
+  80%  { transform: translateY(-5px); }
+  100% { transform: translateY(-4px); }
+}
+@media (prefers-reduced-motion: reduce) { .nav-cta:hover, .nav-cta:focus-visible { animation: none; transform: none; } }
 .nav-toggle { display: none; background: none; border: 0; width: 44px; height: 44px; padding: 10px; cursor: pointer; }
 /* Search icon in the menu bar (after the links on desktop, before the menu button on phones) */
 .brand { margin-inline-end: auto; min-width: 0; }
@@ -183,11 +231,11 @@ button { font: inherit; color: inherit; }
 .on-dark .nav-search:hover { background: rgba(255,255,255,.16); }
 .nav-toggle span { display: block; height: 2px; background: var(--ink); margin: 5px 0; border-radius: 2px; transition: transform .2s var(--ease), opacity .2s, background-color .3s var(--ease); }
 .on-dark .nav-toggle span { background: #fff; }
-@media (min-width: 901px) {
+@media (min-width: 1041px) {
   .on-dark .primary-nav a:not(.btn) { color: rgba(255,255,255,.92); text-shadow: 0 1px 10px rgba(0,0,0,.3); }
   .on-dark .primary-nav a:not(.btn):hover { color: #8FE3AE; }
 }
-@media (max-width: 900px) {
+@media (max-width: 1040px) {
   .nav-toggle { display: block; order: 3; margin-inline-start: 2px; }
   .nav-search { order: 2; margin-inline-start: 0; }
   .nav-lang { order: 1; }
@@ -202,6 +250,7 @@ button { font: inherit; color: inherit; }
   .primary-nav.open { display: flex; }
   .primary-nav a:not(.btn) { padding: 14px 0; border-bottom: 1px solid var(--line); }
   .primary-nav .btn { margin-top: 16px; }
+  .primary-nav .nav-cta { height: 46px; }
   .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
