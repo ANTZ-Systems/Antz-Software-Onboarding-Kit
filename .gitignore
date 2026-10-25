@@ -3,6 +3,8 @@
 !/.gitignore
 !/README.md
 !/vercel.json
+!/Caddyfile
+!/Staticfile
 !/antz-onboard/
 !/audit/
 !/.claude/

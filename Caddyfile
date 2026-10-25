@@ -1,0 +1,51 @@
+# Railway (Railpack staticfile) server config; mirrors the routing in vercel.json.
+# {{.StaticFileRoot}} is filled in by Railpack at build time.
+{
+	admin off
+	persist_config off
+	auto_https off
+
+	log {
+		format json
+	}
+
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+:{$PORT:80} {
+	log {
+		format json
+	}
+
+	respond /health 200
+
+	header {
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+
+	@assets path *.js *.css
+	header @assets Cache-Control "public, max-age=0, must-revalidate"
+
+	root * {{.StaticFileRoot}}
+
+	route {
+		# / serves the guide; /audit and /antz-onboard are served as-is;
+		# anything else is looked up inside antz-onboard/
+		rewrite / /antz-onboard/index.html
+		@site not path /health /audit /audit/* /antz-onboard /antz-onboard/*
+		rewrite @site /antz-onboard{path}
+	}
+
+	file_server {
+		hide .git .claude .env* Caddyfile Staticfile vercel.json
+	}
+
+	encode {
+		gzip
+		zstd
+	}
+}
