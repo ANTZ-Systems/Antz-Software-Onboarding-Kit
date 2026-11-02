@@ -1829,7 +1829,6 @@ window.ANTZ_GUIDES = {
         title: 'Nurseries, rooms and incubators',
         lede: 'Configure nurseries, rooms and incubators once, and every egg has a place to go. Each one has its own list, with search, filters and a button to add more.',
         /* The deck gives each facility its own page; here they are one card each */
-        chain: true,
         cards: [
           { id: 'nursery', title: 'Nursery', icon: 'home', thumb: 3,
             desc: 'View and manage nursery records across sites. Track capacity and availability at a glance: how many rooms and incubators each nursery holds, and whether it is active.',
