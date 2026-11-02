@@ -1295,13 +1295,14 @@ window.ANTZ_GUIDES = {
         label: 'Part 05 · Skip & stop',
         title: 'Skip, stop & administer',
         lede: 'Plans change. Postpone a dose or halt a course entirely: both always require a reason, so the history stays complete. Skip and stop follow the same flow: select the dose, add the reason (required), then reschedule or stop.',
+        chain: true,
         cards: [
           { id: 'reschedule', title: 'Reschedule', icon: 'edit', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.',
-            shots: [{ src: 'action-reschedule', title: 'Reschedule date', desc: 'The Stop Vaccine screen with Reschedule date selected, for the skip flow.' }] },
+            shots: [{ src: 'action-reschedule', title: 'Reschedule', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.' }] },
           { id: 'stop', title: 'Stop', icon: 'alert', desc: 'Halt the vaccination with a reason. It moves to Stopped and can be rescheduled later if needed.',
-            shots: [{ src: 'action-stop', title: 'Stop this vaccine', desc: 'The Stop Vaccine screen with Stop this vaccine selected.' }] },
+            shots: [{ src: 'action-stop', title: 'Stop', desc: 'Halt the vaccination with a reason. It moves to Stopped and can be rescheduled later if needed.' }] },
           { id: 'administer', title: 'Administer', icon: 'approve', desc: 'Record it on the spot or as given in the past, and the vaccination moves straight to Completed.',
-            shots: [{ src: 'action-administer', title: 'Administer Vaccine', desc: 'The Administer Vaccine form, with dosage, note and the mandatory batch number.' }] }
+            shots: [{ src: 'action-administer', title: 'Administer', desc: 'Record it on the spot or as given in the past, and the vaccination moves straight to Completed.' }] }
         ]
       }
     ],
@@ -1352,17 +1353,18 @@ window.ANTZ_GUIDES = {
         label: 'Part 02 · Status views',
         title: 'Status-based views',
         lede: 'Every deworming lives in exactly one status. The five views make monitoring simple: you always know what is coming, what is waiting, and what is done.',
+        chain: true,
         cards: [
           { id: 'upcoming', title: 'Upcoming', icon: 'bell', desc: 'All upcoming deworming by date and site, so nothing is missed.',
-            shots: [{ src: 'status-upcoming', title: 'Upcoming Deworming', desc: 'The Upcoming Deworming screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-upcoming', title: 'Upcoming', desc: 'All upcoming deworming by date and site, so nothing is missed.' }] },
           { id: 'pending', title: 'Pending', icon: 'priority', desc: 'Scheduled deworming awaiting administration, by date and site.',
-            shots: [{ src: 'status-pending', title: 'Pending Deworming', desc: 'The Pending Deworming screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-pending', title: 'Pending', desc: 'Scheduled deworming awaiting administration, by date and site.' }] },
           { id: 'completed', title: 'Completed', icon: 'approve', desc: 'View or revoke administered deworming, with full dosage and batch history.',
-            shots: [{ src: 'status-completed', title: 'Completed Deworming', desc: 'The Completed Deworming screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-completed', title: 'Completed', desc: 'View or revoke administered deworming, with full dosage and batch history.' }] },
           { id: 'skipped', title: 'Skipped', icon: 'edit', desc: 'Postponed deworming, each with a reason and reschedule date.',
-            shots: [{ src: 'status-skipped', title: 'Skipped Deworming', desc: 'The Skipped Deworming screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-skipped', title: 'Skipped', desc: 'Postponed deworming, each with a reason and reschedule date.' }] },
           { id: 'stopped', title: 'Stopped', icon: 'alert', desc: 'Halted deworming, kept on record and re-schedulable.',
-            shots: [{ src: 'status-stopped', title: 'Stopped Deworming', desc: 'The Stopped Deworming screen, listing species with their animal counts.' }] }
+            shots: [{ src: 'status-stopped', title: 'Stopped', desc: 'Halted deworming, kept on record and re-schedulable.' }] }
         ]
       },
       {
@@ -1370,11 +1372,12 @@ window.ANTZ_GUIDES = {
         label: 'Part 03 · Add',
         title: 'Schedule or direct administer',
         lede: 'Adding a deworming gives you two paths. Plan one for later, or record one you are giving right now: both capture the same medicine and date details. Direct administer adds the recording step covered next.',
+        chain: true,
         cards: [
           { id: 'schedule', title: 'Schedule deworming', icon: 'add', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.',
-            shots: [{ src: 'add-schedule', title: 'Schedule Deworming', desc: 'The Schedule Deworming form, with the selected animal, prescription and clinical notes.' }] },
+            shots: [{ src: 'add-schedule', title: 'Schedule deworming', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.' }] },
           { id: 'direct', title: 'Direct administer', icon: 'medicine', desc: 'Record a dose you are giving now or gave in the past, and capture dosage and batch on the spot. It goes straight to Completed.',
-            shots: [{ src: 'add-administer', title: 'Direct Administer', desc: 'The Direct Administer form, with the selected animal, prescription and clinical notes.' }] }
+            shots: [{ src: 'add-administer', title: 'Direct administer', desc: 'Record a dose you are giving now or gave in the past, and capture dosage and batch on the spot. It goes straight to Completed.' }] }
         ]
       },
       {
@@ -1399,13 +1402,14 @@ window.ANTZ_GUIDES = {
         label: 'Part 05 · Skip & stop',
         title: 'Skip, stop & administer',
         lede: 'Plans change. Postpone a dose or halt a course entirely: both always require a reason, so the history stays complete. Skip and stop follow the same flow: select the dose, add the reason (required), then reschedule or stop.',
+        chain: true,
         cards: [
           { id: 'reschedule', title: 'Skip & reschedule', icon: 'edit', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.',
-            shots: [{ src: 'action-reschedule', title: 'Skip Deworming', desc: 'The Skip Deworming screen with Reschedule date selected.' }] },
+            shots: [{ src: 'action-reschedule', title: 'Skip & reschedule', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.' }] },
           { id: 'stop', title: 'Stop', icon: 'alert', desc: 'Halt the deworming with a reason. It moves to Stopped and can be rescheduled later if needed.',
-            shots: [{ src: 'action-stop', title: 'Stop Deworming', desc: 'The Stop Deworming screen with Stop this deworming selected.' }] },
+            shots: [{ src: 'action-stop', title: 'Stop', desc: 'Halt the deworming with a reason. It moves to Stopped and can be rescheduled later if needed.' }] },
           { id: 'administer', title: 'Administer', icon: 'approve', desc: 'Record it on the spot or as given in the past, and it moves straight to Completed.',
-            shots: [{ src: 'action-administer', title: 'Administer Deworming', desc: 'The Administer Deworming form, recording the dose directly with its batch number.' }] }
+            shots: [{ src: 'action-administer', title: 'Administer', desc: 'Record it on the spot or as given in the past, and it moves straight to Completed.' }] }
         ]
       }
     ],
