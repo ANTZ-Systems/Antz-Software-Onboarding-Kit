@@ -1829,6 +1829,7 @@ window.ANTZ_GUIDES = {
         title: 'Nurseries, rooms and incubators',
         lede: 'Configure nurseries, rooms and incubators once, and every egg has a place to go. Each one has its own list, with search, filters and a button to add more.',
         /* The deck gives each facility its own page; here they are one card each */
+        chain: true,
         cards: [
           { id: 'nursery', title: 'Nursery', icon: 'home', thumb: 3,
             desc: 'View and manage nursery records across sites. Track capacity and availability at a glance: how many rooms and incubators each nursery holds, and whether it is active.',
@@ -1882,17 +1883,18 @@ window.ANTZ_GUIDES = {
         title: 'Egg status tabs',
         lede: 'Six lifecycle tabs, six different views of the same eggs. The sixth, All, shows every egg, at every stage, in one unfiltered list.',
         /* No capture of the All tab exists in the kit, so it is described in the lede */
+        chain: true,
         cards: [
           { id: 'received', title: 'Received', icon: 'add', desc: 'Every egg just collected, with species, site, nursery and who brought it in.',
-            shots: [{ src: 'tab-received', device: 'web', title: 'Received', desc: 'The Received tab: species, egg identifier, condition, site, nursery, collection date and collector.' }] },
+            shots: [{ src: 'tab-received', device: 'web', title: 'Received', desc: 'Every egg just collected, with species, site, nursery and who brought it in.' }] },
           { id: 'incubation', title: 'Incubation', icon: 'egg', desc: 'Days in incubation, weight and size, tracked per egg.',
-            shots: [{ src: 'tab-incubation', device: 'web', title: 'Incubation', desc: 'The Incubation tab: state and stage, days in incubation, initial and current weight, length and width.' }] },
+            shots: [{ src: 'tab-incubation', device: 'web', title: 'Incubation', desc: 'Days in incubation, weight and size, tracked per egg.' }] },
           { id: 'hatched', title: 'Hatched', icon: 'pets', desc: 'Gender and identifier once known, plus a link to create the chick\'s Animal ID.',
-            shots: [{ src: 'tab-hatched', device: 'web', title: 'Hatched', desc: 'The Hatched tab, with gender, identifier and the Create Animal ID link.' }] },
+            shots: [{ src: 'tab-hatched', device: 'web', title: 'Hatched', desc: 'Gender and identifier once known, plus a link to create the chick\'s Animal ID.' }] },
           { id: 'to-be-discarded', title: 'To Be Discarded', icon: 'alert', desc: 'Eggs flagged with a reason, selectable for a batch discard request.',
-            shots: [{ src: 'tab-to-be-discarded', device: 'web', title: 'To Be Discarded', desc: 'The To Be Discarded tab: each egg with its reason and a checkbox to select it.' }] },
+            shots: [{ src: 'tab-to-be-discarded', device: 'web', title: 'To Be Discarded', desc: 'Eggs flagged with a reason, selectable for a batch discard request.' }] },
           { id: 'discarded', title: 'Discarded', icon: 'shield', desc: 'Batch discard requests, each held for a security check before it is final.',
-            shots: [{ src: 'tab-discarded', device: 'web', title: 'Discarded', desc: 'The Batch Discarded view, with each request and its pending security check.' }] }
+            shots: [{ src: 'tab-discarded', device: 'web', title: 'Discarded', desc: 'Batch discard requests, each held for a security check before it is final.' }] }
         ]
       },
       {
