@@ -1478,7 +1478,10 @@ body.fwin-open { overflow: hidden; }
 .fwin-card:has(.device-web) { width: min(1320px, calc(100vw - 200px)); grid-template-columns: minmax(0, 34fr) minmax(0, 66fr); }
 .fwin-card:has(.device-web) .fwin-stage { padding: 72px 32px 44px; }
 .fwin-device:has(.device-web) { width: 100%; }
-.fwin-device .device-web { width: 100%; }
+/* A tall web screen is held to the window's height (less the stage padding, bar and bezel), and the bezel shrinks
+   around it, so the frame always closes at the bottom */
+.fwin-device .device-web { width: fit-content; max-width: 100%; }
+.fwin-device .device-web img { display: block; width: auto; max-width: 100%; max-height: calc(100vh - 230px); }
 /* Tablets are taller than they are wide, so a little narrower keeps them clear of the close button */
 .fwin-device .device-tablet { width: min(350px, 100%); }
 .fwin-empty { color: var(--muted); font-size: 15px; }
