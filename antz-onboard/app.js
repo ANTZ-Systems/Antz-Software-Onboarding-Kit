@@ -941,7 +941,7 @@
   /* Every module has an icon now; the fallback only covers modules added later */
   const iconOf = (m) => MODULE_ICON[m.id] || BRAND_ICONS[hash(m.id) % BRAND_ICONS.length];
   /* A module whose own icon stands in for its area's beside the area label (on its page and in its windows) */
-  const AREA_GLYPH_FOR = { mortality: 'fishbone' };
+  const AREA_GLYPH_FOR = { mortality: 'fishbone', necropsy: 'fishbone' };
   const areaGlyphOf = (m, area) => AREA_GLYPH_FOR[m.module || m.id] || area.glyph;
   /* Two photos, cropped and mirrored six ways so neighbouring cards differ */
   const PHOTO_VARIANTS = [
