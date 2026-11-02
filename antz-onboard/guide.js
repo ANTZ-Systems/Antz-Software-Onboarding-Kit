@@ -1902,16 +1902,16 @@ window.ANTZ_GUIDES = {
         label: 'Part 05 · Single record',
         title: 'Egg details',
         lede: 'Open any egg from the list to see its full record: where it is, where it came from, and how it is tracked over time.',
-        /* One screen in the deck: each point opens the same Egg Details capture */
+        /* One screen in the deck: each point opens the Egg Details capture with its own part highlighted */
         glance: {
           title: 'Egg details at a glance',
           desc: 'Five parts of one egg record. Pick a part to see it on the screen.',
           shots: [
-            { src: 'egg-details', device: 'web', icon: 'tag', title: 'Identity strip', desc: 'Egg ID, age, current weight and condition, plus who last updated it.' },
-            { src: 'egg-details', device: 'web', icon: 'home', title: 'Incubator location', desc: 'Current room and incubator, with temperature and humidity, and Transfer to move eggs to another incubator.' },
-            { src: 'egg-details', device: 'web', icon: 'note', title: 'Egg history', desc: 'Site, section and clutch, parentage links, collection date and initial measurements.' },
-            { src: 'egg-details', device: 'web', icon: 'report', title: 'Weight tracking', desc: 'A growth chart plotted from every logged weigh-in, with the log itself alongside.' },
-            { src: 'egg-details', device: 'web', icon: 'chat', title: 'Comments', desc: 'Leave a note on the record for the next keeper to see.' }
+            { src: 'egg-details-identity', device: 'web', icon: 'tag', title: 'Identity strip', desc: 'Egg ID, age, current weight and condition, plus who last updated it.' },
+            { src: 'egg-details-incubator', device: 'web', icon: 'home', title: 'Incubator location', desc: 'Current room and incubator, with temperature and humidity, and Transfer to move eggs to another incubator.' },
+            { src: 'egg-details-history', device: 'web', icon: 'note', title: 'Egg history', desc: 'Site, section and clutch, parentage links, collection date and initial measurements.' },
+            { src: 'egg-details-weight', device: 'web', icon: 'report', title: 'Weight tracking', desc: 'A growth chart plotted from every logged weigh-in, with the log itself alongside.' },
+            { src: 'egg-details-comments', device: 'web', icon: 'chat', title: 'Comments', desc: 'Leave a note on the record for the next keeper to see.' }
           ]
         }
       },
