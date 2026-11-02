@@ -1461,17 +1461,18 @@ window.ANTZ_GUIDES = {
         label: 'Part 02 · Status views',
         title: 'Status-based views',
         lede: 'Every supplement lives in exactly one status. The five views make monitoring simple: you always know what is coming, what is waiting, and what is done.',
+        chain: true,
         cards: [
           { id: 'upcoming', title: 'Upcoming', icon: 'bell', desc: 'All upcoming supplements by date and site, so nothing is missed.',
-            shots: [{ src: 'status-upcoming', title: 'Upcoming Supplements', desc: 'The Upcoming Supplements screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-upcoming', title: 'Upcoming', desc: 'All upcoming supplements by date and site, so nothing is missed.' }] },
           { id: 'pending', title: 'Pending', icon: 'priority', desc: 'Scheduled supplements awaiting administration, by date and site.',
-            shots: [{ src: 'status-pending', title: 'Pending Supplements', desc: 'The Pending Supplements screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-pending', title: 'Pending', desc: 'Scheduled supplements awaiting administration, by date and site.' }] },
           { id: 'completed', title: 'Completed', icon: 'approve', desc: 'All administered supplements, with full dosage and batch history.',
-            shots: [{ src: 'status-completed', title: 'Completed Supplements', desc: 'The Completed Supplements screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-completed', title: 'Completed', desc: 'All administered supplements, with full dosage and batch history.' }] },
           { id: 'skipped', title: 'Skipped', icon: 'edit', desc: 'Postponed supplements, each with a reason and reschedule date.',
-            shots: [{ src: 'status-skipped', title: 'Skipped Supplements', desc: 'The Skipped Supplements screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-skipped', title: 'Skipped', desc: 'Postponed supplements, each with a reason and reschedule date.' }] },
           { id: 'stopped', title: 'Stopped', icon: 'alert', desc: 'Halted supplements, kept on record and re-schedulable.',
-            shots: [{ src: 'status-stopped', title: 'Stopped Supplements', desc: 'The Stopped Supplements screen, listing species with their animal counts.' }] }
+            shots: [{ src: 'status-stopped', title: 'Stopped', desc: 'Halted supplements, kept on record and re-schedulable.' }] }
         ]
       },
       {
@@ -1479,11 +1480,12 @@ window.ANTZ_GUIDES = {
         label: 'Part 03 · Add',
         title: 'Schedule or direct administer',
         lede: 'Adding a supplement gives you two paths. Plan one for later, or record one you are giving right now: both capture the same medicine and date details. Direct administer adds the recording step covered next.',
+        chain: true,
         cards: [
           { id: 'schedule', title: 'Schedule supplement', icon: 'add', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.',
-            shots: [{ src: 'add-schedule', title: 'Schedule Supplements', desc: 'The Schedule Supplements form, with the selected animals, prescription and clinical notes.' }] },
+            shots: [{ src: 'add-schedule', title: 'Schedule supplement', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.' }] },
           { id: 'direct', title: 'Direct administer', icon: 'medicine', desc: 'Record a supplement you are giving now, or one given in the past, and capture dosage and batch on the spot. It goes straight to Completed.',
-            shots: [{ src: 'add-administer', title: 'Direct Supplements', desc: 'The Direct Supplements form, with the selected animal, prescription and clinical notes.' }] }
+            shots: [{ src: 'add-administer', title: 'Direct administer', desc: 'Record a supplement you are giving now, or one given in the past, and capture dosage and batch on the spot. It goes straight to Completed.' }] }
         ]
       },
       {
@@ -1508,13 +1510,14 @@ window.ANTZ_GUIDES = {
         label: 'Part 05 · Skip & stop',
         title: 'Skip, stop & administer',
         lede: 'Plans change. Postpone a dose or halt a course entirely: both always require a reason, so the history stays complete. Skip and stop follow the same flow: select the dose, add the reason (required), then reschedule or stop.',
+        chain: true,
         cards: [
           { id: 'reschedule', title: 'Reschedule', icon: 'edit', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.',
-            shots: [{ src: 'action-reschedule', title: 'Reschedule date', desc: 'The skip screen with Reschedule date selected.' }] },
+            shots: [{ src: 'action-reschedule', title: 'Reschedule', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.' }] },
           { id: 'stop', title: 'Stop', icon: 'alert', desc: 'Halt the supplement with a reason. It moves to Stopped and can be rescheduled later if needed.',
-            shots: [{ src: 'action-stop', title: 'Stop this supplement', desc: 'The stop screen with Stop this supplements selected.' }] },
+            shots: [{ src: 'action-stop', title: 'Stop', desc: 'Halt the supplement with a reason. It moves to Stopped and can be rescheduled later if needed.' }] },
           { id: 'administer', title: 'Administer', icon: 'approve', desc: 'Record it on the spot, or as given in the past, and the supplement moves straight to Completed.',
-            shots: [{ src: 'action-administer', title: 'Administer Supplements', desc: 'The Administer Supplements form, with note, batch number and optional wastage.' }] }
+            shots: [{ src: 'action-administer', title: 'Administer', desc: 'Record it on the spot, or as given in the past, and the supplement moves straight to Completed.' }] }
         ]
       }
     ],
