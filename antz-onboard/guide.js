@@ -1881,7 +1881,6 @@ window.ANTZ_GUIDES = {
         label: 'Part 04 · Live view',
         title: 'Egg status tabs',
         lede: 'Six lifecycle tabs, six different views of the same eggs. The sixth, All, shows every egg, at every stage, in one unfiltered list.',
-        /* No capture of the All tab exists in the kit, so it is described in the lede */
         chain: true,
         cards: [
           { id: 'received', title: 'Received', icon: 'add', desc: 'Every egg just collected, with species, site, nursery and who brought it in.',
@@ -1893,7 +1892,9 @@ window.ANTZ_GUIDES = {
           { id: 'to-be-discarded', title: 'To Be Discarded', icon: 'alert', desc: 'Eggs flagged with a reason, selectable for a batch discard request.',
             shots: [{ src: 'tab-to-be-discarded', device: 'web', title: 'To Be Discarded', desc: 'Eggs flagged with a reason, selectable for a batch discard request.' }] },
           { id: 'discarded', title: 'Discarded', icon: 'shield', desc: 'Batch discard requests, each held for a security check before it is final.',
-            shots: [{ src: 'tab-discarded', device: 'web', title: 'Discarded', desc: 'Batch discard requests, each held for a security check before it is final.' }] }
+            shots: [{ src: 'tab-discarded', device: 'web', title: 'Discarded', desc: 'Batch discard requests, each held for a security check before it is final.' }] },
+          { id: 'all', title: 'All', icon: 'egg', desc: 'Provides a consolidated view of all egg records across different stages, regardless of their current status.',
+            shots: [{ src: 'tab-all', device: 'web', title: 'All', desc: 'Provides a consolidated view of all egg records across different stages, regardless of their current status.' }] }
         ]
       },
       {

@@ -1474,7 +1474,11 @@ body.fwin-open { overflow: hidden; }
 /* A tablet fills the panel's height, so it starts below the close button (top 16px + 40px) */
 .fwin-stage:has(.device-tablet) { padding-top: 68px; padding-bottom: 44px; }
 .fwin-device .device-phone, .fwin-device .device-framed { width: min(300px, calc((100vh - 140px) * 9 / 19.2)); }
-.fwin-device .device-web { width: min(400px, 100%); }
+/* Web screens are wide and full of small type, so their window grows and the screen takes most of it */
+.fwin-card:has(.device-web) { width: min(1320px, calc(100vw - 200px)); grid-template-columns: minmax(0, 34fr) minmax(0, 66fr); }
+.fwin-card:has(.device-web) .fwin-stage { padding: 72px 32px 44px; }
+.fwin-device:has(.device-web) { width: 100%; }
+.fwin-device .device-web { width: 100%; }
 /* Tablets are taller than they are wide, so a little narrower keeps them clear of the close button */
 .fwin-device .device-tablet { width: min(350px, 100%); }
 .fwin-empty { color: var(--muted); font-size: 15px; }
