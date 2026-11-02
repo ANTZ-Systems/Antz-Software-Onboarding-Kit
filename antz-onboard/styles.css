@@ -1008,6 +1008,10 @@ a.mcard-face { text-decoration: none; color: inherit; }
 .mpanel-inner.no-stage { grid-template-columns: 1fr; }
 .mpanel-area { display: flex; margin-bottom: 12px; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tint-ink); }
 .mpanel-area svg { width: 15px; height: 15px; }
+/* In a window the label can be long for its column (web screens narrow it), so it wraps as one line of text
+   rather than as separate flex columns */
+.fwin .mpanel-area { display: block; line-height: 1.6; }
+.fwin .mpanel-area svg { display: inline-block; vertical-align: -2px; margin-right: 8px; }
 .mpanel-info .mpanel-title { font-size: clamp(30px, 4vw, 44px); margin: 0 0 12px; }
 /* Module icon before the panel title, on a badge in the area's gradient */
 .mpanel-title { display: flex; align-items: center; gap: 14px; }

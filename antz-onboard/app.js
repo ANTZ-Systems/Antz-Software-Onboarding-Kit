@@ -2030,6 +2030,7 @@
       document.removeEventListener('keydown', onKey);
       document.body.classList.remove('fwin-open');
       closeFeatureWindow = null;
+      sizeWatch.disconnect();
       if (instant || reducedMotion()) w.remove();
       else { w.classList.remove('in'); w.classList.add('out'); setTimeout(() => w.remove(), 460); }
       if (!instant && close) close(idx, chain ? chain.at : 0);
@@ -2049,17 +2050,24 @@
     go(start);
     /* Radial opening: a circle grows from the clicked feature until it covers the whole card */
     const card = w.querySelector('.fwin-card');
-    const cr = card.getBoundingClientRect();
-    const o = origin || { x: cr.left + cr.width / 2, y: cr.top + cr.height / 2 };
-    const ox = o.x - cr.left, oy = o.y - cr.top;
-    const r = Math.ceil(Math.max(Math.hypot(ox, oy), Math.hypot(cr.width - ox, oy), Math.hypot(ox, cr.height - oy), Math.hypot(cr.width - ox, cr.height - oy)));
-    /* Place the starting point without animating to it, so the circle really starts at the feature */
-    card.style.transition = 'none';
-    card.style.setProperty('--ox', `${Math.round(ox)}px`);
-    card.style.setProperty('--oy', `${Math.round(oy)}px`);
-    card.style.setProperty('--r', `${r}px`);
-    void card.offsetWidth;
-    card.style.transition = '';
+    const cr0 = card.getBoundingClientRect();
+    const o = origin || { x: cr0.left + cr0.width / 2, y: cr0.top + cr0.height / 2 };
+    /* Place the circle without animating to it, so it really starts at the feature. Measured again whenever the
+       card changes size (a web screen widens it, a tall one loads in), so the circle always covers it */
+    const fitCircle = () => {
+      const cr = card.getBoundingClientRect();
+      const ox = o.x - cr.left, oy = o.y - cr.top;
+      const r = Math.ceil(Math.max(Math.hypot(ox, oy), Math.hypot(cr.width - ox, oy), Math.hypot(ox, cr.height - oy), Math.hypot(cr.width - ox, cr.height - oy))) + 2;
+      card.style.transition = 'none';
+      card.style.setProperty('--ox', `${Math.round(ox)}px`);
+      card.style.setProperty('--oy', `${Math.round(oy)}px`);
+      card.style.setProperty('--r', `${r}px`);
+      void card.offsetWidth;
+      card.style.transition = '';
+    };
+    fitCircle();
+    const sizeWatch = new ResizeObserver(() => { if (w.classList.contains('in')) fitCircle(); });
+    sizeWatch.observe(card);
     requestAnimationFrame(() => w.classList.add('in'));
     w.querySelector('.fwin-close').focus({ preventScroll: true });
   }
