@@ -1743,7 +1743,7 @@ window.ANTZ_GUIDES = {
           shots: [
             { src: 'req-header', title: 'Animal & mortality header', desc: 'AID, species, enclosure, site, time since death and requester.' },
             { src: 'req-report', title: 'Mortality report', desc: 'Suspected cause, date and time of death, and carcass condition.' },
-            { src: 'req-status', title: 'Current status', desc: 'Where the record sits: here, Pending, with the date.' },
+            { src: 'req-status', title: 'Current status', desc: 'Displays the record\'s current status along with date.' },
             { src: 'req-add', title: 'Add necropsy', desc: 'Begin the examination entry from the Update Necropsy action at the bottom.' },
             { src: 'req-update', title: 'Update, draft & submit', desc: 'Update the necropsy details, then save as draft or submit when finalised.' }
           ]
