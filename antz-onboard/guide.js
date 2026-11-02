@@ -1630,21 +1630,22 @@ window.ANTZ_GUIDES = {
         label: 'Part 01 · The module',
         title: 'Mortality at a glance',
         lede: 'Everything around an animal death lives in one module: the live dashboard, the listings, the full record, and the controls to correct it. It improves transparency, speeds up decisions and supports better welfare monitoring.',
+        chain: true,
         cards: [
           { id: 'dashboard', title: 'Mortality dashboard', icon: 'report', desc: 'Totals for deaths, affected species and causes.',
-            shots: [{ src: 'dashboard', title: 'Mortality dashboard', desc: 'The totals for animals, species and reasons, highlighted at the top of the dashboard.' }] },
+            shots: [{ src: 'dashboard', title: 'Mortality dashboard', desc: 'Totals for deaths, affected species and causes.' }] },
           { id: 'listings', title: 'Multi-view listings', icon: 'species', desc: 'Records by animal, species or cause, linked to profiles.',
-            shots: [{ src: 'listings', title: 'Multi-view listings', desc: 'The Animals, Species and Reasons totals, with the multi-view toggle for the list.' }] },
+            shots: [{ src: 'listings', title: 'Multi-view listings', desc: 'Records by animal, species or cause, linked to profiles.' }] },
           { id: 'search', title: 'Advanced search & filters', icon: 'filter', desc: 'Search by species, cause, location, date or keyword.',
-            shots: [{ src: 'search', title: 'Search & filters', desc: 'The date and site selectors, search bar and advanced filters, highlighted.' }] },
+            shots: [{ src: 'search', title: 'Advanced search & filters', desc: 'Search by species, cause, location, date or keyword.' }] },
           { id: 'record', title: 'Deceased animal records', icon: 'note', desc: 'Full death detail: cause, ID, enclosure, site and sex.',
-            shots: [{ src: 'record', title: 'Deceased animal record', desc: 'A deceased animal record card in the mortality list, highlighted.' }] },
+            shots: [{ src: 'record', title: 'Deceased animal records', desc: 'Full death detail: cause, ID, enclosure, site and sex.' }] },
           { id: 'edit', title: 'Edit records', icon: 'edit', desc: 'Edit mortality reports after entry to keep them accurate.',
-            shots: [{ src: 'edit', title: 'Edit a mortality report', desc: 'The edit button on the Mortality Report in the animal record.' }] },
+            shots: [{ src: 'edit', title: 'Edit records', desc: 'Edit mortality reports after entry to keep them accurate.' }] },
           { id: 'revoke', title: 'Revoke records', icon: 'alert', desc: 'Revoke incorrect records to restore active status.',
-            shots: [{ src: 'revoke', title: 'Revoke mortality', desc: 'The Revoke Mortality option in the animal record menu.' }] },
+            shots: [{ src: 'revoke', title: 'Revoke records', desc: 'Revoke incorrect records to restore active status.' }] },
           { id: 'carcass', title: 'Carcass transfer', icon: 'transfer', desc: 'View and track carcass movement between locations.',
-            shots: [{ src: 'carcass', title: 'Carcass Transfers', desc: 'The Carcass Transfers list, with transfers by status.' }] }
+            shots: [{ src: 'carcass', title: 'Carcass transfer', desc: 'View and track carcass movement between locations.' }] }
         ]
       },
       {
@@ -1671,17 +1672,18 @@ window.ANTZ_GUIDES = {
         title: 'Carcass transfer',
         lede: 'Track and record carcass movement between sites and necropsy centres, with status at every stage and a comment thread to keep the team in step. It improves transparency, ensures compliance and supports efficient post-mortality management.',
         /* The deck also draws a Loading Checklist phone screen in HTML, but no tile opens it and it is not a capture, so it is left out */
+        chain: true,
         cards: [
           { id: 'status', title: 'Status tracking', icon: 'manage', desc: 'Monitor transfer stages: Pending, In Transit, Completed and Canceled.',
-            shots: [{ src: 'transfer-status', title: 'Status tracking', desc: 'The Carcass Transfers list with its status tabs highlighted.' }] },
+            shots: [{ src: 'transfer-status', title: 'Status tracking', desc: 'Monitor transfer stages: Pending, In Transit, Completed and Canceled.' }] },
           { id: 'search', title: 'Search & filters', icon: 'filter', desc: 'Easily search and filter transfers by status.',
-            shots: [{ src: 'transfer-search', title: 'Search & filters', desc: 'The Carcass Transfers list with the search bar and filter button highlighted.' }] },
+            shots: [{ src: 'transfer-search', title: 'Search & filters', desc: 'Easily search and filter transfers by status.' }] },
           { id: 'record', title: 'Carcass transfer', icon: 'transfer', desc: 'Track and record carcass movement between sites or necropsy centres.',
-            shots: [{ src: 'transfer-form', title: 'Carcass Transfer form', desc: 'Choose the location and destination, select the carcass and submit the request.' }] },
+            shots: [{ src: 'transfer-form', title: 'Carcass transfer', desc: 'Track and record carcass movement between sites or necropsy centres.' }] },
           { id: 'updates', title: 'Real-time status updates', icon: 'bell', desc: 'Update the status: Transfer Initiated, Checklist Filled, Loading Pending.',
-            shots: [{ src: 'transfer-updates', title: 'Status updates', desc: 'The carcass transfer status timeline, with each update timestamped.' }] },
+            shots: [{ src: 'transfer-updates', title: 'Real-time status updates', desc: 'Update the status: Transfer Initiated, Checklist Filled, Loading Pending.' }] },
           { id: 'comments', title: 'Comments & communication', icon: 'chat', desc: 'Add comments for coordination and record-keeping.',
-            shots: [{ src: 'transfer-comments', title: 'Comments', desc: 'The carcass transfer detail with its comments thread.' }] }
+            shots: [{ src: 'transfer-comments', title: 'Comments & communication', desc: 'Add comments for coordination and record-keeping.' }] }
         ]
       }
     ],
