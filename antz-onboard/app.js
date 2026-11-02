@@ -514,6 +514,7 @@
      re-download the subset from Google Fonts with the glyph added to icon_names. Missing ones fall back to explore. */
   /* Icons composed from the set's shapes, for modules the font has no glyph for (same art as assets/icons) */
   const GUIDE_DRAWN = {
+    mortality: '<g fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"><path d="M100-480q70-170 220-170v340q-150 0-220-170Z"/><path d="M320-480h420"/><path d="M420-480q12-110 70-210M420-480q12 110 70 210"/><path d="M530-480q12-95 60-180M530-480q12 95 60 180"/><path d="M640-480q10-75 45-140M640-480q10 75 45 140"/><path d="M740-480l120-130v260l-120-130Z"/></g><circle cx="225" cy="-520" r="30"/>',
     'medical-records': '<path d="M264.62-120q-27.62 0-46.12-18.5Q200-157 200-184.62v-590.76q0-27.62 18.5-46.12Q237-840 264.62-840h288.53q12.93 0 25.12 5.23 12.19 5.23 20.88 13.92l141.7 141.7q8.69 8.69 13.92 20.88t5.23 25.12v448.53q0 27.62-18.5 46.12Q723-120 695.38-120H264.62ZM560-672.31V-800H264.62q-9.24 0-16.93 7.69-7.69 7.69-7.69 16.93v590.76q0 9.24 7.69 16.93 7.69 7.69 16.93 7.69h430.76q9.24 0 16.93-7.69 7.69-7.69 7.69-16.93V-640H592.31q-13.93 0-23.12-9.19-9.19-9.19-9.19-23.12ZM240-800v160-160 640-640Z"/><path d="M330-630.0h140a20.0 20.0 0 0 1 0 40h-140a20.0 20.0 0 0 1 0-40ZM330-520.0h300a20.0 20.0 0 0 1 0 40h-300a20.0 20.0 0 0 1 0-40Z"/><path transform="translate(480 -265) scale(.36) translate(-480 480)" d="M180.04-495q-33.58 0-56.81-23.19Q100-541.37 100-574.96q0-33.58 23.19-56.81Q146.37-655 179.96-655q33.58 0 56.81 23.19Q260-608.63 260-575.04q0 33.58-23.19 56.81Q213.63-495 180.04-495Zm123.19-183.19Q280-701.37 280-734.96q0-33.58 23.19-56.81Q326.37-815 359.96-815q33.58 0 56.81 23.19Q440-768.63 440-735.04q0 33.58-23.19 56.81Q393.63-655 360.04-655q-33.58 0-56.81-23.19Zm240 0Q520-701.37 520-734.96q0-33.58 23.19-56.81Q566.37-815 599.96-815q33.58 0 56.81 23.19Q680-768.63 680-735.04q0 33.58-23.19 56.81Q633.63-655 600.04-655q-33.58 0-56.81-23.19ZM780.04-495q-33.58 0-56.81-23.19Q700-541.37 700-574.96q0-33.58 23.19-56.81Q746.37-655 779.96-655q33.58 0 56.81 23.19Q860-608.63 860-575.04q0 33.58-23.19 56.81Q813.63-495 780.04-495ZM266-95q-37.31 0-61.65-28.55Q180-152.1 180-191q0-48.92 34.35-83.69 34.34-34.77 67.03-70.46 29-31.77 50.39-67.89 21.38-36.11 49.61-68.11 19.7-22.16 44.57-38Q450.83-535 480-535q30.02 0 55.63 15.23 25.6 15.23 44.52 38.15 28 32 49.12 68.24 21.11 36.23 49.35 68.23 32.69 35.69 67.03 70.46Q780-239.92 780-191q0 38.9-24.35 67.45Q731.31-95 694-95q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/>'
   };
   const GUIDE_GLYPH = {
@@ -541,7 +542,7 @@
     const backModule = byId[g.back] && visible.includes(byId[g.back]) ? byId[g.back] : null;
     const sets = [];
     const addSet = (key, title, ic, shots, winFlow, winNotes) => sets.push({
-      id: `guide-${id}-${key}`, track, title, web: /-web$/.test(id), winFlow, winNotes,
+      id: `guide-${id}-${key}`, module: id, track, title, web: /-web$/.test(id), winFlow, winNotes,
       /* keep: the text is shown exactly as written (it keeps a dash the house style would otherwise turn into a comma) */
       features: shots.map((s) => ({ title: s.title, desc: s.desc, icon: s.icon || ic, shot: srcOf(s), keep: !!s.keep })),
       /* A screen is a phone unless it says otherwise (device: 'tablet' or 'web' for web modules) */
@@ -933,12 +934,15 @@
     'animal-management': 'cruelty_free', 'tags-hub': 'sell', 'animal-transfer': 'local_shipping', approvals: 'approval',
     'missing-escaped-animal': 'crisis_alert', 'symptoms-clinical-assessment-prescription': 'stethoscope',
     'administer-medicine': 'medication_liquid', vaccination: 'vaccines', deworming: 'pest_control', supplements: 'nutrition',
-    mortality: 'heart_minus', 'fetal-death': 'heart_broken', 'helpdesk-module': 'support_agent', security: 'verified_user',
+    mortality: 'fish_bone', 'fetal-death': 'heart_broken', 'helpdesk-module': 'support_agent', security: 'verified_user',
     'reports-app': 'analytics', 'reports-web': 'summarize'
   };
   const hash = (str) => [...str].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
   /* Every module has an icon now; the fallback only covers modules added later */
   const iconOf = (m) => MODULE_ICON[m.id] || BRAND_ICONS[hash(m.id) % BRAND_ICONS.length];
+  /* A module whose own icon stands in for its area's beside the area label (on its page and in its windows) */
+  const AREA_GLYPH_FOR = { mortality: 'fishbone' };
+  const areaGlyphOf = (m, area) => AREA_GLYPH_FOR[m.module || m.id] || area.glyph;
   /* Two photos, cropped and mirrored six ways so neighbouring cards differ */
   const PHOTO_VARIANTS = [
     { src: 'collections_bg', pos: '30% 40%', flip: 1 },
@@ -1580,7 +1584,7 @@
       <section class="mpage tint-${tint}">
         <div class="container">
           ${moduleTabsHTML(m)}
-          <span class="mpanel-area">${icon(area.glyph)}${esc(area.label)} · ${numberOf[m.id]}</span>
+          <span class="mpanel-area">${icon(areaGlyphOf(m, area))}${esc(area.label)} · ${numberOf[m.id]}</span>
           <div class="mpanel-inner${hasShots ? '' : ' no-stage'}">
             <div class="mpanel-info">
               <h1 class="mpanel-title"><span class="mpanel-icon"><img src="assets/icons/${iconOf(m)}_icon.svg" alt=""></span>${esc(m.title)}</h1>
@@ -1923,7 +1927,7 @@
         <button class="fwin-close" type="button" data-close aria-label="${esc(t('win.close'))}">${CLOSE_SVG}</button>
         <div class="fwin-stage"><div class="fwin-device"></div></div>
         <div class="fwin-info">
-          <span class="mpanel-area">${icon(area.glyph)}${esc(area.label)} · <span class="fwin-set">${esc(m.title)}</span></span>
+          <span class="mpanel-area">${icon(areaGlyphOf(m, area))}${esc(area.label)} · <span class="fwin-set">${esc(m.title)}</span></span>
           <div class="fwin-text">
             <div class="fwin-head"><span class="fwin-ic" aria-hidden="true"></span><p class="fwin-count" aria-live="polite"></p></div>
             <h2 class="fwin-title" id="fwin-title"></h2><p class="fwin-desc"></p>
