@@ -1714,21 +1714,22 @@ window.ANTZ_GUIDES = {
         label: 'Part 01 · The module',
         title: 'Inside the module',
         lede: 'The Necropsy module documents post-mortem examinations with detailed observations, organ-specific findings and medical conclusions. Seven surfaces carry it, from finding a record to reading its full timeline.',
+        chain: true,
         cards: [
           { id: 'search', title: 'Search & filters', icon: 'filter', desc: 'Search by animal or species; filter by site, date and priority.',
-            shots: [{ src: 'search', title: 'Search & filters', desc: 'The necropsy list on the Pending tab, with the search bar highlighted.' }] },
+            shots: [{ src: 'search', title: 'Search & filters', desc: 'Search by animal or species; filter by site, date and priority.' }] },
           { id: 'status', title: 'Status tracking', icon: 'manage', desc: 'Monitor stages: Incoming, Pending, Draft and Completed.',
-            shots: [{ src: 'status', title: 'Status tracking', desc: 'The necropsy list with its status tabs highlighted and Pending active.' }] },
+            shots: [{ src: 'status', title: 'Status tracking', desc: 'Monitor stages: Incoming, Pending, Draft and Completed.' }] },
           { id: 'card', title: 'Animal card & request info', icon: 'tag', desc: 'AID, species, location, cause, requester and priority.',
-            shots: [{ src: 'animal-card', title: 'Animal card', desc: 'A necropsy request card with the animal profile highlighted.' }] },
+            shots: [{ src: 'animal-card', title: 'Animal card & request info', desc: 'AID, species, location, cause, requester and priority.' }] },
           { id: 'carcass', title: 'Carcass transfer', icon: 'transfer', desc: 'View transfer requests: Pending Acceptance and Received.',
-            shots: [{ src: 'carcass-list', title: 'Carcass Transfers', desc: 'The Carcass Transfers list with the Received tab active.' }] },
+            shots: [{ src: 'carcass-list', title: 'Carcass transfer', desc: 'View transfer requests: Pending Acceptance and Received.' }] },
           { id: 'request', title: 'Detailed request view', icon: 'note', desc: 'The full report: cause, condition and notes. Update, draft or submit.',
-            shots: [{ src: 'request', title: 'Necropsy request', desc: 'The request detail: mortality report, cause, carcass condition and Pending status.' }] },
+            shots: [{ src: 'request', title: 'Detailed request view', desc: 'The full report: cause, condition and notes. Update, draft or submit.' }] },
           { id: 'download', title: 'Download report', icon: 'report', desc: 'Export reports or drafts as PDFs for records and offline use.',
-            shots: [{ src: 'download', title: 'Download report', desc: 'The necropsy report with the download action highlighted.' }] },
+            shots: [{ src: 'download', title: 'Download report', desc: 'Export reports or drafts as PDFs for records and offline use.' }] },
           { id: 'timeline', title: 'Timeline', icon: 'eye', desc: 'Every action tracked with the user and a timestamp.',
-            shots: [{ src: 'timeline', title: 'History timeline', desc: 'The necropsy history: completed, draft discarded and saved as draft, each with its user and time.' }] }
+            shots: [{ src: 'timeline', title: 'Timeline', desc: 'Every action tracked with the user and a timestamp.' }] }
         ]
       },
       {
@@ -1753,11 +1754,12 @@ window.ANTZ_GUIDES = {
         label: 'Part 03 · Carcass transfer',
         title: 'Finding transfers, fast',
         lede: 'Carcass Transfer streamlines carcass movement tracking from the originating site to the necropsy centre. Across the transfer list, two controls keep the right requests in front of you.',
+        chain: true,
         cards: [
           { id: 'search', title: 'Search & filters', icon: 'filter', desc: 'Search transfers by animal ID and filter by status, such as Pending Acceptance and Received, to focus on what needs action now.',
-            shots: [{ src: 'find-search', title: 'Search by animal ID', desc: 'The Carcass Transfers list with search by animal ID and the filter highlighted.' }] },
+            shots: [{ src: 'find-search', title: 'Search & filters', desc: 'Search transfers by animal ID and filter by status, such as Pending Acceptance and Received, to focus on what needs action now.' }] },
           { id: 'centre', title: 'Necropsy centre filtering', icon: 'lab', desc: 'View and monitor only the transfers bound for a selected necropsy centre: ideal when one team owns a single destination.',
-            shots: [{ src: 'find-centre', title: 'Necropsy centre filter', desc: 'The Carcass Transfers list with the necropsy centre dropdown highlighted.' }] }
+            shots: [{ src: 'find-centre', title: 'Necropsy centre filtering', desc: 'View and monitor only the transfers bound for a selected necropsy centre: ideal when one team owns a single destination.' }] }
         ]
       },
       {
