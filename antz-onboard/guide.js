@@ -1962,6 +1962,7 @@ window.ANTZ_GUIDES = {
             { src: 'status-approved', title: 'Approved', desc: 'Requests approved and ready to move to the next stage of the workflow.' },
             { src: 'status-rejected', title: 'Rejected', desc: 'Requests declined during approval. Open one to read the reason and take corrective action if needed.' },
             { src: 'status-cancelled', title: 'Cancelled', desc: 'Requests no longer active. A new request is needed to proceed.' },
+            { src: 'status-deleted', title: 'Deleted', desc: 'View deleted requests.' },
             { src: 'status-all', title: 'All', desc: 'Every request across all statuses, regardless of its stage.' }
           ]
         }

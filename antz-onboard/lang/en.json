@@ -1129,7 +1129,7 @@
     },
     {
      "title": "Request management",
-     "desc": "Raise, edit, cancel, or reject requests with priorities.",
+     "desc": "Raise, edit, clone, cancel, reject, or delete requests as required.",
      "alt": "Carpentry request for wooden nest boxes at South Aviary Dome: vendor, request details, cost estimate, actual cost and current status In Progress"
     },
     {
