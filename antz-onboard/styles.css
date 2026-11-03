@@ -885,27 +885,27 @@ button { font: inherit; color: inherit; }
 .mcard-face { isolation: isolate; }
 /* Home module cards: the area tabs' holographic film, drifting foil and a passing sheen at 94%, in the bottom-right
    corner and fading towards the top-left, under the card's content while it is hovered or focused */
-.holo { position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; overflow: hidden; }
-.holo::before, .holo::after {
+.mcard-holo { position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; overflow: hidden; }
+.mcard-holo::before, .mcard-holo::after {
   content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: 0; transition: opacity .45s ease;
   -webkit-mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
   mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
 }
-.holo::before {
+.mcard-holo::before {
   background: linear-gradient(115deg, #FFD9EC 0%, #E3D9FF 16%, #CDEBFF 32%, #C8F7E6 48%, #F6F7C8 64%, #FFDCCF 80%, #FFD9EC 100%) 0 50% / 300% 100%;
   animation: nav-cta-holo 2.4s linear infinite;
 }
-.holo::after {
+.mcard-holo::after {
   background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.95) 50%, transparent 65%) -150% 0 / 60% 100% no-repeat;
   mix-blend-mode: soft-light; animation: nav-cta-sheen 3.6s cubic-bezier(.4,0,.2,1) infinite;
 }
-.mcard-face:hover > .holo::before, .mcard-face:hover > .holo::after,
-.mcard-face:focus-visible > .holo::before, .mcard-face:focus-visible > .holo::after { opacity: .94; }
-[dir="rtl"] .holo::before, [dir="rtl"] .holo::after {
+.mcard-face:hover > .mcard-holo::before, .mcard-face:hover > .mcard-holo::after,
+.mcard-face:focus-visible > .mcard-holo::before, .mcard-face:focus-visible > .mcard-holo::after { opacity: .94; }
+[dir="rtl"] .mcard-holo::before, [dir="rtl"] .mcard-holo::after {
   -webkit-mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
   mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
 }
-@media (prefers-reduced-motion: reduce) { .holo::before, .holo::after { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .mcard-holo::before, .mcard-holo::after { animation: none; } }
 /* Know more cards: a holographic mesh, from the LSET Foundation site's content area: eight pastel blobs, each circling its own
    small orbit at its own phase, so the wash turns rather than slides. It sits on a layer under the card's
    content and appears only while the card is hovered or focused; at rest the card keeps its usual face.
