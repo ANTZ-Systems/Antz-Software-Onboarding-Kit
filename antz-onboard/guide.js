@@ -2160,13 +2160,31 @@ window.ANTZ_GUIDES = {
         label: 'Part 02 · Care & observations',
         title: 'Care and observation reports',
         lede: 'Welfare assessments, keeper assignments and the observation log for an individual animal, each ready to filter and download.',
-        cards: [
-          { id: 'assessment', title: 'Animal Assessment Report', icon: 'medical', desc: 'Body-condition assessments that surface welfare concerns early.',
-            shots: [{ src: 'assessment', device: 'tablet', title: 'Animal Assessment Report', desc: 'Pick the species and assessment type, then generate each animal\'s body condition (Overweight, Ideal or N/A) with dates.' }] },
-          { id: 'keeper', title: 'Animal Keeper Report', icon: 'users', desc: 'Keepers assigned to each animal, animal-wise or keeper-wise.',
-            shots: [{ src: 'keeper', device: 'tablet', title: 'Animal Keeper Report', desc: 'Animal-wise or keeper-wise views showing where each animal lives, its caretaker count and primary keeper, ready to download.' }] },
-          { id: 'observation', title: 'Animal Observation Report', icon: 'eye', desc: 'Every observation recorded for one individual animal.',
-            shots: [{ src: 'observation', device: 'tablet', title: 'Animal Observation Report', desc: 'The animal in focus, filters by observation type, sub-type, date range or free text, and the exportable observation log.' }] }
+        tours: [
+          { kicker: 'Care & Observations', title: 'Animal Assessment Report', numbered: true, flip: true,
+            desc: 'Body-condition assessments that surface welfare concerns early.',
+            shots: [
+              { src: 'assessment-pick', device: 'tablet', title: 'Pick species & type', desc: 'Choose the species and the assessment type to run.' },
+              { src: 'assessment-body', device: 'tablet', title: 'Body-condition results', desc: 'Each animal\'s condition, Overweight, Ideal or N/A, with dates.' },
+              { src: 'assessment-generate', device: 'tablet', title: 'Generate the report', desc: 'Build the assessment on demand.' }
+            ] },
+          { kicker: 'Care & Observations', title: 'Animal Keeper Report', numbered: true, flip: true,
+            desc: 'Keepers assigned to each animal, animal-wise or keeper-wise.',
+            shots: [
+              { src: 'keeper-wise', device: 'tablet', title: 'Animal-wise or keeper-wise', desc: 'Two views of the same assignment data, 2,174 animals here.' },
+              { src: 'keeper-lives', device: 'tablet', title: 'Where each animal lives', desc: 'Enclosure, section and site for every record.' },
+              { src: 'keeper-caretaker', device: 'tablet', title: 'Caretaker count', desc: 'How many keepers look after each animal.' },
+              { src: 'keeper-primary', device: 'tablet', title: 'Primary keeper', desc: 'The lead keeper assigned to each animal.' },
+              { src: 'keeper-download', device: 'tablet', title: 'Download report', desc: 'Export the full keeper assignment report for offline use or sharing.' }
+            ] },
+          { kicker: 'Care & Observations', title: 'Animal Observation Report', numbered: true, flip: true,
+            desc: 'Every observation recorded for one individual animal.',
+            shots: [
+              { src: 'observation-focus', device: 'tablet', title: 'Animal in focus', desc: 'The individual whose observations you\'re viewing.' },
+              { src: 'observation-filter', device: 'tablet', title: 'Filter observations', desc: 'By observation type, sub-type, date range or free text.' },
+              { src: 'observation-log', device: 'tablet', title: 'Observation log', desc: 'Every recorded observation, listed and exportable.' },
+              { src: 'observation-download', device: 'tablet', title: 'Download Report', desc: 'Tap "Download Report" to export the full observation log for offline use or sharing.' }
+            ] }
         ]
       },
       {
@@ -2174,18 +2192,37 @@ window.ANTZ_GUIDES = {
         label: 'Part 03 · Diaries & site',
         title: 'Diaries, counts and site reports',
         lede: 'What each keeper and biologist recorded, how many animals each enclosure holds, and every observation logged across a site.',
-        cards: [
-          { id: 'keeper-diary', title: 'Keeper\'s Diary', icon: 'note', desc: 'Every observation a keeper recorded, to view and download.',
-            shots: [{ src: 'keeper-diary', device: 'tablet', title: 'Keeper\'s Diary', desc: 'Pick whose diary to review, drill into an observation type and sub-type such as Feeding and Diet, and download all entries.' }] },
-          /* The deck's Biologist's Diary capture shows a veterinarian's diary with no rows */
-          { id: 'biologist-diary', title: 'Biologist\'s Diary', icon: 'lab', desc: 'Every observation a biologist recorded, to view and download.',
-            shots: [{ src: 'biologist-diary', device: 'tablet', title: 'Biologist\'s Diary', desc: 'Pick whose diary to review, filter by observation type, sub-type and date range, and download all entries.' }] },
-          /* The capture's on-screen title reads Animal Count Register */
-          { id: 'enclosure', title: 'Enclosure Count Report', icon: 'home', desc: 'Animal- or species-wise counts for an enclosure within a site.',
-            shots: [{ src: 'enclosure-count', device: 'tablet', title: 'Enclosure Count Report', desc: 'Search by species, see the site, section and enclosure count summary, and list each animal with its enclosure and gender.' }] },
-          /* The capture's on-screen title reads Daily Report */
-          { id: 'daily-site', title: 'Daily Site Report', icon: 'areas', desc: 'All observations recorded for a whole site, ready to download.',
-            shots: [{ src: 'daily-site', device: 'tablet', title: 'Daily Site Report', desc: 'The sites in scope, filters by AID, observation type, sub-type or date range, and the date, entity and type of every entry.' }] }
+        tours: [
+          { kicker: 'Diaries & Site', title: 'Keeper\'s Diary', numbered: true, flip: true,
+            desc: 'Every observation a keeper recorded, to view and download.',
+            shots: [
+              { src: 'keeperdiary-whose', device: 'tablet', title: 'Whose diary', desc: 'The keeper whose entries you\'re reviewing.' },
+              { src: 'keeperdiary-filter', device: 'tablet', title: 'Filter by observation type', desc: 'Drill into a type and sub-type, such as Feeding and Diet.' },
+              { src: 'keeperdiary-download', device: 'tablet', title: 'Download the diary', desc: 'Export all entries for the selected filters.' }
+            ] },
+          { kicker: 'Diaries & Site', title: 'Biologist\'s Diary', numbered: true, flip: true,
+            desc: 'Every observation a biologist recorded, to view and download.',
+            shots: [
+              { src: 'biologistdiary-whose', device: 'tablet', title: 'Whose diary', desc: 'The biologist whose entries you\'re reviewing.' },
+              { src: 'biologistdiary-filter', device: 'tablet', title: 'Filter observations', desc: 'By observation type, sub-type and date range.' },
+              { src: 'biologistdiary-download', device: 'tablet', title: 'Download the diary', desc: 'Export all entries for the selected filters.' }
+            ] },
+          { kicker: 'Diaries & Site', title: 'Enclosure Count Report', numbered: true, flip: true,
+            desc: 'Animal- or species-wise counts for an enclosure within a site.',
+            shots: [
+              { src: 'enclosure-search', device: 'tablet', title: 'Search by species', desc: 'Find any animal in the enclosure by species name.' },
+              { src: 'enclosure-summary', device: 'tablet', title: 'Enclosure summary', desc: 'Site, section and total enclosure count for the selection.' },
+              { src: 'enclosure-counts', device: 'tablet', title: 'Animal counts', desc: 'Each animal listed with its enclosure name and gender.' },
+              { src: 'enclosure-downloadreport', device: 'tablet', title: 'Download Report', desc: 'Tap "Download Report" to export the enclosure count for offline use or sharing.' }
+            ] },
+          { kicker: 'Diaries & Site', title: 'Daily Site Report', numbered: true, flip: true,
+            desc: 'All observations recorded for a whole site, ready to download.',
+            shots: [
+              { src: 'dailysite-sites', device: 'tablet', title: 'Sites in scope', desc: 'Every site included in this daily report, listed up top.' },
+              { src: 'dailysite-filter', device: 'tablet', title: 'Filter observations', desc: 'By AID, observation type, sub-type or date range.' },
+              { src: 'dailysite-log', device: 'tablet', title: 'Observation log', desc: 'Date, entity and observation type for every entry across the sites.' },
+              { src: 'dailysite-download', device: 'tablet', title: 'Download Report', desc: 'Tap "Download Report" to export the site-wide daily log for offline use or sharing.' }
+            ] }
         ]
       }
     ],
