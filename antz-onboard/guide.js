@@ -1949,8 +1949,22 @@ window.ANTZ_GUIDES = {
     back: 'helpdesk-module',
     parts: [
       {
+        id: 'lifecycle',
+        label: 'Part 01 · Workflow',
+        title: 'The request lifecycle',
+        lede: 'Every request moves along one path, from raised to completed. Approval, costing and fulfilment are the gates between stages. A rejected request can be corrected and resubmitted; a cancelled one needs a new request; a completed one can be reverted to finish or fix the work.',
+        flow: [
+          { icon: 'add', title: 'Raise Request', desc: 'A new request is created with full details.' },
+          { icon: 'cost', title: 'Add Costing', desc: 'Estimates are added for the items and services.' },
+          { icon: 'approve', title: 'Approve / Reject', desc: 'Approvers review and approve or reject it.' },
+          { icon: 'progress', title: 'Move to In-progress', desc: 'The approved request moves into active work.' },
+          { icon: 'done', title: 'Completed', desc: 'Work is done and the request is closed.' },
+          { icon: 'undo', title: 'Move back to In-progress', desc: 'Sent back to In Progress when more work is needed.' }
+        ]
+      },
+      {
         id: 'home',
-        label: 'Part 01 · The screen',
+        label: 'Part 02 · The screen',
         title: 'The Help Desk home',
         lede: 'One place to raise, track and resolve every request. Every request lives on one screen, organised by status, so you can track pending, approved, rejected, cancelled, in-progress and completed requests in one transparent view.',
         /* Tab counts differ between the slide's tiles, the image alts and the screenshots, so no counts are quoted */
@@ -1969,7 +1983,7 @@ window.ANTZ_GUIDES = {
       },
       {
         id: 'capabilities',
-        label: 'Part 02 · The module',
+        label: 'Part 03 · The module',
         title: 'Raise it, cost it, decide, close it out',
         lede: 'The Request module brings accountability to every ask, speeds up resolution, and keeps departments coordinated, from the moment a request is raised to the moment it is fulfilled.',
         cards: [
@@ -2005,7 +2019,7 @@ window.ANTZ_GUIDES = {
       },
       {
         id: 'roles',
-        label: 'Part 03 · Roles',
+        label: 'Part 04 · Roles',
         title: 'Everyone raises, permissions decide the rest',
         lede: 'The Help Desk is open to all user roles. Who can approve, cost and fulfil is governed by permissions, so each person sees only the actions that belong to them.',
         /* Built from the deck's three role lists; a cross means the action is not in that role's list */
@@ -2035,20 +2049,6 @@ window.ANTZ_GUIDES = {
               cells: [{ ok: false, text: 'Not in role' }, { ok: false, text: 'Not in role' }, { ok: true, text: 'Yes' }] }
           ]
         }
-      },
-      {
-        id: 'lifecycle',
-        label: 'Part 04 · Workflow',
-        title: 'The request lifecycle',
-        lede: 'Every request moves along one path, from raised to completed. Approval, costing and fulfilment are the gates between stages. A rejected request can be corrected and resubmitted; a cancelled one needs a new request; a completed one can be reverted to finish or fix the work.',
-        flow: [
-          { icon: 'add', title: 'Raise Request', desc: 'A new request is created with full details.' },
-          { icon: 'cost', title: 'Add Costing', desc: 'Estimates are added for the items and services.' },
-          { icon: 'approve', title: 'Approve / Reject', desc: 'Approvers review and approve or reject it.' },
-          { icon: 'progress', title: 'Move to In-progress', desc: 'The approved request moves into active work.' },
-          { icon: 'done', title: 'Completed', desc: 'Work is done and the request is closed.' },
-          { icon: 'undo', title: 'Move back to In-progress', desc: 'Sent back to In Progress when more work is needed.' }
-        ]
       }
     ],
     close: {
