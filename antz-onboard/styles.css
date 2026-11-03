@@ -1502,6 +1502,10 @@ body.fwin-open { overflow: hidden; }
 .fwin-device .device-web img { display: block; width: auto; max-width: 100%; max-height: calc(100vh - 230px); }
 /* Tablets are taller than they are wide, so a little narrower keeps them clear of the close button */
 .fwin-device .device-tablet { width: min(350px, 100%); }
+/* Pharmacy (Web) screens are dense, so its tablets are a quarter larger (350 to 438px) in a wider window,
+   still held to the window's height */
+.fwin[data-module="pharmacy-web"] .fwin-card:has(.device-tablet) { width: min(1160px, calc(100vw - 200px)); grid-template-columns: minmax(0, 50fr) minmax(0, 50fr); }
+.fwin[data-module="pharmacy-web"] .fwin-device .device-tablet { width: min(438px, 100%, calc((100vh - 200px) * .74)); }
 .fwin-empty { color: var(--muted); font-size: 15px; }
 .fwin-info { background: linear-gradient(160deg, #fff 55%, var(--tint-soft2) 100%); display: flex; flex-direction: column; padding: 56px 44px 40px 52px; min-height: 0; overflow-y: auto; }
 .fwin-head { display: flex; align-items: center; gap: 12px; margin: 22px 0 14px; }

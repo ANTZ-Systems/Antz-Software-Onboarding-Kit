@@ -1928,6 +1928,7 @@
     };
     const w = document.createElement('div');
     w.className = `fwin tint-${AREA_TINT[m.track]}`;
+    w.dataset.module = m.module || m.id;
     w.innerHTML = `
       <div class="fwin-backdrop" data-close></div>
       <button class="fwin-arrow prev" type="button" aria-label="${esc(t('win.prev'))}">${CHEV_L}</button>
