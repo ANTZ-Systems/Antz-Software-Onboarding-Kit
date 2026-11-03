@@ -1224,7 +1224,7 @@ a.mcard-face { text-decoration: none; color: inherit; }
   background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.95) 50%, transparent 65%) -150% 0 / 60% 100% no-repeat;
   mix-blend-mode: soft-light; animation: nav-cta-sheen 3.6s cubic-bezier(.4,0,.2,1) infinite;
 }
-.mtab:not([aria-current]):hover::before, .mtab:not([aria-current]):hover::after { opacity: 1; }
+.mtab:not([aria-current]):hover::before, .mtab:not([aria-current]):hover::after { opacity: .94; }
 @media (prefers-reduced-motion: reduce) { .mtab::before, .mtab::after { animation: none; } }
 .mtab > .drawn-border path { stroke: var(--line-grad, var(--tint-line)); }
 /* Tabs stop 10px above the bottom line; the selected outline curves down to it and runs beneath its neighbours */
