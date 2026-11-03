@@ -137,7 +137,7 @@
     'faq.q4': 'We run more than one site. Does that work?',
     'faq.a4': 'Antz keeps data from every site and department in one place. Housing is organised by site, section and enclosure, and moves between sites go through approval and a security check-out.',
     'faq.q5': 'How do we get started?',
-    'faq.a5': 'Start with the Getting Started guide, then open the modules your role uses. If something is unclear, write to hello@antz.systems.',
+    'faq.a5': 'Start with the Getting Started guide, then open the modules your role uses. If something is unclear, write to info@antzsystems.com.',
 
     'pager.prev': 'Previous',
     'pager.next': 'Next',

@@ -772,6 +772,9 @@
     document.title = `${g.title} · ${t('brand.title')}`;
   }
 
+  /* The support address opens the visitor's own mail app wherever it appears */
+  const EMAIL = 'info@antzsystems.com';
+
   function renderHome(returning) {
     const about = byId['what-is-antz-systems'];
     const spot = byId[FEATURE_PICK.id];
@@ -890,7 +893,7 @@
             <div class="actions" data-depth="0.45">
               <button class="btn btn-primary" type="button" data-scroll="index">${esc(t('cta.back'))}</button>
             </div>
-            <p class="or" data-depth="0.3">${esc(t('cta.or', { email: '\u0000' })).replace('\u0000', '<b>hello@antz.systems</b>')}</p>
+            <p class="or" data-depth="0.3">${esc(t('cta.or', { email: '\u0000' })).replace('\u0000', `<a href="mailto:${EMAIL}">${EMAIL}</a>`)}</p>
           </div>
         </div>
       </section>
@@ -902,7 +905,7 @@
             <h2 class="section-title">${esc(t('faq.title'))}</h2>
           </div>
           <div class="faq">
-            ${faqs.map(([q, a]) => `<details class="reveal"><summary>${esc(q)}</summary><p class="answer">${esc(a)}</p></details>`).join('')}
+            ${faqs.map(([q, a]) => `<details class="reveal"><summary>${esc(q)}</summary><p class="answer">${esc(a).replace(EMAIL, `<a href="mailto:${EMAIL}">${EMAIL}</a>`)}</p></details>`).join('')}
           </div>
         </div>
       </section>`;

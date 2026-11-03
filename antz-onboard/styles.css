@@ -1127,7 +1127,12 @@ a.mcard-face { text-decoration: none; color: inherit; }
 .cta .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .cta .or { margin: 18px 0 0; font-size: 15px; color: rgba(255,255,255,.85); }
 .cta [data-depth] { will-change: transform; }
-.cta .or b { color: #fff; font-weight: 600; user-select: all; }
+.cta .or a { color: #fff; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(255,255,255,.45); text-underline-offset: 3px; }
+/* The address lifts a little on hover, easing in */
+.cta .or a { display: inline-block; transition: transform .35s ease-in, text-decoration-color .35s ease-in; }
+.cta .or a:hover, .cta .or a:focus-visible { text-decoration-color: #fff; transform: translateY(-3px); }
+@media (prefers-reduced-motion: reduce) { .cta .or a { transition: none; } .cta .or a:hover { transform: none; } }
+.answer a { color: var(--green-strong); font-weight: 600; }
 @media (max-width: 640px) { .cta-inner { padding: 80px 0; } .cta p { font-size: 16px; } }
 
 /* ---------- FAQ ---------- */
