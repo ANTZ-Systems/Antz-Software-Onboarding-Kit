@@ -1411,8 +1411,8 @@
       ...[...app.querySelectorAll('.mfeat-row')].map((el) => [el, { ...CARD_BORDER, stroke: 1, bleed: 0, over: true,
         /* Hover, or keyboard focus on its button (a mouse click leaves focus behind, which must not keep it drawn) */
         isOn: () => (el.matches(':hover') && canHover()) || !!el.querySelector(':focus-visible') }]),
-      /* Area tabs on module pages: the home chips' drawn border, in each area's colour (not on the selected tab) */
-      ...[...app.querySelectorAll('.mtab')].map((el) => [el, { ...CHIP_BORDER, feather: 40,
+      /* Area tabs on module pages: the home chips' drawn border, a 1px line in each area's colour (not on the selected tab) */
+      ...[...app.querySelectorAll('.mtab')].map((el) => [el, { ...CHIP_BORDER, stroke: 1, feather: 40,
         isOn: () => !el.hasAttribute('aria-current') && ((el.matches(':hover') && canHover()) || el.matches(':focus-visible')) }]),
       ...[...app.querySelectorAll('.mfilter, .hero-chips .chip')].map((el) => [el, { ...CHIP_BORDER,
         isOn: () => el.matches(':hover') || el.matches(':focus-visible') }])
