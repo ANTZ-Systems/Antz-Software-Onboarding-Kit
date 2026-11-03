@@ -882,13 +882,36 @@ button { font: inherit; color: inherit; }
 }
 .mcard-face:hover, .mcard-face:focus-visible { transform: translateY(-4px); box-shadow: 0 22px 44px -22px rgba(14,40,34,.38), 0 2px 6px rgba(14,23,21,.05); }
 .mcard-face:focus-visible { outline: none; }
-/* Holographic mesh, from the LSET Foundation site's content area: eight pastel blobs, each circling its own
+.mcard-face { isolation: isolate; }
+/* Home module cards: the area tabs' holographic film, drifting foil and a passing sheen at 94%, in the bottom-right
+   corner and fading towards the top-left, under the card's content while it is hovered or focused */
+.holo { position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; overflow: hidden; }
+.holo::before, .holo::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: 0; transition: opacity .45s ease;
+  -webkit-mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+  mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+}
+.holo::before {
+  background: linear-gradient(115deg, #FFD9EC 0%, #E3D9FF 16%, #CDEBFF 32%, #C8F7E6 48%, #F6F7C8 64%, #FFDCCF 80%, #FFD9EC 100%) 0 50% / 300% 100%;
+  animation: nav-cta-holo 2.4s linear infinite;
+}
+.holo::after {
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.95) 50%, transparent 65%) -150% 0 / 60% 100% no-repeat;
+  mix-blend-mode: soft-light; animation: nav-cta-sheen 3.6s cubic-bezier(.4,0,.2,1) infinite;
+}
+.mcard-face:hover > .holo::before, .mcard-face:hover > .holo::after,
+.mcard-face:focus-visible > .holo::before, .mcard-face:focus-visible > .holo::after { opacity: .94; }
+[dir="rtl"] .holo::before, [dir="rtl"] .holo::after {
+  -webkit-mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+  mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+}
+@media (prefers-reduced-motion: reduce) { .holo::before, .holo::after { animation: none; } }
+/* Know more cards: a holographic mesh, from the LSET Foundation site's content area: eight pastel blobs, each circling its own
    small orbit at its own phase, so the wash turns rather than slides. It sits on a layer under the card's
    content and appears only while the card is hovered or focused; at rest the card keeps its usual face.
    Leaving pauses the turn where it is, so the next hover picks up from there instead of jumping back. */
 @property --mesh-turn { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
-.mcard-face { isolation: isolate; }
-.mcard-face::before {
+.gcard.mcard-face::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   /* How strong the wash is: 1 is the Foundation site's full strength */
   --mesh-strength: .45;
@@ -904,15 +927,15 @@ button { font: inherit; color: inherit; }
     radial-gradient(ellipse 47% 55% at calc(46% + 15% * cos(var(--mesh-turn) + 195deg)) calc(6% + 15% * sin(var(--mesh-turn) + 195deg)), rgb(204 228 255 / calc(70% * var(--mesh-strength))), rgb(204 228 255 / 0%) 100%);
   opacity: 0; transition: opacity .5s ease;
 }
-.mcard-face:hover::before, .mcard-face:focus-visible::before { opacity: 1; }
+.gcard.mcard-face:hover::before, .gcard.mcard-face:focus-visible::before { opacity: 1; }
 @keyframes meshTurn { to { --mesh-turn: 360deg; } }
 @media (prefers-reduced-motion: no-preference) {
-  .mcard-face::before { animation: meshTurn 10s linear infinite paused; }
+  .gcard.mcard-face::before { animation: meshTurn 10s linear infinite paused; }
   .mcard-face:hover::before, .mcard-face:focus-visible::before { animation-play-state: running; }
   /* Neighbouring cards start at different points of the turn */
-  .mcard:nth-child(4n+2) .mcard-face::before { animation-delay: -3s; }
-  .mcard:nth-child(4n+3) .mcard-face::before { animation-delay: -6s; }
-  .mcard:nth-child(4n+4) .mcard-face::before { animation-delay: -8s; }
+  .mcard:nth-child(4n+2) .gcard.mcard-face::before { animation-delay: -3s; }
+  .mcard:nth-child(4n+3) .gcard.mcard-face::before { animation-delay: -6s; }
+  .mcard:nth-child(4n+4) .gcard.mcard-face::before { animation-delay: -8s; }
   .ggrid > .mcard-face:nth-child(odd)::before { animation-delay: -4s; }
 }
 /* The resting 1px edge sits under the drawn border, so the drawn line covers it completely */
