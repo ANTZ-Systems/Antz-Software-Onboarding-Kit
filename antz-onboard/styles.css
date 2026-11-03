@@ -2360,3 +2360,28 @@ body.fwin-open { overflow: hidden; }
   .fb-form { padding: 26px 20px; gap: 22px; }
   .fb-row { grid-template-columns: 1fr; }
 }
+
+/* Feedback tab: a small rounded tab floating just off the right edge, halfway down, reading bottom to top;
+   it lifts a little on hover */
+.fb-tab {
+  position: fixed; right: 12px; top: 50%; z-index: 60; display: flex; align-items: center; gap: 6px;
+  padding: 11px 7px 12px; border-radius: 10px; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg);
+  /* 45deg in the tab's own (rotated) frame: green at the top, teal at the bottom as seen */
+  background: linear-gradient(45deg, var(--green) 0%, var(--teal) 100%); color: #fff; text-decoration: none;
+  font-size: 12.5px; font-weight: 600; letter-spacing: .03em;
+  box-shadow: 0 2px 4px rgba(14,40,34,.12), 0 10px 22px -6px rgba(14,40,34,.38);
+  transition: transform .45s cubic-bezier(.4,0,.2,1), box-shadow .45s cubic-bezier(.4,0,.2,1), opacity .3s var(--ease), visibility .3s;
+}
+.fb-tab svg { width: 14px; height: 14px; transform: rotate(90deg); fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.fb-tab:hover, .fb-tab:focus-visible {
+  transform: translateY(calc(-50% - 4px)) rotate(180deg);
+  box-shadow: 0 4px 8px rgba(14,40,34,.14), 0 18px 30px -8px rgba(14,40,34,.45);
+  transition: transform .55s cubic-bezier(.34,1.56,.64,1), box-shadow .55s cubic-bezier(.22,.8,.24,1), opacity .3s, visibility .3s;
+}
+.fb-tab:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.fb-tab.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+[dir="rtl"] .fb-tab { right: auto; left: 12px; transform: translateY(-50%); }
+[dir="rtl"] .fb-tab svg { transform: rotate(-90deg); }
+[dir="rtl"] .fb-tab:hover, [dir="rtl"] .fb-tab:focus-visible { transform: translateY(calc(-50% - 4px)); }
+@media (max-width: 560px) { .fb-tab { right: 8px; padding: 9px 6px 10px; font-size: 11.5px; } [dir="rtl"] .fb-tab { left: 8px; } }
+@media (prefers-reduced-motion: reduce) { .fb-tab, .fb-tab:hover { transition: opacity .3s, visibility .3s; } .fb-tab:hover { transform: translateY(-50%) rotate(180deg); } }

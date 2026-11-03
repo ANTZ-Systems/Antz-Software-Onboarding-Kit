@@ -2624,6 +2624,16 @@
     observeReveal();
   }
 
+  /* Every page but its own: a Feedback tab fixed to the right edge, halfway down, opening the feedback page */
+  const fbTab = document.createElement('a');
+  fbTab.className = 'fb-tab';
+  fbTab.href = '#/feedback';
+  fbTab.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H9.5L5 20.5v-3.5h-.5a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1Z"/></svg><span>${esc(t('nav.feedback'))}</span>`;
+  document.body.append(fbTab);
+  const syncFbTab = () => fbTab.classList.toggle('hide', location.hash.split('/')[1] === 'feedback');
+  window.addEventListener('hashchange', syncFbTab);
+  syncFbTab();
+
   /* Every page: a floating button back to the top, in the app's FAB gradient, once the banner is scrolled past */
   const topFab = document.createElement('button');
   topFab.className = 'top-fab';
