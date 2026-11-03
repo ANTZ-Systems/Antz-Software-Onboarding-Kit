@@ -1940,7 +1940,7 @@ window.ANTZ_GUIDES = {
   },
   /* From References/Module Details Pages/Help desk interactive kit (Help Desk Kit) */
   'helpdesk-module': {
-    source: 'Help desk interactive kit · Help Desk Kit',
+    source: 'Help desk interactive kit · Help Desk Kit (updated copy in References/Help desk interactive kit)',
     title: 'Helpdesk Module',
     kicker: 'Operations & Oversight',
     sub: 'The Request module for raising and tracking requests for resources, maintenance and services, with accountability, faster resolution and coordination across every department.',
@@ -1973,13 +1973,15 @@ window.ANTZ_GUIDES = {
         title: 'Raise it, cost it, decide, close it out',
         lede: 'The Request module brings accountability to every ask, speeds up resolution, and keeps departments coordinated, from the moment a request is raised to the moment it is fulfilled.',
         cards: [
-          { id: 'requests', title: 'Request management', icon: 'help', desc: 'Raise a new request with full detail, edit it before it is processed, cancel it when it is no longer needed, or reject it with a reason.',
+          { id: 'requests', title: 'Request management', icon: 'help', desc: 'Raise a new request with full detail, edit it before it is processed, clone it for reuse, cancel it when it is no longer needed, reject it with a reason, or delete it.',
             shots: [
               { src: 'request-raise', title: 'Raise Request', desc: 'Create and submit a new request with all the required details.' },
               { src: 'request-edit', title: 'Edit Request', desc: 'Update an existing request before it is processed.' },
+              { src: 'request-clone', title: 'Clone Request', desc: 'Create a copy of an existing request for reuse.' },
               { src: 'request-cancel', title: 'Cancel Request', desc: 'Withdraw a request that is no longer needed, giving a reason.' },
               /* The slide says "after approval"; the deck's source text says "during approval", which matches the rest of the deck */
-              { src: 'request-reject', title: 'Reject Request', desc: 'Decline a request during approval and provide a reason.' }
+              { src: 'request-reject', title: 'Reject Request', desc: 'Decline a request during approval and provide a reason.' },
+              { src: 'request-delete', title: 'Delete Requests', desc: 'Remove requests that are no longer required.' }
             ] },
           { id: 'costs', title: 'Cost management', icon: 'database', desc: 'Build the budget for a request before you commit: add, edit, duplicate or delete cost estimates.',
             shots: [
@@ -2017,10 +2019,16 @@ window.ANTZ_GUIDES = {
           rows: [
             { title: 'Raise a request', desc: 'Open to all user roles.', icon: 'add',
               cells: [{ ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }] },
-            { title: 'Edit, cancel, track status', desc: 'Manage your own request.', icon: 'edit',
+            { title: 'Edit or delete', desc: 'Manage your own request.', icon: 'edit',
               cells: [{ ok: true, text: 'Yes' }, { ok: false, text: 'Not in role' }, { ok: false, text: 'Not in role' }] },
-            { title: 'Approve or reject', desc: 'From the My Approvals queue.', icon: 'approve',
+            { title: 'Cancel a request', desc: 'Withdraw it with a reason.', icon: 'undo',
+              cells: [{ ok: true, text: 'Yes' }, { ok: false, text: 'Not in role' }, { ok: true, text: 'Yes' }] },
+            { title: 'Clone a request', desc: 'Copy an existing request for reuse.', icon: 'link',
+              cells: [{ ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }] },
+            { title: 'Approve', desc: 'From the My Approvals queue.', icon: 'approve',
               cells: [{ ok: false, text: 'Not in role' }, { ok: true, text: 'Yes', note: 'Approval rights' }, { ok: false, text: 'Not in role' }] },
+            { title: 'Reject', desc: 'Decline it with a reason.', icon: 'alert',
+              cells: [{ ok: false, text: 'Not in role' }, { ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }] },
             { title: 'Cost estimates', desc: 'Add, edit, duplicate or delete.', icon: 'database',
               cells: [{ ok: false, text: 'Not in role' }, { ok: false, text: 'Not in role' }, { ok: true, text: 'Yes' }] },
             { title: 'Complete or revert', desc: 'Mark as Completed, Revert to In Progress.', icon: 'priority',
@@ -2049,7 +2057,7 @@ window.ANTZ_GUIDES = {
       lede: 'Raise it, route it, resolve it: every request accounted for, from the first tap to the final tick. Good data, good coordination, better care.',
       items: [
         { icon: 'filter', title: 'View requests by status', desc: 'One transparent list across pending, approved, rejected, cancelled, in-progress and completed, with My Approvals, Awaiting Costing and All filters on top.' },
-        { icon: 'manage', title: 'Request management', desc: 'Raise, edit, cancel or reject. Every request carries its details and priority, and a clear reason when it is declined.' },
+        { icon: 'manage', title: 'Request management', desc: 'Raise, edit, clone, cancel, reject or delete. Every request carries its details and priority, and a clear reason when it is declined.' },
         { icon: 'cost', title: 'Cost management', desc: 'Add, edit, duplicate or delete estimates so the budget for items and services is set before the work begins.' },
         { icon: 'done', title: 'Fulfilment & reversion', desc: 'Mark work completed when it is done, or revert it to in-progress when more work or a correction is needed.' }
       ]
