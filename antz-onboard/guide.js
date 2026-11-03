@@ -2173,6 +2173,142 @@ window.ANTZ_GUIDES = {
         { icon: 'users', title: 'Open to all roles', desc: 'Available to every role; individual reports appear as their permissions are enabled.' }
       ]
     }
+  },
+  /* From References/Pharmacy Interactive Kit Design (Pharmacy Web Kit). The deck's tablet captures are cropped to the screen.
+     Dashboard points 6 (Doctor-wise Report) and 8 (Fast Moving Products) have no capture in the kit, so they are in the lede */
+  'pharmacy-web': {
+    source: 'Pharmacy Interactive Kit Design · Pharmacy Web Kit',
+    title: 'Pharmacy (Web)',
+    kicker: 'Operations & Oversight',
+    sub: 'The web console for running a pharmacy end to end: masters and storage, inventory and products, requests and shipments, dispensing, adjustments and reporting.',
+    audience: ['Pharmacists', 'Store admins', 'Logistics', 'New users'],
+    area: 'operations',
+    back: 'pharmacy-web',
+    parts: [
+      {
+        id: 'dashboard',
+        label: 'Part 01 · Real-time view',
+        title: 'Dashboard',
+        lede: 'Real-time insights on stock issues, shipments, purchases, requests, usage, expiries and fast-moving products, with visual trends for quick action. The dashboard also carries a Doctor-wise Report of product requests by user, doctor or store, and a list of Fast Moving Products shipped most often.',
+        actions: {
+          title: 'On this screen', numbered: true,
+          desc: 'Six parts of the pharmacy dashboard, each highlighted on the screen.',
+          shots: [
+            { src: 'dash-critical', device: 'tablet', title: 'Critical info', desc: 'Expired and out-of-stock medicines, flagged for quick resolution.' },
+            { src: 'dash-daily', device: 'tablet', title: 'Daily overview', desc: 'Today\'s requests, shipments and dispatched value.' },
+            { src: 'dash-month', device: 'tablet', title: 'Month-wise dispatch & purchase', desc: 'Charts of dispatch and purchase by month, to monitor supply trends.' },
+            { src: 'dash-stores', device: 'tablet', title: 'Top 5 stores', desc: 'The top stores by usage, with product, quantity and value data.' },
+            { src: 'dash-recent', device: 'tablet', title: 'Recent requests', desc: 'The latest purchase and transfer requests, completed and pending.' },
+            { src: 'dash-expired', device: 'tablet', title: 'Top 10 expired products', desc: 'The most expired items, listed for quick action.' }
+          ]
+        }
+      },
+      {
+        id: 'stock-report',
+        label: 'Part 02 · Visibility',
+        title: 'Stock report',
+        lede: 'Track batch-wise stock with value and expiry, flag low or expired items, monitor upcoming expiries and manage escrow with dispute resolution.',
+        actions: {
+          title: 'The stock report tabs', numbered: true,
+          desc: 'Five views of your stock. Point at a tab to see it on the screen.',
+          shots: [
+            { src: 'sr-batch', device: 'tablet', title: 'Batch-wise stock', desc: 'Quantity, price, value, batch and expiry for every product.' },
+            { src: 'sr-low', device: 'tablet', title: 'Low stock', desc: 'Items running out, with reorder levels, so you restock in time.' },
+            { src: 'sr-expired', device: 'tablet', title: 'Expired stock', desc: 'A clear list of expired items with batch and expiry dates.' },
+            { src: 'sr-about', device: 'tablet', title: 'About to expire', desc: 'What expires soon, so you can use or return it before it goes to waste.' },
+            { src: 'sr-escrow', device: 'tablet', title: 'Escrow', desc: 'Stock packed and moving between stores. Use the Dispute filter to fix short or mismatched deliveries.' }
+          ]
+        }
+      },
+      {
+        id: 'requests',
+        label: 'Part 03 · Store-to-store',
+        title: 'Requests',
+        lede: 'Manage product requests, store-wise requirements, pending items and direct dispatches from one centralised view.',
+        actions: {
+          title: 'The request views', numbered: true,
+          desc: 'Three ways to follow requests. Point at one to see it on the screen.',
+          shots: [
+            { src: 'req-all', device: 'tablet', title: 'All requests', desc: 'Every pending, shipped and disputed request, with its age, pharmacy details and resolution tools.' },
+            { src: 'req-store', device: 'tablet', title: 'Store-wise requests', desc: 'Totals, availability and emergencies per store, with drill-downs.' },
+            { src: 'req-new', device: 'tablet', title: 'New product requests', desc: 'Requests for new products, tracked as Approved, Pending, Cancelled and Rejected.' }
+          ]
+        }
+      },
+      {
+        id: 'movement',
+        label: 'Part 04 · Movement',
+        title: 'Returns, dispatch, shipments and dispensing',
+        lede: 'How stock moves: back from stores, out without a request when it is urgent, in and out as shipments, and on to patients.',
+        chain: true,
+        cards: [
+          { id: 'returns', title: 'Returns', icon: 'undo', desc: 'Manage product returns from stores, with the reason, status and delivery tracked for every return.',
+            shots: [{ src: 'returns', device: 'tablet', title: 'Returns', desc: 'Manage product returns from stores, with the reason, status and delivery tracked for every return.' }] },
+          { id: 'direct-dispatch', title: 'Dispatch without request', icon: 'priority', desc: 'Bypass traditional requests to dispatch products directly when urgent needs arise.',
+            shots: [{ src: 'direct-dispatch', device: 'tablet', title: 'Dispatch without request', desc: 'Bypass traditional requests to dispatch products directly when urgent needs arise.' }] },
+          { id: 'ship-incoming', title: 'Incoming shipments', icon: 'transfer', desc: 'Track shipments of medicines coming in from suppliers, and fulfil them.',
+            shots: [{ src: 'ship-incoming', device: 'tablet', title: 'Incoming shipments', desc: 'Track shipments of medicines coming in from suppliers, and fulfil them.' }] },
+          { id: 'ship-outgoing', title: 'Outgoing shipments', icon: 'transfer', desc: 'Track shipments of medicines going out to stores, with the fulfilment status of each.',
+            shots: [{ src: 'ship-outgoing', device: 'tablet', title: 'Outgoing shipments', desc: 'Track shipments of medicines going out to stores, with the fulfilment status of each.' }] },
+          { id: 'dispense', title: 'Dispense medicine', icon: 'medicine', desc: 'Doctors can prescribe and dispense medicines, or patients collect them directly from the pharmacy.',
+            shots: [{ src: 'dispense', device: 'tablet', title: 'Dispense medicine', desc: 'Doctors can prescribe and dispense medicines, or patients collect them directly from the pharmacy.' }] }
+        ]
+      },
+      {
+        id: 'stock',
+        label: 'Part 05 · Catalogue and stock',
+        title: 'Products, inventory and storage',
+        lede: 'The catalogue, the stock that comes in, the changes that keep it accurate, and where it all sits.',
+        chain: true,
+        cards: [
+          { id: 'product', title: 'Product management', icon: 'manage', desc: 'Create and manage products, track inventory and expiry, keep a unified ledger, and handle substitutes, variants and reference info.',
+            shots: [{ src: 'product', device: 'tablet', title: 'Product management', desc: 'Create and manage products, track inventory and expiry, keep a unified ledger, and handle substitutes, variants and reference info.' }] },
+          { id: 'inventory', title: 'Inventory', icon: 'add', desc: 'Add and import stock, auto-fill from invoices, view purchase history, and review batch, pricing and quantity details.',
+            shots: [{ src: 'inventory', device: 'tablet', title: 'Inventory', desc: 'Add and import stock, auto-fill from invoices, view purchase history, and review batch, pricing and quantity details.' }] },
+          { id: 'add-existing', title: 'Add existing inventory', icon: 'history', desc: 'Quickly log stock you already have with minimal inputs: ideal for corrections or backfills.',
+            shots: [{ src: 'add-existing', device: 'tablet', title: 'Add existing inventory', desc: 'Quickly log stock you already have with minimal inputs: ideal for corrections or backfills.' }] },
+          { id: 'stock-adjustment', title: 'Stock adjustment', icon: 'edit', desc: 'Record stock that is missing, broken or expired, with a full audit history of every change.',
+            shots: [{ src: 'stock-adjustment', device: 'tablet', title: 'Stock adjustment', desc: 'Record stock that is missing, broken or expired, with a full audit history of every change.' }] },
+          { id: 'rts', title: 'Return to supplier', icon: 'discard', desc: 'Return unwanted, expired or excess stock to suppliers, with every request tracked, to save storage space and holding costs.',
+            shots: [{ src: 'rts', device: 'tablet', title: 'Return to supplier', desc: 'Return unwanted, expired or excess stock to suppliers, with every request tracked, to save storage space and holding costs.' }] },
+          { id: 'stock-location', title: 'Master, rack & shelves', icon: 'home', desc: 'Organise storage by rack and shelf for quick access, with custom packaging, UOM, salts, drivers and manufacturers.',
+            shots: [{ src: 'stock-location', device: 'tablet', title: 'Master, rack & shelves', desc: 'Organise storage by rack and shelf for quick access, with custom packaging, UOM, salts, drivers and manufacturers.' }] }
+        ]
+      },
+      {
+        id: 'reports',
+        label: 'Part 06 · Insight',
+        title: 'Report management',
+        lede: 'Track consumption, returns, shipments, purchases, dispensing and requests with filters and downloads, for supplier, finance and demand insights.',
+        actions: {
+          title: 'Ten reports', numbered: true,
+          desc: 'Every report filters by date and downloads. Point at one to see it on the screen.',
+          shots: [
+            { src: 'rep-consumption', device: 'tablet', title: 'Consumption report', desc: 'What each product consumed, by medicine, store and drug type.' },
+            { src: 'rep-return', device: 'tablet', title: 'Return report', desc: 'Returns by return and shipment number, with an Expired filter.' },
+            { src: 'rep-shipment', device: 'tablet', title: 'Shipment report', desc: 'Outgoing stock by shipment and request number.' },
+            { src: 'rep-dispense', device: 'tablet', title: 'Dispense report', desc: 'Every dispense with its product and batch number.' },
+            { src: 'rep-reconciliation', device: 'tablet', title: 'Reconciliation report', desc: 'Current balance against purchased quantity, month by month, batch-wise if needed.' },
+            { src: 'rep-purchase', device: 'tablet', title: 'Purchase report', desc: 'Purchases by number, product and batch, for audits.' },
+            { src: 'rep-pending', device: 'tablet', title: 'Pending request report', desc: 'Requests still pending, with their priority, for audits.' },
+            { src: 'rep-rts', device: 'tablet', title: 'Return to supplier report', desc: 'Every return to a supplier, by request and date.' },
+            { src: 'rep-all-req', device: 'tablet', title: 'All requested items report', desc: 'Every requested item, with its priority and request number.' },
+            { src: 'rep-price', device: 'tablet', title: 'Product price by supplier', desc: 'Each product\'s type, category and unit price from a selected supplier.' }
+          ]
+        }
+      }
+    ],
+    close: {
+      label: 'Get started',
+      title: 'Ready to dispense',
+      lede: 'That is the Pharmacy module end to end. Open the console and start with your requests; the rest of the lifecycle follows from there.',
+      items: [
+        { icon: 'eye', title: 'See it at a glance', desc: 'A real-time dashboard and stock report flag expiries, low stock and disputes first.' },
+        { icon: 'transfer', title: 'Move stock with a trail', desc: 'Requests, returns, direct dispatches and shipments, each tracked from start to finish.' },
+        { icon: 'manage', title: 'Keep the catalogue right', desc: 'Products, inventory, adjustments and supplier returns, in their racks and shelves.' },
+        { icon: 'report', title: 'Report on everything', desc: 'Ten filterable, downloadable reports for supplier, finance and demand insights.' }
+      ]
+    }
   }
   /* ---- end of module guides ---- */
 };
