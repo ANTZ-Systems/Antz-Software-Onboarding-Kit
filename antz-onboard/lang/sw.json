@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Usalama",
-   "intro": "Moduli ya Usalama inasimamia ruhusa maalum za kila kituo na inasimamia michakato ya uhamisho na utupaji wa mayai pamoja na uhamisho wowote wa wanyama au wa hospitali, ili kuhakikisha uhamisho unaodhibitiwa na uwajibikaji kamili kuhusu nani alishughulikia nini, na lini.",
-   "summary": "Inasimamia ruhusa maalum za kila kituo na inasimamia michakato ya uhamisho na utupaji wa mayai pamoja na uhamisho wowote wa wanyama au wa hospitali, ili kuhakikisha uhamisho unaodhibitiwa na uwajibikaji kamili kuhusu nani alishughulikia nini, na lini",
+   "intro": "Moduli ya Usalama inasimamia michakato ya uhamisho na utupaji wa mayai ya kila kituo pamoja na uhamisho wowote wa wanyama, wa mizoga au wa hospitali, ili kuhakikisha uhamisho unaodhibitiwa na uwajibikaji kamili kuhusu nani alishughulikia nini, na lini.",
+   "summary": "Inasimamia michakato ya uhamisho na utupaji wa mayai ya kila kituo pamoja na uhamisho wowote wa wanyama, wa mizoga au wa hospitali, ili kuhakikisha uhamisho unaodhibitiwa na uwajibikaji kamili kuhusu nani alishughulikia nini, na lini",
    "features": [
     {
      "title": "Uchujaji",

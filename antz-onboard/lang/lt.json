@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Apsauga",
-   "intro": "Apsaugos modulis valdo konkrečių vietų leidimus ir prižiūri kiaušinių perkėlimo bei išmetimo procesus ir bet kokį gyvūnų ar ligoninės perkėlimą, kad judėjimas būtų kontroliuojamas ir būtų visiškai aišku, kas, ką ir kada tvarkė.",
-   "summary": "Konkrečių vietų leidimų valdymas ir kiaušinių perkėlimo bei išmetimo, gyvūnų ir ligoninės perkėlimų priežiūra, kad būtų aišku, kas, ką ir kada tvarkė",
+   "intro": "Apsaugos modulis prižiūri konkrečių vietų kiaušinių perkėlimo bei išmetimo procesus ir bet kokį gyvūnų, gaišenų ar ligoninės perkėlimą, kad judėjimas būtų kontroliuojamas ir būtų visiškai aišku, kas, ką ir kada tvarkė.",
+   "summary": "Konkrečių vietų kiaušinių perkėlimo bei išmetimo, gyvūnų, gaišenų ir ligoninės perkėlimų priežiūra, kad būtų aišku, kas, ką ir kada tvarkė",
    "features": [
     {
      "title": "Filtravimo funkcija",

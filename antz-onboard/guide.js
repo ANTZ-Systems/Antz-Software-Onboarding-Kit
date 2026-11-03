@@ -2078,11 +2078,12 @@ window.ANTZ_GUIDES = {
         label: 'Part 01 · The module',
         title: 'What Security covers',
         lede: 'The Security module oversees site permissions and every egg, animal, hospital and carcass transfer, ensuring controlled movement and full accountability for who handled what, and when.',
+        chain: true,
         cards: [
           { id: 'filter', title: 'Filter functionality', icon: 'filter', desc: 'Filter records by status for focused review: Show All, Checkout Pending or Security Checkout Cleared.',
-            shots: [{ src: 'filter', title: 'Filter By dialog', desc: 'The Filter By dialog with Show All selected, above Checkout Pending and Security Checkout Cleared.' }] },
+            shots: [{ src: 'filter', title: 'Filter functionality', desc: 'Filter records by status for focused review: Show All, Checkout Pending or Security Checkout Cleared.' }] },
           { id: 'checkout', title: 'Check-in & check-out', icon: 'shield', desc: 'Authorised security checks records in and out across every transfer type.',
-            shots: [{ src: 'check-in-out', title: 'Security check-in', desc: 'A hospital transfer cleared at checkout, ready for security check-in at the hospital.' }] }
+            shots: [{ src: 'check-in-out', title: 'Check-in & check-out', desc: 'Authorised security checks records in and out across every transfer type.' }] }
         ]
       },
       {
@@ -2127,13 +2128,31 @@ window.ANTZ_GUIDES = {
         /* The overview slide has no screens, so its three features are folded into this lede.
            The deck's live report explorer (slides 4 and 5) is an HTML mock-up, not a capture, so it is not used */
         lede: 'The Reports module presents categorised data on key animal events under clear headings. Refine any report by date range, site or species, customise the view with show / hide columns, gender-wise toggles and site selection, and download it for offline use, sharing or compliance.',
-        cards: [
-          { id: 'species', title: 'Species General Report', icon: 'species', desc: 'Population by species, with a clear male / female breakdown.',
-            shots: [{ src: 'species', device: 'tablet', title: 'Species General Report', desc: 'Male, female, indeterminate and undetermined counts per species, with a site filter, show / hide columns and Download report.' }] },
-          { id: 'daily', title: 'Daily Report', icon: 'report', desc: 'A day of activity: natality, transfers, mortality and assessments.',
-            shots: [{ src: 'daily', device: 'tablet', title: 'Daily Report', desc: 'Past and upcoming reports, grouped by natality, accession, mortality, assessment and transfer, with a download for each row.' }] },
-          { id: 'list', title: 'Animal Report List', icon: 'batch', desc: 'Detailed animal records, filterable by species, site and attributes.',
-            shots: [{ src: 'animal-list', device: 'tablet', title: 'Animal Report List', desc: 'Each animal\'s age, breed, variant, enclosure, section and site, with Antz animal ID, microchip and ring number columns, filters and show / hide.' }] }
+        /* As the kit's report pages: one tour per report, its points beside a screen that highlights each in turn */
+        tours: [
+          { kicker: 'Population & Activity', title: 'Species General Report', numbered: true, flip: true,
+            desc: 'Population by species with a clear male / female breakdown.',
+            shots: [
+              { src: 'species-gender', device: 'tablet', title: 'Gender split, Indeterminate and Undetermined', desc: 'Male counts in mint, female counts in pink, per species, at a glance.' },
+              { src: 'species-site', device: 'tablet', title: 'Filter by site', desc: 'Scope the population to any of your sites.' },
+              { src: 'species-hide', device: 'tablet', title: 'Show / hide columns', desc: 'Tailor the table to only the columns you care about.' },
+              { src: 'species-download', device: 'tablet', title: 'Download report', desc: 'Export the full species report for offline use, sharing or compliance.' }
+            ] },
+          { kicker: 'Population & Activity', title: 'Daily Report', numbered: true, flip: true,
+            desc: 'A day of activity: natality, transfers, mortality and assessments.',
+            shots: [
+              { src: 'daily-past', device: 'tablet', title: 'Past & upcoming reports', desc: 'Switch between historical reports and scheduled ones.' },
+              { src: 'daily-grouped', device: 'tablet', title: 'Grouped by activity', desc: 'Natality, accession, mortality and assessment, neatly grouped.' },
+              { src: 'daily-download', device: 'tablet', title: 'Download any section', desc: 'Each row exports on its own with one tap.' }
+            ] },
+          { kicker: 'Population & Activity', title: 'Animal Report List', numbered: true, flip: true,
+            desc: 'Detailed animal records, filterable by species, site and attributes.',
+            shots: [
+              { src: 'list-full', device: 'tablet', title: 'Full animal record', desc: 'Age, breed, variant, enclosure, section and site, all in one card.' },
+              { src: 'list-filter', device: 'tablet', title: 'Filter & show / hide', desc: 'Narrow the list and choose which columns appear.' },
+              { src: 'list-ids', device: 'tablet', title: 'IDs and record columns', desc: 'Antz Animal ID, microchip, ring number, gender, animal type and count, site, section, enclosure, morph, breed, weight, age, accession date and type, organisation, and taxonomy from class to species.' },
+              { src: 'list-download', device: 'tablet', title: 'Download report', desc: 'Export the full animal list for offline use, sharing or compliance.' }
+            ] }
         ]
       },
       {

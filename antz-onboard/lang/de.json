@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Sicherheit",
-   "intro": "Das Sicherheitsmodul verwaltet standortspezifische Berechtigungen und beaufsichtigt Eiertransfers und das Verwerfen von Eiern sowie jeden Tier- oder Kliniktransfer. So sind kontrollierte Bewegungen und eine lückenlose Nachvollziehbarkeit gewährleistet, wer was wann bearbeitet hat.",
-   "summary": "Standortberechtigungen und Aufsicht über Eier-, Tier- und Kliniktransfers",
+   "intro": "Das Sicherheitsmodul beaufsichtigt standortspezifische Eiertransfers und das Verwerfen von Eiern sowie jeden Tier-, Kadaver- oder Kliniktransfer. So sind kontrollierte Bewegungen und eine lückenlose Nachvollziehbarkeit gewährleistet, wer was wann bearbeitet hat.",
+   "summary": "Aufsicht über Eier-, Tier-, Kadaver- und Kliniktransfers",
    "features": [
     {
      "title": "Filterfunktion",

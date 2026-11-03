@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Apsardze",
-   "intro": "Apsardzes modulis pārvalda vietai specifiskas atļaujas un pārrauga olu pārvietošanas un iznīcināšanas procesus, kā arī jebkuru dzīvnieku vai slimnīcas pārvietošanu, lai nodrošinātu kontrolētu pārvietošanu un pilnu pārskatatbildību par to, kurš ar ko rīkojās un kad.",
-   "summary": "Pārvalda vietai specifiskas atļaujas un pārrauga olu pārvietošanas un iznīcināšanas procesus, kā arī jebkuru dzīvnieku vai slimnīcas pārvietošanu, nodrošinot kontrolētu pārvietošanu un pilnu pārskatatbildību par to, kurš ar ko rīkojās un kad",
+   "intro": "Apsardzes modulis pārrauga vietai specifiskus olu pārvietošanas un iznīcināšanas procesus, kā arī jebkuru dzīvnieku, līķu vai slimnīcas pārvietošanu, lai nodrošinātu kontrolētu pārvietošanu un pilnu pārskatatbildību par to, kurš ar ko rīkojās un kad.",
+   "summary": "Pārrauga vietai specifiskus olu pārvietošanas un iznīcināšanas procesus, kā arī jebkuru dzīvnieku, līķu vai slimnīcas pārvietošanu, nodrošinot kontrolētu pārvietošanu un pilnu pārskatatbildību par to, kurš ar ko rīkojās un kad",
    "features": [
     {
      "title": "Filtrēšanas funkcija",

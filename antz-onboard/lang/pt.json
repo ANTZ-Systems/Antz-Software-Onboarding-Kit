@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Segurança",
-   "intro": "O Módulo de Segurança gerencia as permissões específicas de cada unidade e supervisiona os processos de transferência e descarte de ovos e qualquer transferência de animais ou para o hospital, garantindo movimentação controlada e total responsabilização sobre quem manuseou o quê e quando.",
-   "summary": "Gerencia permissões por unidade e supervisiona transferências de ovos, animais e para o hospital, com total responsabilização",
+   "intro": "O Módulo de Segurança supervisiona os processos de transferência e descarte de ovos de cada unidade e qualquer transferência de animais, de carcaças ou para o hospital, garantindo movimentação controlada e total responsabilização sobre quem manuseou o quê e quando.",
+   "summary": "Supervisiona transferências de ovos por unidade, de animais, de carcaças e para o hospital, com total responsabilização",
    "features": [
     {
      "title": "Filtros",

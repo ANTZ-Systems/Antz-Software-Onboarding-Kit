@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Turvalisus",
-   "intro": "Turvamoodul haldab asukohapõhiseid õigusi ning jälgib munade üleviimise ja hävitamise protsesse ning kõiki loomade ja haiglasse üleviimisi, et tagada kontrollitud liikumine ja täielik vastutus selle eest, kes mida ja millal käsitles.",
-   "summary": "Haldab asukohapõhiseid õigusi ning jälgib munade üleviimist ja hävitamist ning kõiki loomade ja haiglasse üleviimisi",
+   "intro": "Turvamoodul jälgib asukohapõhiseid munade üleviimise ja hävitamise protsesse ning kõiki loomade, korjuste ja haiglasse üleviimisi, et tagada kontrollitud liikumine ja täielik vastutus selle eest, kes mida ja millal käsitles.",
+   "summary": "Jälgib asukohapõhist munade üleviimist ja hävitamist ning kõiki loomade, korjuste ja haiglasse üleviimisi",
    "features": [
     {
      "title": "Filtreerimine",

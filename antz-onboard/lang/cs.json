@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Ostraha",
-   "intro": "Modul Ostraha spravuje oprávnění pro jednotlivé areály a dohlíží na přesuny a vyřazování vajec i na veškeré přesuny zvířat a převozy do nemocnice, aby byl pohyb pod kontrolou a bylo vždy jasné, kdo s čím a kdy manipuloval.",
-   "summary": "Spravuje oprávnění pro jednotlivé areály a dohlíží na přesuny a vyřazování vajec i na veškeré přesuny zvířat a převozy do nemocnice, aby byl pohyb pod kontrolou a bylo jasné, kdo s čím a kdy manipuloval",
+   "intro": "Modul Ostraha dohlíží na přesuny a vyřazování vajec v jednotlivých areálech i na veškeré přesuny zvířat, převozy kadáverů a převozy do nemocnice, aby byl pohyb pod kontrolou a bylo vždy jasné, kdo s čím a kdy manipuloval.",
+   "summary": "Dohlíží na přesuny a vyřazování vajec v jednotlivých areálech i na veškeré přesuny zvířat, převozy kadáverů a převozy do nemocnice, aby byl pohyb pod kontrolou a bylo jasné, kdo s čím a kdy manipuloval",
    "features": [
     {
      "title": "Filtrování",

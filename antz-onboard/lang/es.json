@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Seguridad",
-   "intro": "El Módulo de seguridad gestiona los permisos específicos de cada sede y supervisa los procesos de traslado y descarte de huevos y cualquier traslado de animales o al hospital, para garantizar un movimiento controlado y una rendición de cuentas completa sobre quién gestionó qué y cuándo.",
-   "summary": "Gestiona los permisos específicos de cada sede y supervisa los traslados y descartes de huevos y cualquier traslado de animales o al hospital, con control total de quién gestionó qué y cuándo",
+   "intro": "El Módulo de seguridad supervisa los procesos de traslado y descarte de huevos de cada sede y cualquier traslado de animales, de cadáveres o al hospital, para garantizar un movimiento controlado y una rendición de cuentas completa sobre quién gestionó qué y cuándo.",
+   "summary": "Supervisa los traslados y descartes de huevos de cada sede y cualquier traslado de animales, de cadáveres o al hospital, con control total de quién gestionó qué y cuándo",
    "features": [
     {
      "title": "Función de filtro",

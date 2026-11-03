@@ -3633,7 +3633,7 @@
    "page": 37,
    "title": "Security",
    "track": "operations",
-   "intro": "The Security Module manages site-specific permissions and oversees egg transfer and discard processes and any animal or hospital transfer to ensure controlled movement and full accountability for who handled what, and when.",
+   "intro": "The Security Module oversees site-specific egg transfers and discard processes, and any animal, carcass or hospital transfer to ensure controlled movement and full accountability for who handled what, and when.",
    "grad": "butter",
    "glyph": "shield",
    "features": [

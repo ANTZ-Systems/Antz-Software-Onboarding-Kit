@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Keamanan",
-   "intro": "Modul Keamanan mengelola izin khusus lokasi dan mengawasi proses pemindahan serta pembuangan telur, juga setiap pemindahan satwa atau ke rumah sakit, untuk memastikan pergerakan yang terkontrol dan akuntabilitas penuh atas siapa yang menangani apa, dan kapan.",
-   "summary": "Mengelola izin khusus lokasi dan mengawasi pemindahan telur, satwa, dan rumah sakit untuk pergerakan yang terkontrol",
+   "intro": "Modul Keamanan mengawasi proses pemindahan serta pembuangan telur di setiap lokasi, juga setiap pemindahan satwa, bangkai, atau ke rumah sakit, untuk memastikan pergerakan yang terkontrol dan akuntabilitas penuh atas siapa yang menangani apa, dan kapan.",
+   "summary": "Mengawasi pemindahan telur di setiap lokasi, serta pemindahan satwa, bangkai, dan ke rumah sakit untuk pergerakan yang terkontrol",
    "features": [
     {
      "title": "Fungsi filter",

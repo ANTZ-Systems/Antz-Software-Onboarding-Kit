@@ -592,7 +592,8 @@
         ${outerLens(c.title)}
         </div>`;
     };
-    /* A phone beside a grid of tiles, each opening its screen. With an overview, the phone shows it and the
+    /* A phone beside a grid of tiles, each opening its screen. A part can hold several tours (part.tours); qa.flip
+       puts the screen on the right and qa.kicker adds an eyebrow above the title. With an overview, the phone shows it and the
        tiles follow it in the set; without one, the phone shows the first tile's screen, and pointing at a tile
        (numbered when qa.numbered) brings its screen up on the phone. */
     const actionsHTML = (qa, key) => {
@@ -601,7 +602,7 @@
       const items = qa.overview ? [qa.overview, ...qa.shots] : qa.shots;
       const set = addSet(key, head.title, qa.overview ? 'add' : 'note', items);
       return `
-        <div class="gqa reveal${qa.overview ? '' : ' gqa-tour'}">
+        <div class="gqa reveal${qa.overview ? '' : ' gqa-tour'}${qa.flip ? ' gqa-flip' : ''}">
           <div class="gqa-stage-wrap">
           <button class="gqa-stage" type="button" data-set="${set}" data-i="0" aria-label="${esc(t('guide.view'))}: ${esc(head.title)}">
             ${deviceHTML({ src: srcOf(items[0]), alt: '', device: items[0].device || 'phone' }, { lens: false })}
@@ -609,6 +610,7 @@
           ${outerLens(head.title)}
           </div>
           <div class="gqa-side">
+            ${qa.kicker ? `<span class="gqa-kicker">${esc(qa.kicker)}</span>` : ''}
             <h3>${esc(head.title)}</h3>
             <p>${esc(head.desc)} ${esc(t(qa.overview ? 'guide.qaHint' : canHover() ? 'guide.tourHint' : 'guide.tourHintTap'))}.</p>
             <ul class="gqa-grid${qa.numbered ? ' numbered' : ''}">${qa.shots.map((s, i) => `
@@ -668,6 +670,7 @@
           ${p.glance ? glanceHTML(p.glance) : ''}
           ${p.cards ? `<div class="ggrid reveal" data-n="${p.cards.length}"${p.chain ? ' data-chain' : ''}>${p.cards.map((c) => cardHTML(c, ++n, p.notes)).join('')}</div>` : ''}
           ${p.actions ? actionsHTML(p.actions, p.id) : ''}
+          ${p.tours ? p.tours.map((qa, i) => actionsHTML(qa, `${p.id}-${i}`)).join('') : ''}
           ${p.flow ? flowHTML(p.flow) : ''}
           ${p.compare ? compareHTML(p.compare) : ''}
           ${p.hierarchy ? hierarchyHTML(p.hierarchy) : ''}

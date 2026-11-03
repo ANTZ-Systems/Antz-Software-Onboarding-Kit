@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Sécurité",
-   "intro": "Le module Sécurité gère les autorisations propres à chaque site et supervise les transferts et éliminations d’œufs ainsi que tout transfert d’animal ou vers l’hôpital, pour garantir des déplacements contrôlés et savoir précisément qui a fait quoi, et quand.",
-   "summary": "Gère les autorisations par site et supervise les transferts et éliminations d’œufs ainsi que tout transfert d’animal ou vers l’hôpital, pour des déplacements contrôlés et une traçabilité complète",
+   "intro": "Le module Sécurité supervise, pour chaque site, les transferts et éliminations d’œufs ainsi que tout transfert d’animal, de carcasse ou vers l’hôpital, pour garantir des déplacements contrôlés et savoir précisément qui a fait quoi, et quand.",
+   "summary": "Supervise, pour chaque site, les transferts et éliminations d’œufs ainsi que tout transfert d’animal, de carcasse ou vers l’hôpital, pour des déplacements contrôlés et une traçabilité complète",
    "features": [
     {
      "title": "Filtres",

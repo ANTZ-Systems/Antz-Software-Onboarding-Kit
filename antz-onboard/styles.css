@@ -1198,7 +1198,21 @@ a.mcard-face { text-decoration: none; color: inherit; }
   background: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px -10px rgba(14,40,34,.35), 0 2px 4px rgba(14,40,34,.06);
   transition: background .45s ease, border-color .45s ease, transform .55s cubic-bezier(.34,1.56,.64,1), box-shadow .55s cubic-bezier(.22,.8,.24,1);
 }
-.mtab > .drawn-border path { stroke: var(--tint-line); }
+/* Hovered tabs take on the Ready to Onboard? pill's holographic film: the same drifting foil and passing sheen,
+   faded in behind the content */
+.mtab { isolation: isolate; }
+.mtab::before, .mtab::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .45s ease; }
+.mtab::before {
+  background: linear-gradient(115deg, #FFD9EC 0%, #E3D9FF 16%, #CDEBFF 32%, #C8F7E6 48%, #F6F7C8 64%, #FFDCCF 80%, #FFD9EC 100%) 0 50% / 300% 100%;
+  animation: nav-cta-holo 2.4s linear infinite;
+}
+.mtab::after {
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.95) 50%, transparent 65%) -150% 0 / 60% 100% no-repeat;
+  mix-blend-mode: soft-light; animation: nav-cta-sheen 3.6s cubic-bezier(.4,0,.2,1) infinite;
+}
+.mtab:not([aria-current]):hover::before, .mtab:not([aria-current]):hover::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .mtab::before, .mtab::after { animation: none; } }
+.mtab > .drawn-border path { stroke: var(--line-grad, var(--tint-line)); }
 /* Tabs stop 10px above the bottom line; the selected outline curves down to it and runs beneath its neighbours */
 .mtab { margin-bottom: 10px; }
 /* Selected: the page colour shows through; its outline is drawn by .mtab-ind, which glides between tabs */
@@ -2005,6 +2019,11 @@ body.fwin-open { overflow: hidden; }
 .gqa-tour .gqa-grid button.on { border-color: color-mix(in srgb, var(--tint-line) 55%, #fff); box-shadow: 0 12px 22px -14px rgba(14,40,34,.35); }
 .gqa-tour .gqa-grid button.on .n { background: linear-gradient(135deg, var(--tint-line) 0%, var(--tint-line2) 100%); color: #fff; }
 .gqa-tour .gqa-stage img { transition: opacity .25s var(--ease); }
+/* Several tours in one part (Reports): spaced apart; flipped ones keep the list on the left and the screen on the right */
+.gqa + .gqa { margin-top: 72px; }
+.gqa-flip { grid-template-columns: 1.2fr .8fr; }
+.gqa-flip > .gqa-side { order: -1; }
+.gqa-kicker { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--tint-ink, var(--green-strong)); }
 
 /* Flow: open steps (no boxes), each with its icon in a circle in the area's colours, joined by one line;
    the step number sits beside the title. Across on wide screens, down on phones. */
@@ -2195,6 +2214,8 @@ body.fwin-open { overflow: hidden; }
 
 @media (max-width: 900px) {
   .gqa { grid-template-columns: 1fr; }
+  .gqa-flip > .gqa-side { order: 0; }
+  .gqa-stage .device-tablet { width: 250px; } /* fits the shorter stage */
   .gqa-stage { position: relative; top: 0; height: 440px; }
   .gqa-stage-wrap { position: relative; top: 0; }
   .gqa-stage .device-phone { width: 190px; }
