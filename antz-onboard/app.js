@@ -362,7 +362,7 @@
        data-full is the whole screen in one image, for the lens */
     if (shot.scroll) {
       const sc = shot.scroll;
-      return `<div class="device device-phone${z}" data-full="${esc(sc.full)}"><div class="screen screen-scroll"><img class="screen-head" src="${esc(sc.head)}" alt=""><div class="screen-body" tabindex="0" data-at="${sc.at}" aria-label="${esc(shot.alt)}"><img src="${esc(sc.body)}" alt="${esc(shot.alt)}"></div><span class="screen-cue" aria-hidden="true">${esc(t('screen.scroll'))}</span>${k}</div>${l}</div>`;
+      return `<div class="device device-phone${z}" data-full="${esc(sc.full)}"><div class="screen screen-scroll"><img class="screen-head" src="${esc(sc.head)}" alt=""><div class="screen-body" tabindex="0" data-at="${sc.at}"${sc.auto ? ' data-auto' : ''} aria-label="${esc(shot.alt)}"><img src="${esc(sc.body)}" alt="${esc(shot.alt)}"></div>${sc.auto ? '' : `<span class="screen-cue" aria-hidden="true">${esc(t('screen.scroll'))}</span>`}${k}</div>${l}</div>`;
     }
     /* Every phone screen gets the same green frame, drawn in CSS (the frames once baked into some captures are cropped off) */
     return `<div class="device device-phone${z}"><div class="screen">${img}${k}</div>${l}</div>`;
@@ -513,7 +513,13 @@
      (assets/fonts/material-symbols-rounded-guide.woff2). A new guide needs its glyph added here and to the font:
      re-download the subset from Google Fonts with the glyph added to icon_names. Missing ones fall back to explore. */
   /* Icons composed from the set's shapes, for modules the font has no glyph for (same art as assets/icons) */
+  /* Mortality's fish bone (same art as assets/icons/fish_bone_icon.svg), also on the egg web guide's banner */
+  const FISH_BONE = '<g fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"><path d="M100-480q70-170 220-170v340q-150 0-220-170Z"/><path d="M320-480h420"/><path d="M420-480q12-110 70-210M420-480q12 110 70 210"/><path d="M530-480q12-95 60-180M530-480q12 95 60 180"/><path d="M640-480q10-75 45-140M640-480q10 75 45 140"/><path d="M740-480l120-130v260l-120-130Z"/></g><circle cx="225" cy="-520" r="30"/>';
   const GUIDE_DRAWN = {
+    mortality: FISH_BONE,
+    'egg-management-web': FISH_BONE,
+    /* The module's own icon (assets/icons/pharmacy_icon.svg) */
+    'pharmacy-web': '<path d="M237.85-160q-33.54 0-52.81-26.85-19.27-26.84-8.58-58.15l65.08-195-65.08-195q-10.69-31.31 8.58-58.15Q204.31-720 237.85-720h405.53L689-846.85q3.15-8.46 11.65-12.34 8.5-3.89 16.97-.73 8.46 3.15 12.34 11.65 3.89 8.5.73 16.96L690.92-720h31.23q33.54 0 52.81 26.85 19.27 26.84 8.58 58.15l-65.08 195 65.08 195q10.69 31.31-8.58 58.15Q755.69-160 722.15-160h-484.3ZM460-307.69h40V-420h112.31v-40H500v-112.31h-40V-460H347.69v40H460v112.31ZM237.85-200h484.3q13.08 0 20-10 6.93-10 3.08-22.31L676-440l69.23-207.69q3.85-12.31-3.08-22.31-6.92-10-20-10h-484.3q-13.08 0-20 10-6.93 10-3.08 22.31L284-440l-69.23 207.69Q210.92-220 217.85-210q6.92 10 20 10ZM480-440Z"/>',
     'medical-records': '<path d="M264.62-120q-27.62 0-46.12-18.5Q200-157 200-184.62v-590.76q0-27.62 18.5-46.12Q237-840 264.62-840h288.53q12.93 0 25.12 5.23 12.19 5.23 20.88 13.92l141.7 141.7q8.69 8.69 13.92 20.88t5.23 25.12v448.53q0 27.62-18.5 46.12Q723-120 695.38-120H264.62ZM560-672.31V-800H264.62q-9.24 0-16.93 7.69-7.69 7.69-7.69 16.93v590.76q0 9.24 7.69 16.93 7.69 7.69 16.93 7.69h430.76q9.24 0 16.93-7.69 7.69-7.69 7.69-16.93V-640H592.31q-13.93 0-23.12-9.19-9.19-9.19-9.19-23.12ZM240-800v160-160 640-640Z"/><path d="M330-630.0h140a20.0 20.0 0 0 1 0 40h-140a20.0 20.0 0 0 1 0-40ZM330-520.0h300a20.0 20.0 0 0 1 0 40h-300a20.0 20.0 0 0 1 0-40Z"/><path transform="translate(480 -265) scale(.36) translate(-480 480)" d="M180.04-495q-33.58 0-56.81-23.19Q100-541.37 100-574.96q0-33.58 23.19-56.81Q146.37-655 179.96-655q33.58 0 56.81 23.19Q260-608.63 260-575.04q0 33.58-23.19 56.81Q213.63-495 180.04-495Zm123.19-183.19Q280-701.37 280-734.96q0-33.58 23.19-56.81Q326.37-815 359.96-815q33.58 0 56.81 23.19Q440-768.63 440-735.04q0 33.58-23.19 56.81Q393.63-655 360.04-655q-33.58 0-56.81-23.19Zm240 0Q520-701.37 520-734.96q0-33.58 23.19-56.81Q566.37-815 599.96-815q33.58 0 56.81 23.19Q680-768.63 680-735.04q0 33.58-23.19 56.81Q633.63-655 600.04-655q-33.58 0-56.81-23.19ZM780.04-495q-33.58 0-56.81-23.19Q700-541.37 700-574.96q0-33.58 23.19-56.81Q746.37-655 779.96-655q33.58 0 56.81 23.19Q860-608.63 860-575.04q0 33.58-23.19 56.81Q813.63-495 780.04-495ZM266-95q-37.31 0-61.65-28.55Q180-152.1 180-191q0-48.92 34.35-83.69 34.34-34.77 67.03-70.46 29-31.77 50.39-67.89 21.38-36.11 49.61-68.11 19.7-22.16 44.57-38Q450.83-535 480-535q30.02 0 55.63 15.23 25.6 15.23 44.52 38.15 28 32 49.12 68.24 21.11 36.23 49.35 68.23 32.69 35.69 67.03 70.46Q780-239.92 780-191q0 38.9-24.35 67.45Q731.31-95 694-95q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/>'
   };
   const GUIDE_GLYPH = {
@@ -540,12 +546,13 @@
     const track = g.area && areaById[g.area] ? g.area : 'guide';
     const backModule = byId[g.back] && visible.includes(byId[g.back]) ? byId[g.back] : null;
     const sets = [];
-    const addSet = (key, title, ic, shots, flow) => sets.push({
-      id: `guide-${id}-${key}`, track, title, web: /-web$/.test(id), flow,
-      features: shots.map((s) => ({ title: s.title, desc: s.desc, icon: s.icon || ic, shot: srcOf(s) })),
+    const addSet = (key, title, ic, shots, winFlow, winNotes) => sets.push({
+      id: `guide-${id}-${key}`, module: id, track, title, web: /-web$/.test(id), winFlow, winNotes,
+      /* keep: the text is shown exactly as written (it keeps a dash the house style would otherwise turn into a comma) */
+      features: shots.map((s) => ({ title: s.title, desc: s.desc, icon: s.icon || ic, shot: srcOf(s), keep: !!s.keep })),
       /* A screen is a phone unless it says otherwise (device: 'tablet' or 'web' for web modules) */
       shots: shots.map((s) => ({ src: srcOf(s), alt: s.title, device: s.device || 'phone',
-        scroll: s.scroll && { head: srcOf({ src: s.scroll.head }), body: srcOf({ src: s.scroll.body }), full: srcOf({ src: s.scroll.full }), at: s.scroll.at } }))
+        scroll: s.scroll && { head: srcOf({ src: s.scroll.head }), body: srcOf({ src: s.scroll.body }), full: srcOf({ src: s.scroll.full }), at: s.scroll.at, auto: !!s.scroll.auto } }))
     }) - 1;
 
     /* At a glance: the module pages' feature cards, each opening its screen */
@@ -567,8 +574,9 @@
           </ol>
         </div>`;
     };
-    const cardHTML = (c, n) => {
-      const set = addSet(c.id, c.title, c.icon, c.shots, c.flow);
+    /* notes: a part's points (part.notes) shown in the window of each of its cards */
+    const cardHTML = (c, n, notes) => {
+      const set = addSet(c.id, c.title, c.icon, c.shots, c.flow, notes);
       return `
         <div class="gcard-wrap${webGuide ? ' has-lens' : ''}">
         <button class="mcard-face gcard" type="button" data-set="${set}" data-i="0">
@@ -658,7 +666,7 @@
             <p class="section-lede">${withFab(p.lede)}</p>
           </div>
           ${p.glance ? glanceHTML(p.glance) : ''}
-          ${p.cards ? `<div class="ggrid reveal" data-n="${p.cards.length}">${p.cards.map((c) => cardHTML(c, ++n)).join('')}</div>` : ''}
+          ${p.cards ? `<div class="ggrid reveal" data-n="${p.cards.length}"${p.chain ? ' data-chain' : ''}>${p.cards.map((c) => cardHTML(c, ++n, p.notes)).join('')}</div>` : ''}
           ${p.actions ? actionsHTML(p.actions, p.id) : ''}
           ${p.flow ? flowHTML(p.flow) : ''}
           ${p.compare ? compareHTML(p.compare) : ''}
@@ -746,10 +754,14 @@
       const b = e.target.closest('[data-set]');
       if (!b) return;
       const r = b.getBoundingClientRect();
-      /* The window holds only this card's screens and stops at its first and last; closing it returns focus to the card */
+      /* The window holds only this card's screens and stops at its first and last. In a grid marked chain
+         (part.chain), it runs on through every card of that grid instead. Closing returns focus to the card last shown */
+      const grid = b.closest('.ggrid[data-chain]');
+      const ids = grid ? [...grid.querySelectorAll('.gcard[data-set]')].map((x) => +x.dataset.set) : null;
       (narrow() ? openFeatureSheet : openFeatureWindow)(sets[+b.dataset.set], +b.dataset.i || 0, {
         origin: { x: r.left + r.width / 2, y: r.top + r.height / 2 },
-        close: () => b.focus({ preventScroll: true }), returnFocusTo: b
+        chain: ids ? { sets: ids.map((k) => sets[k]), at: ids.indexOf(+b.dataset.set) } : undefined,
+        close: (i, k) => ((ids && page.querySelector(`.gcard[data-set="${ids[k]}"]`)) || b).focus({ preventScroll: true }), returnFocusTo: b
       });
     });
     sizeBorders();
@@ -927,12 +939,15 @@
     'animal-management': 'cruelty_free', 'tags-hub': 'sell', 'animal-transfer': 'local_shipping', approvals: 'approval',
     'missing-escaped-animal': 'crisis_alert', 'symptoms-clinical-assessment-prescription': 'stethoscope',
     'administer-medicine': 'medication_liquid', vaccination: 'vaccines', deworming: 'pest_control', supplements: 'nutrition',
-    mortality: 'heart_minus', 'fetal-death': 'heart_broken', 'helpdesk-module': 'support_agent', security: 'verified_user',
+    mortality: 'fish_bone', 'fetal-death': 'heart_broken', 'helpdesk-module': 'support_agent', security: 'verified_user',
     'reports-app': 'analytics', 'reports-web': 'summarize'
   };
   const hash = (str) => [...str].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
   /* Every module has an icon now; the fallback only covers modules added later */
   const iconOf = (m) => MODULE_ICON[m.id] || BRAND_ICONS[hash(m.id) % BRAND_ICONS.length];
+  /* A module whose own icon stands in for its area's beside the area label (on its page and in its windows) */
+  const AREA_GLYPH_FOR = { mortality: 'fishbone', necropsy: 'fishbone', 'egg-management-web': 'fishbone' };
+  const areaGlyphOf = (m, area) => AREA_GLYPH_FOR[m.module || m.id] || area.glyph;
   /* Two photos, cropped and mirrored six ways so neighbouring cards differ */
   const PHOTO_VARIANTS = [
     { src: 'collections_bg', pos: '30% 40%', flip: 1 },
@@ -1574,7 +1589,7 @@
       <section class="mpage tint-${tint}">
         <div class="container">
           ${moduleTabsHTML(m)}
-          <span class="mpanel-area">${icon(area.glyph)}${esc(area.label)} · ${numberOf[m.id]}</span>
+          <span class="mpanel-area">${icon(areaGlyphOf(m, area))}${esc(area.label)} · ${numberOf[m.id]}</span>
           <div class="mpanel-inner${hasShots ? '' : ' no-stage'}">
             <div class="mpanel-info">
               <h1 class="mpanel-title"><span class="mpanel-icon"><img src="assets/icons/${iconOf(m)}_icon.svg" alt=""></span>${esc(m.title)}</h1>
@@ -1874,6 +1889,26 @@
         screen.classList.toggle('at-end', atEnd());
         if (placed && cue) cue.classList.add('gone');
       }, { passive: true });
+      /* data-auto: the screen scrolls itself slowly down and back up, as on the deck's page; scrolling it by hand
+         pauses that for a few seconds. It stops once the screen leaves the page */
+      if ('auto' in body.dataset && !reducedMotion()) {
+        let pos = 0, dir = 1, last = performance.now(), hold = 0;
+        const pause = () => { hold = performance.now() + 2600; };
+        ['wheel', 'pointerdown', 'touchstart', 'keydown'].forEach((ev) => body.addEventListener(ev, pause, { passive: true }));
+        const tick = (now) => {
+          if (!body.isConnected) return;
+          const dt = Math.min(0.05, (now - last) / 1000); last = now;
+          const max = body.scrollHeight - body.clientHeight;
+          if (now < hold) pos = body.scrollTop;
+          else if (max > 0) {
+            pos += dir * 34 * dt;
+            if (pos >= max) { pos = max; dir = -1; } else if (pos <= 0) { pos = 0; dir = 1; }
+            body.scrollTop = pos;
+          }
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
     });
   }
   let closeFeatureWindow = null;
@@ -1897,11 +1932,12 @@
         <button class="fwin-close" type="button" data-close aria-label="${esc(t('win.close'))}">${CLOSE_SVG}</button>
         <div class="fwin-stage"><div class="fwin-device"></div></div>
         <div class="fwin-info">
-          <span class="mpanel-area">${icon(area.glyph)}${esc(area.label)} · <span class="fwin-set">${esc(m.title)}</span></span>
+          <span class="mpanel-area">${icon(areaGlyphOf(m, area))}${esc(area.label)} · <span class="fwin-set">${esc(m.title)}</span></span>
           <div class="fwin-text">
             <div class="fwin-head"><span class="fwin-ic" aria-hidden="true"></span><p class="fwin-count" aria-live="polite"></p></div>
             <h2 class="fwin-title" id="fwin-title"></h2><p class="fwin-desc"></p>
           </div>
+          <div class="fwin-notes"></div>
           <div class="fwin-flow"></div>
           <div class="fwin-dots"></div>
         </div>
@@ -1914,16 +1950,35 @@
     const dotBox = w.querySelector('.fwin-dots');
     let dots = [], animals = [];
     /* (Re)build what belongs to the current set: its title, dots and animal wash */
+    /* A chained window counts and dots every screen of every card in the chain, so a run of one-screen cards reads "3 of 5" */
+    const before = (k) => (chain ? chain.sets.slice(0, k).reduce((a, x) => a + x.features.length, 0) : 0);
+    const total = chain ? before(chain.sets.length) : 0;
     const useSet = () => {
       n = m.features.length;
       w.querySelector('.fwin-set').textContent = m.title;
-      dotBox.innerHTML = m.features.map((f, i) => `<button type="button" data-i="${i}" aria-label="${esc(tidyTitle(f.title))}"></button>`).join('');
-      dots = [...dotBox.children];
-      /* A card's own process (flow), the same for each of its screens, as the module pages' stepper */
-      w.querySelector('.fwin-flow').innerHTML = m.flow ? moduleFlowHTML(m.flow) : '';
+      if (!chain || !dots.length) {
+        dotBox.innerHTML = (chain ? chain.sets : [m]).map((x, k) => x.features.map((f, i) =>
+          `<button type="button" data-k="${k}" data-i="${i}" aria-label="${esc(tidyTitle(f.title))}"></button>`).join('')).join('');
+        dots = [...dotBox.children];
+      }
+      /* A guide card's own process (winFlow), the same for each of its screens, as the module pages' stepper.
+         Only cards whose process is not already on the page behind (a module's own flow is shown there) */
+      w.querySelector('.fwin-flow').innerHTML = m.winFlow ? moduleFlowHTML(m.winFlow) : '';
+      /* A part's points (winNotes), such as what every row of the directory offers: a label, then one line each */
+      const nt = m.winNotes;
+      w.querySelector('.fwin-notes').innerHTML = nt ? `
+        <p class="fwin-notes-label">${esc(nt.label)}</p>
+        <ul>${nt.items.map((x) => `<li><span class="ic" aria-hidden="true">${x.icon === 'search' ? SEARCH_SVG : icon(x.icon)}</span><span><b>${esc(x.lead)}</b> ${esc(x.text)}</span></li>`).join('')}</ul>` : '';
       animals = animalsFor(m);
     };
     useSet();
+    /* Move to another card of the chain (a dot on another card) */
+    const toSet = (k, i = 0) => {
+      if (!chain || k === chain.at) return;
+      const dir = k > chain.at ? 1 : -1;
+      chain.at = k; m = chain.sets[k]; useSet(); idx = -1;
+      go(i, dir);
+    };
     const hasSet = (d) => !!(chain && chain.sets[chain.at + d]);
     let idx = -1;
     const go = (i, dir = 0) => {
@@ -1938,10 +1993,10 @@
       if (i < 0 || i >= n || i === idx) return;
       idx = i;
       const f = m.features[i], shot = shotOf(i);
-      w.querySelector('.fwin-count').textContent = t('win.count', { i: i + 1, n });
+      w.querySelector('.fwin-count').textContent = chain ? t('win.count', { i: before(chain.at) + i + 1, n: total }) : t('win.count', { i: i + 1, n });
       w.querySelector('.fwin-ic').innerHTML = icon(f.icon);
       w.querySelector('.fwin-title').textContent = tidyTitle(f.title);
-      w.querySelector('.fwin-desc').textContent = tidy(f.desc);
+      w.querySelector('.fwin-desc').textContent = f.keep ? f.desc : tidy(f.desc);
       /* The wash starts a little below the text, however long this feature's description is */
       setAnimal(w.querySelector('.fwin-info'), animals[i % animals.length], () => text.offsetTop + text.offsetHeight);
       dev.innerHTML = shot ? deviceHTML({ ...shot, lock: !!f.lock }) : `<p class="fwin-empty">${esc(t('win.soon'))}</p>`;
@@ -1954,7 +2009,7 @@
       prev.disabled = i === 0 && !hasSet(-1); next.disabled = i === n - 1 && !hasSet(1);
       /* An arrow that just became disabled drops focus; hand it to the other arrow */
       if (had && had.disabled) (had === next ? prev : next).focus({ preventScroll: true });
-      dots.forEach((d, j) => d.setAttribute('aria-current', String(j === i)));
+      dots.forEach((d) => d.setAttribute('aria-current', String(+d.dataset.i === i && +d.dataset.k === (chain ? chain.at : 0))));
       [i - 1, i + 1].forEach((j) => { const s2 = j >= 0 && j < n && shotOf(j); if (s2) new Image().src = s2.src; });
       if (step) step(i);
     };
@@ -1977,6 +2032,7 @@
       document.removeEventListener('keydown', onKey);
       document.body.classList.remove('fwin-open');
       closeFeatureWindow = null;
+      sizeWatch.disconnect();
       if (instant || reducedMotion()) w.remove();
       else { w.classList.remove('in'); w.classList.add('out'); setTimeout(() => w.remove(), 460); }
       if (!instant && close) close(idx, chain ? chain.at : 0);
@@ -1985,22 +2041,35 @@
     document.addEventListener('keydown', onKey);
     prev.addEventListener('click', () => go(idx - 1, -1));
     next.addEventListener('click', () => go(idx + 1, 1));
-    dotBox.addEventListener('click', (e) => { const d = e.target.closest('button'); if (d) go(+d.dataset.i, +d.dataset.i > idx ? 1 : -1); });
+    dotBox.addEventListener('click', (e) => {
+      const d = e.target.closest('button');
+      if (!d) return;
+      const k = +d.dataset.k, i = +d.dataset.i;
+      if (chain && k !== chain.at) toSet(k, i);
+      else go(i, i > idx ? 1 : -1);
+    });
     w.addEventListener('click', (e) => { if (e.target.closest('[data-close]')) shut(); });
     go(start);
     /* Radial opening: a circle grows from the clicked feature until it covers the whole card */
     const card = w.querySelector('.fwin-card');
-    const cr = card.getBoundingClientRect();
-    const o = origin || { x: cr.left + cr.width / 2, y: cr.top + cr.height / 2 };
-    const ox = o.x - cr.left, oy = o.y - cr.top;
-    const r = Math.ceil(Math.max(Math.hypot(ox, oy), Math.hypot(cr.width - ox, oy), Math.hypot(ox, cr.height - oy), Math.hypot(cr.width - ox, cr.height - oy)));
-    /* Place the starting point without animating to it, so the circle really starts at the feature */
-    card.style.transition = 'none';
-    card.style.setProperty('--ox', `${Math.round(ox)}px`);
-    card.style.setProperty('--oy', `${Math.round(oy)}px`);
-    card.style.setProperty('--r', `${r}px`);
-    void card.offsetWidth;
-    card.style.transition = '';
+    const cr0 = card.getBoundingClientRect();
+    const o = origin || { x: cr0.left + cr0.width / 2, y: cr0.top + cr0.height / 2 };
+    /* Place the circle without animating to it, so it really starts at the feature. Measured again whenever the
+       card changes size (a web screen widens it, a tall one loads in), so the circle always covers it */
+    const fitCircle = () => {
+      const cr = card.getBoundingClientRect();
+      const ox = o.x - cr.left, oy = o.y - cr.top;
+      const r = Math.ceil(Math.max(Math.hypot(ox, oy), Math.hypot(cr.width - ox, oy), Math.hypot(ox, cr.height - oy), Math.hypot(cr.width - ox, cr.height - oy))) + 2;
+      card.style.transition = 'none';
+      card.style.setProperty('--ox', `${Math.round(ox)}px`);
+      card.style.setProperty('--oy', `${Math.round(oy)}px`);
+      card.style.setProperty('--r', `${r}px`);
+      void card.offsetWidth;
+      card.style.transition = '';
+    };
+    fitCircle();
+    const sizeWatch = new ResizeObserver(() => { if (w.classList.contains('in')) fitCircle(); });
+    sizeWatch.observe(card);
     requestAnimationFrame(() => w.classList.add('in'));
     w.querySelector('.fwin-close').focus({ preventScroll: true });
   }
@@ -2040,7 +2109,7 @@
       </div>
       <div class="g-stage"><div class="g-track"><span class="g-frame"><img class="g-img" alt="" draggable="false"></span></div>${sheet ? lensHTML() : ''}</div>
       <div class="g-info"><div class="g-head"><span class="g-ic" aria-hidden="true"></span></div><b class="g-ft"></b><p class="g-fd"></p></div>
-      ${sheet && m.flow ? `<div class="g-flow">${moduleFlowHTML(m.flow)}</div>` : ''}
+      ${sheet && m.winFlow ? `<div class="g-flow">${moduleFlowHTML(m.winFlow)}</div>` : ''}
       <div class="g-nav">
         <button class="g-arrow g-prev" type="button" aria-label="${esc(t('win.prev'))}">${CHEV_L}</button>
         <div class="g-dots">${slides.map((sl, i) => `<button type="button" aria-label="${esc(sl.title || t('gal.screen', { i: i + 1 }))}" data-i="${i}"></button>`).join('')}</div>
@@ -2297,7 +2366,7 @@
     const slidesOf = (x, group) => x.features.map((f, i) => {
       const src = f.shot || (x.shots[i] && x.shots[i].src) || (x.shots[0] && x.shots[0].src);
       const shot = src ? shotFor(x, src) : null;
-      return { src: src || '', full: shot && shot.scroll && shot.scroll.full, alt: (shot && shot.alt) || f.title, title: tidyTitle(f.title), desc: tidy(f.desc), icon: f.icon, device: shot && shot.device,
+      return { src: src || '', full: shot && shot.scroll && shot.scroll.full, alt: (shot && shot.alt) || f.title, title: tidyTitle(f.title), desc: f.keep ? f.desc : tidy(f.desc), icon: f.icon, device: shot && shot.device,
         lock: !!f.lock, group, groupTitle: x.title, local: i };
     });
     if (!chain) { openGallery(m, slidesOf(m), start, returnFocusTo, { sheet: true, origin, step, close }); return; }
@@ -2339,8 +2408,24 @@
       goTop = false;
     }
     syncHeader();
+    syncTopFab();
     observeReveal();
   }
+
+  /* Every page: a floating button back to the top, in the app's FAB gradient, once the banner is scrolled past */
+  const topFab = document.createElement('button');
+  topFab.className = 'top-fab';
+  topFab.type = 'button';
+  topFab.setAttribute('aria-label', t('top.back'));
+  topFab.title = t('top.back');
+  topFab.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>';
+  document.body.append(topFab);
+  function syncTopFab() { topFab.classList.toggle('show', window.scrollY > window.innerHeight * 0.8); }
+  window.addEventListener('scroll', syncTopFab, { passive: true });
+  topFab.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    topFab.blur();
+  });
   function observeReveal() {
     const els = app.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('in')); return; }

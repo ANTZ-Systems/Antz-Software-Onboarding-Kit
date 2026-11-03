@@ -1284,7 +1284,7 @@ window.ANTZ_CONTENT = {
     },
     {
      "title": "Transfer log",
-     "desc": "Full status history with timestamps and users.",
+     "desc": "Full status history with timestamps.",
      "shot": "assets/shots/p14-transfer-transfer-log.png",
      "alt": "Transfer log timeline ending in Transfer Completed",
      "device": "prefr",
@@ -3552,7 +3552,7 @@ window.ANTZ_CONTENT = {
     },
     {
      "title": "Request management",
-     "desc": "Raise, edit, cancel, or reject requests with priorities.",
+     "desc": "Raise, edit, clone, cancel, reject, or delete requests as required.",
      "shot": "assets/shots/p34-help-request.png",
      "alt": "Carpentry request for wooden nest boxes at South Aviary Dome: vendor, request details, cost estimate, actual cost and current status In Progress",
      "device": "phone",

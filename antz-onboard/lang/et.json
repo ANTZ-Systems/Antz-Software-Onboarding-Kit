@@ -502,7 +502,7 @@
     },
     {
      "title": "Üleviimiste logi",
-     "desc": "Täielik oleku ajalugu koos ajatemplite ja kasutajatega.",
+     "desc": "Täielik oleku ajalugu koos ajatemplitega.",
      "alt": "Üleviimise ajajoon, mis lõpeb olekuga Üleviimine lõpetatud"
     }
    ]
@@ -1100,7 +1100,7 @@
     },
     {
      "title": "Taotluste haldus",
-     "desc": "Esitage, muutke, tühistage või lükake tagasi prioriteetidega taotlusi.",
+     "desc": "Esitage, muutke, kloonige, tühistage, lükake tagasi või kustutage taotlusi vastavalt vajadusele.",
      "alt": "Puusepatöö taotlus puidust pesakastidele South Aviary Dome’is: tarnija, taotluse üksikasjad, kuluhinnang, tegelik kulu ja praegune olek Töös"
     },
     {

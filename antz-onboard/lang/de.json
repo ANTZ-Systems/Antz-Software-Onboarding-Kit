@@ -502,7 +502,7 @@
     },
     {
      "title": "Transferprotokoll",
-     "desc": "Vollständiger Statusverlauf mit Zeitstempeln und Nutzenden.",
+     "desc": "Vollständiger Statusverlauf mit Zeitstempeln.",
      "alt": "Transferverlauf, der mit Transfer abgeschlossen endet"
     }
    ]
@@ -1100,7 +1100,7 @@
     },
     {
      "title": "Anfrageverwaltung",
-     "desc": "Anfragen mit Prioritäten stellen, bearbeiten, stornieren oder ablehnen.",
+     "desc": "Anfragen nach Bedarf stellen, bearbeiten, klonen, stornieren, ablehnen oder löschen.",
      "alt": "Schreinerei-Anfrage für Nistkästen aus Holz im South Aviary Dome: Lieferant, Anfragedetails, Kostenschätzung, tatsächliche Kosten und aktueller Status In Bearbeitung"
     },
     {

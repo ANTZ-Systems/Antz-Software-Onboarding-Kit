@@ -194,6 +194,7 @@ window.ANTZ_GUIDES = {
         label: 'Part 01 · The module',
         title: 'Six core capabilities',
         lede: 'Records and manages all animal movements within and outside the organisation, tracking requests, approvals and allocations for secure, well-documented relocation between enclosures, sites and institutions.',
+        chain: true,
         cards: [
           { id: 'types', title: 'Transfer types', icon: 'transfer', desc: 'In-house, inter-site and external transfers.',
             shots: [{ src: 'transfer-types', title: 'Choose transfer type', desc: 'Pick in-house, inter-site or external when you start a transfer.' }] },
@@ -205,7 +206,7 @@ window.ANTZ_GUIDES = {
             shots: [{ src: 'security', title: 'Security clearance & checkout', desc: 'Security clears and checks out an inter-site transfer.' }] },
           { id: 'allocation', title: 'Allocation', icon: 'home', desc: 'On arrival, allocate to an enclosure and notify staff.',
             shots: [{ src: 'allocation', title: 'Allocate enclosures', desc: 'On arrival, allocate the animals to enclosures for an inter-site transfer.' }] },
-          { id: 'log', title: 'Transfer log', icon: 'report', desc: 'Full status history with timestamps and users.',
+          { id: 'log', title: 'Transfer log', icon: 'report', desc: 'Full status history with timestamps.',
             shots: [{ src: 'transfer-log', title: 'Transfer log', desc: 'The full, timestamped status history of the transfer.' }] }
         ]
       },
@@ -381,6 +382,8 @@ window.ANTZ_GUIDES = {
         id: 'capabilities',
         label: 'Part 01 · The module',
         title: 'What the module does',
+        /* One screen per card: the window steps on through all five cards rather than stopping at each */
+        chain: true,
         lede: 'Create and manage every account, set what each role can reach, and keep a record of who signed in and from where. Users also get secure login with OTP recovery delivered over SMS or WhatsApp.',
         /* The overview slide has no screens: each card opens the matching screen from the walkthrough slides.
            Login & Recovery has no screen anywhere in the deck, so it is kept in the lede rather than as a card.
@@ -388,10 +391,10 @@ window.ANTZ_GUIDES = {
         cards: [
           { id: 'profile', title: 'Profile creation & management', icon: 'users', desc: 'Store user details: name, contact, staff ID, date of birth and blood group.',
             shots: [{ src: 'add-identity', scroll: { head: 'form-head', body: 'form-identity', full: 'form-identity-full', at: 238 }, title: 'Add User Basic Info', desc: 'The form that captures a new user\'s identity, contact and personal details.' }] },
-          { id: 'roles', title: 'Roles & permissions', icon: 'access', desc: 'Assign roles, such as Curator or Vet, and set their access rights per module.',
-            shots: [{ src: 'role-permissions', title: 'Role permissions', desc: 'Choose a role and see the rights it holds in each module.' }] },
           { id: 'access', title: 'Access control', icon: 'shield', desc: 'Restrict by site or section, activate or deactivate accounts, with auto-timeout.',
             shots: [{ src: 'access-scope', title: 'Access permissions', desc: 'Location, pharmacy, organisation, nursery, necropsy centre and hospital access for one user.' }] },
+          { id: 'roles', title: 'Roles & permissions', icon: 'access', desc: 'Assign roles, such as Curator or Vet, and set their access rights per module.',
+            shots: [{ src: 'role-permissions', scroll: { head: 'perm-head', body: 'perm-body', full: 'perm-full', at: 0, auto: true }, title: 'Role permissions', desc: 'Choose a role and see the rights it holds in each module.' }] },
           { id: 'activity', title: 'Activity tracking', icon: 'devices', desc: 'See last login and device details, and deactivate a device if needed.',
             shots: [
               { src: 'profile-devices', title: 'Devices', desc: 'Signed-in devices, each with its device ID and last active time.' },
@@ -429,12 +432,15 @@ window.ANTZ_GUIDES = {
         id: 'roles',
         label: 'Part 03 · Who can do what',
         title: 'Roles, permissions & access',
+        /* The window steps between both cards with its arrows; the permissions screen scrolls on its own, up and down,
+           under its fixed status bar, as on the deck's page */
+        chain: true,
         lede: 'Pick a role, then tune exactly what it can reach. Permissions run per module; access runs per place. Grant or modify view, add, edit or delete rights, applied per module, per role or per individual user.',
         cards: [
           { id: 'scope', title: 'Access scope mapping', icon: 'areas', desc: 'Map the user to sites, pharmacies, nurseries, hospitals and necropsy centres.',
             shots: [{ src: 'access-scope', title: 'Access permissions', desc: 'Location, pharmacy, organisation, nursery, necropsy centre and hospital access on the Edit Permissions screen.' }] },
           { id: 'modules', title: 'Roles & module permissions', icon: 'access', desc: 'Choose a role, then grant View, Add, Edit or Delete per module.',
-            shots: [{ src: 'role-permissions', title: 'Role permissions', desc: 'A Zoologist role with its module permissions for collection, housing, mortality and more.' }] }
+            shots: [{ src: 'role-permissions', scroll: { head: 'perm-head', body: 'perm-body', full: 'perm-full', at: 0, auto: true }, title: 'Role permissions', desc: 'A Zoologist role with its module permissions for collection, housing, mortality and more.' }] }
         ]
       },
       {
@@ -461,17 +467,30 @@ window.ANTZ_GUIDES = {
         id: 'directory',
         label: 'Part 05 · Everyone, at a glance',
         title: 'Users directory',
+        /* The window steps between both cards with its arrows and shows, under each screen's text, what every row
+           of the list offers, as on the deck's directory page */
+        chain: true,
+        notes: {
+          label: 'On every row',
+          items: [
+            { icon: 'search', lead: 'Search', text: 'by name, role or staff number.' },
+            { icon: 'chat', lead: 'Call & chat', text: 'a teammate without leaving the list.' },
+            { icon: 'history', lead: 'Last active', text: 'time, so you know who\'s online.' }
+          ]
+        },
         lede: 'The directory opens on a live count of your team and lets you reach anyone in a tap. Search by name, role or staff number, call or chat a teammate without leaving the list, and see each person\'s last active time.',
         cards: [
           { id: 'people', title: 'By users', icon: 'users', desc: 'Total, active today and blocked — then the full searchable list.',
-            shots: [{ src: 'directory-people', title: 'Users by people', desc: 'Team totals above a searchable list of users, each with call and chat.' }] },
+            shots: [{ src: 'directory-people', title: 'Users by people', keep: true, desc: 'Total, active today and blocked — then the full searchable list.' }] },
           { id: 'sites', title: 'By site', icon: 'areas', desc: 'The same counts rolled up per facility, site by site.',
-            shots: [{ src: 'directory-sites', title: 'Users by site', desc: 'Total users, active today and blocked, rolled up for each site.' }] }
+            shots: [{ src: 'directory-sites', title: 'Users by site', desc: 'The same counts rolled up per facility, site by site.' }] }
         ]
       },
       {
         id: 'filters',
         label: 'Part 06 · Narrow it down',
+        /* One screen per card: the window steps between both with its arrows */
+        chain: true,
         title: 'Filters & activity logs',
         lede: 'Narrow the directory down by role or status, and read the activity trail for anyone. The activity log filters actions by user and time range, covering logins, animal and medical records, facility, diet, notes and breeding.',
         /* The deck says the directory can be sliced "four ways" but shows only two filters (role and status), so the count is left out */
@@ -682,9 +701,10 @@ window.ANTZ_GUIDES = {
           { id: 'site-quick', title: 'Quick actions', icon: 'add', desc: 'Tap the green + and a sheet slides up: tap any action to jump straight to it.',
             shots: [
               { src: 'site-quick', title: 'Quick actions sheet', desc: 'The site\'s quick actions sheet, opened from the green + button.' },
+              { src: 'site-quick-batch', title: 'Batch Assessment', desc: 'Record assessments for species belonging to a selected site.' },
               { src: 'site-quick-tag', title: 'Add Tags', desc: 'Create and assign tags to organise and categorise the site.' },
               { src: 'site-quick-note', title: 'Add Note', desc: 'Quickly create and save notes for the selected entity.' },
-              { src: 'site-quick-section', title: 'Add Section', desc: 'Create new sections within the site to organise and manage enclosures.' },
+              { src: 'site-quick-section', title: 'Add Section', desc: 'Create new sections within the site to organise and manage enclosures efficiently.' },
               { src: 'site-quick-home', title: 'Home', desc: 'Return to the Home dashboard.' }
             ] }
         ]
@@ -739,6 +759,7 @@ window.ANTZ_GUIDES = {
           { id: 'section-quick', title: 'Quick actions', icon: 'add', desc: 'Tap the green + and a sheet slides up: tap any action to jump straight to it.',
             shots: [
               { src: 'section-quick', title: 'Quick actions sheet', desc: 'The section\'s quick actions sheet, opened from the green + button.' },
+              { src: 'section-quick-batch', title: 'Batch Assessment', desc: 'Record assessments for species belonging to a selected section.' },
               { src: 'section-quick-tag', title: 'Add Tags', desc: 'Create and assign tags to organise and categorise records.' },
               { src: 'section-quick-note', title: 'Add Note', desc: 'Quickly create and save notes for animals, enclosures or other entities.' },
               { src: 'section-quick-enclosure', title: 'Add Enclosure', desc: 'Create a new enclosure and assign it to the right site and section.' },
@@ -795,6 +816,7 @@ window.ANTZ_GUIDES = {
           { id: 'enclosure-quick', title: 'Quick actions', icon: 'add', desc: 'Tap the green + and a sheet slides up: tap any action to jump straight to it.',
             shots: [
               { src: 'enclosure-quick', title: 'Quick actions sheet', desc: 'The enclosure\'s quick actions sheet, opened from the green + button.' },
+              { src: 'enclosure-quick-batch', title: 'Batch Assessment', desc: 'Record assessments for species belonging to a selected enclosure.' },
               { src: 'enclosure-quick-tag', title: 'Add Tag', desc: 'Create and assign tags to organise and categorise records.' },
               { src: 'enclosure-quick-note', title: 'Add Note', desc: 'Create and save notes related to the enclosure.' },
               { src: 'enclosure-quick-sub', title: 'Add Sub Enclosure', desc: 'Create a sub-enclosure nested within this enclosure.' },
@@ -804,8 +826,24 @@ window.ANTZ_GUIDES = {
         ]
       },
       {
+        id: 'contents',
+        label: 'Part 08 · What lives inside',
+        title: 'An enclosure may contain',
+        lede: 'Depending on how the animals are housed and tracked, every enclosure holds one of three record types.',
+        /* The deck's "An enclosure may contain" slide, with the Add screen for each record type */
+        chain: true,
+        cards: [
+          { id: 'contents-single', title: 'Single animal', icon: 'pets', desc: 'One animal on its own record.',
+            shots: [{ src: 'holds-single', title: 'Single animal', desc: 'Add Animal with Single selected: species, accession type and date, ownership term, enclosure and sex type.' }] },
+          { id: 'contents-batch', title: 'Batch of animals', icon: 'batch', desc: 'One species, managed as one record.',
+            shots: [{ src: 'holds-batch', title: 'Batch of animals', desc: 'Add Animal with Batch selected: a count each of male, female, undetermined and indeterminate, then the basic information.' }] },
+          { id: 'contents-group', title: 'Group of animals', icon: 'users', desc: 'A larger group of one species.',
+            shots: [{ src: 'holds-group', title: 'Group of animals', desc: 'Add Group of Animals: a total count, accession details, species, enclosure, sex type and collection type.' }] }
+        ]
+      },
+      {
         id: 'features',
-        label: 'Part 08 · Compared',
+        label: 'Part 09 · Compared',
         title: 'Feature availability',
         lede: 'Most features work at every level of housing. Transfers, teams and hospital tracking live at the site; treatment tracking and user access stop at the section.',
         /* Rows and marks as in the deck's matrix. Three marks do not match the deck's own tab lists: Mortality is marked for
@@ -858,6 +896,8 @@ window.ANTZ_GUIDES = {
             { title: 'Favourites & bookmark', desc: 'Quick access from the Focus Hub.', icon: 'focus',
               cells: [{ ok: true, text: 'Available' }, { ok: true, text: 'Available' }, { ok: true, text: 'Available' }] },
             { title: 'Tags', desc: 'Organise, categorise and identify.', icon: 'tag',
+              cells: [{ ok: true, text: 'Available' }, { ok: true, text: 'Available' }, { ok: true, text: 'Available' }] },
+            { title: 'Batch assessment', desc: 'Record assessments for the species at that level.', icon: 'approve',
               cells: [{ ok: true, text: 'Available' }, { ok: true, text: 'Available' }, { ok: true, text: 'Available' }] }
           ]
         }
@@ -941,7 +981,7 @@ window.ANTZ_GUIDES = {
               { src: 'notes', title: 'Notes', desc: 'All notes for the animal across its site, section and enclosure.' },
               { src: 'media', title: 'Media', desc: 'Manage animal-related images, videos and documents.' }
             ] },
-          { id: 'identity', title: 'Identity, history & lineage', icon: 'tag', desc: 'Identifiers, housing history, incidents, diet, lineage and offspring: the tabs that situate an animal in its world.',
+          { id: 'identity', title: 'Identity, history & lineage', icon: 'history', desc: 'Identifiers, housing history, incidents, diet, lineage and offspring: the tabs that situate an animal in its world.',
             shots: [
               { src: 'identifier', title: 'Identifier', desc: 'Add, edit or delete a local identifier: set its type and name, mark it primary and upload images.' },
               { src: 'history', title: 'History', desc: 'Current and past enclosure details.' },
@@ -950,11 +990,14 @@ window.ANTZ_GUIDES = {
               { src: 'lineage', title: 'Lineage', desc: 'Track the genetic and breeding history of the animal.' },
               { src: 'offspring', title: 'Offspring', desc: 'Record and manage the progeny of the selected animal.' }
             ] },
-          /* The deck's Tags screen is a placeholder (a copy of the Incharges screen), so Tags has no screen of its own */
-          { id: 'handover', title: 'Transfer & incharge', icon: 'transfer', desc: 'Hospital transfer status and the chain of responsibility travel with the record. Tags label an animal for quick filtering by group, condition or care priority.',
+          { id: 'handover', title: 'Transfer & incharge', icon: 'transfer', desc: 'Hospital transfer status and the chain of responsibility travel with the record.',
             shots: [
               { src: 'hospital', title: 'Hospital transfer', desc: 'Track requests through Pending, In-transit, Accepted, Cancelled or Rejected.' },
               { src: 'incharge', title: 'Incharges', desc: 'Who is currently assigned, with a timeline of current and previous incharges for accountability.' }
+            ] },
+          { id: 'tags', title: 'Tags', icon: 'tag', desc: 'Label an animal for quick filtering by group, condition or care priority.',
+            shots: [
+              { src: 'tags', title: 'Tags', desc: 'The animal\'s tags, shown on its profile header too. Search and filter them, switch between Public and Private tags, and add one with the green +.' }
             ] }
         ]
       }
@@ -986,6 +1029,7 @@ window.ANTZ_GUIDES = {
         label: 'Part 01 · The module',
         title: 'The Medical module',
         lede: 'Record, track and manage animal health, including diagnoses, prescriptions and treatments, with organised histories and coordination across the vet team.',
+        chain: true,
         cards: [
           { id: 'create', title: 'Record creation', icon: 'add', desc: 'Single, batch, group, scheduled or direct workflows, with lab requests and exact date and time logging.',
             shots: [{ src: 'create', title: 'Record creation', desc: 'Quick actions for Single, Group and Batch records, Pool Lab Request, Direct Administer, Prescription, Vaccination and Deworming, and Schedule Vaccination.' }] },
@@ -1023,7 +1067,7 @@ window.ANTZ_GUIDES = {
           title: 'Add Medical Record', numbered: true,
           desc: 'Each section of the form, highlighted in turn. Templates save time: frequently used symptoms, assessments and prescriptions can be stored and reapplied to the next record in a couple of taps.',
           shots: [
-            { src: 'clinical-notes', title: 'Clinical notes', desc: 'Free-text observations or instructions for caretakers and team members, for clear communication.' },
+            { src: 'clinical-notes', title: 'Clinical notes', desc: 'Record and manage clinical observations for caretakers and team members, for clear communication.' },
             { src: 'assessments', title: 'Assessments', desc: 'Animal-specific metrics, such as weight, beak length and enclosure details, for accurate health tracking.' },
             { src: 'symptoms', title: 'Symptoms', desc: 'Search a list of common symptoms or reuse custom templates, and record duration and severity for each.' },
             { src: 'clinical-assessment', title: 'Clinical assessments', desc: 'Select an assessment from a searchable list or a saved template, with duration and severity captured.' },
@@ -1202,17 +1246,18 @@ window.ANTZ_GUIDES = {
         label: 'Part 02 · Status views',
         title: 'Status-based views',
         lede: 'Every vaccination lives in exactly one status. The five views make monitoring simple: you always know what is coming, what is waiting, and what is done.',
+        chain: true,
         cards: [
           { id: 'upcoming', title: 'Upcoming', icon: 'bell', desc: 'All upcoming vaccinations by date and site, so nothing is missed.',
-            shots: [{ src: 'status-upcoming', title: 'Upcoming Vaccination', desc: 'The Upcoming Vaccination screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-upcoming', title: 'Upcoming', desc: 'All upcoming vaccinations by date and site, so nothing is missed.' }] },
           { id: 'pending', title: 'Pending', icon: 'priority', desc: 'Scheduled vaccinations awaiting administration, by date and site.',
-            shots: [{ src: 'status-pending', title: 'Pending Vaccination', desc: 'The Pending Vaccination screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-pending', title: 'Pending', desc: 'Scheduled vaccinations awaiting administration, by date and site.' }] },
           { id: 'completed', title: 'Completed', icon: 'approve', desc: 'All administered vaccinations, with full dosage and batch history.',
-            shots: [{ src: 'status-completed', title: 'Completed Vaccination', desc: 'The Completed Vaccination screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-completed', title: 'Completed', desc: 'All administered vaccinations, with full dosage and batch history.' }] },
           { id: 'skipped', title: 'Skipped', icon: 'edit', desc: 'Postponed vaccinations, each with a reason and reschedule date.',
-            shots: [{ src: 'status-skipped', title: 'Skipped Vaccination', desc: 'The Skipped Vaccination screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-skipped', title: 'Skipped', desc: 'Postponed vaccinations, each with a reason and reschedule date.' }] },
           { id: 'stopped', title: 'Stopped', icon: 'alert', desc: 'Halted vaccinations, kept on record and re-schedulable.',
-            shots: [{ src: 'status-stopped', title: 'Stopped Vaccination', desc: 'The Stopped Vaccination screen, listing species with their animal counts.' }] }
+            shots: [{ src: 'status-stopped', title: 'Stopped', desc: 'Halted vaccinations, kept on record and re-schedulable.' }] }
         ]
       },
       {
@@ -1220,11 +1265,12 @@ window.ANTZ_GUIDES = {
         label: 'Part 03 · Add',
         title: 'Schedule or direct administer',
         lede: 'Adding a vaccination gives you two paths. Plan one for later, or record one you are giving right now: both capture the same medicine and date details. Direct administer adds the recording step covered next.',
+        chain: true,
         cards: [
           { id: 'schedule', title: 'Schedule vaccination', icon: 'add', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.',
-            shots: [{ src: 'add-schedule', title: 'Schedule Vaccination', desc: 'The Schedule Vaccination form, with the selected animal, prescription and clinical notes.' }] },
+            shots: [{ src: 'add-schedule', title: 'Schedule vaccination', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.' }] },
           { id: 'direct', title: 'Direct administer', icon: 'vaccine', desc: 'Record a vaccine you are giving now or gave in the past, and capture dosage and batch on the spot. It goes straight to Completed.',
-            shots: [{ src: 'add-administer', title: 'Direct Vaccination', desc: 'The Direct Vaccination form, with the selected animals, prescription and clinical notes.' }] }
+            shots: [{ src: 'add-administer', title: 'Direct administer', desc: 'Record a vaccine you are giving now or gave in the past, and capture dosage and batch on the spot. It goes straight to Completed.' }] }
         ]
       },
       {
@@ -1249,13 +1295,14 @@ window.ANTZ_GUIDES = {
         label: 'Part 05 · Skip & stop',
         title: 'Skip, stop & administer',
         lede: 'Plans change. Postpone a dose or halt a course entirely: both always require a reason, so the history stays complete. Skip and stop follow the same flow: select the dose, add the reason (required), then reschedule or stop.',
+        chain: true,
         cards: [
           { id: 'reschedule', title: 'Reschedule', icon: 'edit', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.',
-            shots: [{ src: 'action-reschedule', title: 'Reschedule date', desc: 'The Stop Vaccine screen with Reschedule date selected, for the skip flow.' }] },
+            shots: [{ src: 'action-reschedule', title: 'Reschedule', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.' }] },
           { id: 'stop', title: 'Stop', icon: 'alert', desc: 'Halt the vaccination with a reason. It moves to Stopped and can be rescheduled later if needed.',
-            shots: [{ src: 'action-stop', title: 'Stop this vaccine', desc: 'The Stop Vaccine screen with Stop this vaccine selected.' }] },
+            shots: [{ src: 'action-stop', title: 'Stop', desc: 'Halt the vaccination with a reason. It moves to Stopped and can be rescheduled later if needed.' }] },
           { id: 'administer', title: 'Administer', icon: 'approve', desc: 'Record it on the spot or as given in the past, and the vaccination moves straight to Completed.',
-            shots: [{ src: 'action-administer', title: 'Administer Vaccine', desc: 'The Administer Vaccine form, with dosage, note and the mandatory batch number.' }] }
+            shots: [{ src: 'action-administer', title: 'Administer', desc: 'Record it on the spot or as given in the past, and the vaccination moves straight to Completed.' }] }
         ]
       }
     ],
@@ -1306,17 +1353,18 @@ window.ANTZ_GUIDES = {
         label: 'Part 02 · Status views',
         title: 'Status-based views',
         lede: 'Every deworming lives in exactly one status. The five views make monitoring simple: you always know what is coming, what is waiting, and what is done.',
+        chain: true,
         cards: [
           { id: 'upcoming', title: 'Upcoming', icon: 'bell', desc: 'All upcoming deworming by date and site, so nothing is missed.',
-            shots: [{ src: 'status-upcoming', title: 'Upcoming Deworming', desc: 'The Upcoming Deworming screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-upcoming', title: 'Upcoming', desc: 'All upcoming deworming by date and site, so nothing is missed.' }] },
           { id: 'pending', title: 'Pending', icon: 'priority', desc: 'Scheduled deworming awaiting administration, by date and site.',
-            shots: [{ src: 'status-pending', title: 'Pending Deworming', desc: 'The Pending Deworming screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-pending', title: 'Pending', desc: 'Scheduled deworming awaiting administration, by date and site.' }] },
           { id: 'completed', title: 'Completed', icon: 'approve', desc: 'View or revoke administered deworming, with full dosage and batch history.',
-            shots: [{ src: 'status-completed', title: 'Completed Deworming', desc: 'The Completed Deworming screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-completed', title: 'Completed', desc: 'View or revoke administered deworming, with full dosage and batch history.' }] },
           { id: 'skipped', title: 'Skipped', icon: 'edit', desc: 'Postponed deworming, each with a reason and reschedule date.',
-            shots: [{ src: 'status-skipped', title: 'Skipped Deworming', desc: 'The Skipped Deworming screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-skipped', title: 'Skipped', desc: 'Postponed deworming, each with a reason and reschedule date.' }] },
           { id: 'stopped', title: 'Stopped', icon: 'alert', desc: 'Halted deworming, kept on record and re-schedulable.',
-            shots: [{ src: 'status-stopped', title: 'Stopped Deworming', desc: 'The Stopped Deworming screen, listing species with their animal counts.' }] }
+            shots: [{ src: 'status-stopped', title: 'Stopped', desc: 'Halted deworming, kept on record and re-schedulable.' }] }
         ]
       },
       {
@@ -1324,11 +1372,12 @@ window.ANTZ_GUIDES = {
         label: 'Part 03 · Add',
         title: 'Schedule or direct administer',
         lede: 'Adding a deworming gives you two paths. Plan one for later, or record one you are giving right now: both capture the same medicine and date details. Direct administer adds the recording step covered next.',
+        chain: true,
         cards: [
           { id: 'schedule', title: 'Schedule deworming', icon: 'add', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.',
-            shots: [{ src: 'add-schedule', title: 'Schedule Deworming', desc: 'The Schedule Deworming form, with the selected animal, prescription and clinical notes.' }] },
+            shots: [{ src: 'add-schedule', title: 'Schedule deworming', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.' }] },
           { id: 'direct', title: 'Direct administer', icon: 'medicine', desc: 'Record a dose you are giving now or gave in the past, and capture dosage and batch on the spot. It goes straight to Completed.',
-            shots: [{ src: 'add-administer', title: 'Direct Administer', desc: 'The Direct Administer form, with the selected animal, prescription and clinical notes.' }] }
+            shots: [{ src: 'add-administer', title: 'Direct administer', desc: 'Record a dose you are giving now or gave in the past, and capture dosage and batch on the spot. It goes straight to Completed.' }] }
         ]
       },
       {
@@ -1353,13 +1402,14 @@ window.ANTZ_GUIDES = {
         label: 'Part 05 · Skip & stop',
         title: 'Skip, stop & administer',
         lede: 'Plans change. Postpone a dose or halt a course entirely: both always require a reason, so the history stays complete. Skip and stop follow the same flow: select the dose, add the reason (required), then reschedule or stop.',
+        chain: true,
         cards: [
           { id: 'reschedule', title: 'Skip & reschedule', icon: 'edit', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.',
-            shots: [{ src: 'action-reschedule', title: 'Skip Deworming', desc: 'The Skip Deworming screen with Reschedule date selected.' }] },
+            shots: [{ src: 'action-reschedule', title: 'Skip & reschedule', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.' }] },
           { id: 'stop', title: 'Stop', icon: 'alert', desc: 'Halt the deworming with a reason. It moves to Stopped and can be rescheduled later if needed.',
-            shots: [{ src: 'action-stop', title: 'Stop Deworming', desc: 'The Stop Deworming screen with Stop this deworming selected.' }] },
+            shots: [{ src: 'action-stop', title: 'Stop', desc: 'Halt the deworming with a reason. It moves to Stopped and can be rescheduled later if needed.' }] },
           { id: 'administer', title: 'Administer', icon: 'approve', desc: 'Record it on the spot or as given in the past, and it moves straight to Completed.',
-            shots: [{ src: 'action-administer', title: 'Administer Deworming', desc: 'The Administer Deworming form, recording the dose directly with its batch number.' }] }
+            shots: [{ src: 'action-administer', title: 'Administer', desc: 'Record it on the spot or as given in the past, and it moves straight to Completed.' }] }
         ]
       }
     ],
@@ -1411,17 +1461,18 @@ window.ANTZ_GUIDES = {
         label: 'Part 02 · Status views',
         title: 'Status-based views',
         lede: 'Every supplement lives in exactly one status. The five views make monitoring simple: you always know what is coming, what is waiting, and what is done.',
+        chain: true,
         cards: [
           { id: 'upcoming', title: 'Upcoming', icon: 'bell', desc: 'All upcoming supplements by date and site, so nothing is missed.',
-            shots: [{ src: 'status-upcoming', title: 'Upcoming Supplements', desc: 'The Upcoming Supplements screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-upcoming', title: 'Upcoming', desc: 'All upcoming supplements by date and site, so nothing is missed.' }] },
           { id: 'pending', title: 'Pending', icon: 'priority', desc: 'Scheduled supplements awaiting administration, by date and site.',
-            shots: [{ src: 'status-pending', title: 'Pending Supplements', desc: 'The Pending Supplements screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-pending', title: 'Pending', desc: 'Scheduled supplements awaiting administration, by date and site.' }] },
           { id: 'completed', title: 'Completed', icon: 'approve', desc: 'All administered supplements, with full dosage and batch history.',
-            shots: [{ src: 'status-completed', title: 'Completed Supplements', desc: 'The Completed Supplements screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-completed', title: 'Completed', desc: 'All administered supplements, with full dosage and batch history.' }] },
           { id: 'skipped', title: 'Skipped', icon: 'edit', desc: 'Postponed supplements, each with a reason and reschedule date.',
-            shots: [{ src: 'status-skipped', title: 'Skipped Supplements', desc: 'The Skipped Supplements screen, listing species with their animal counts.' }] },
+            shots: [{ src: 'status-skipped', title: 'Skipped', desc: 'Postponed supplements, each with a reason and reschedule date.' }] },
           { id: 'stopped', title: 'Stopped', icon: 'alert', desc: 'Halted supplements, kept on record and re-schedulable.',
-            shots: [{ src: 'status-stopped', title: 'Stopped Supplements', desc: 'The Stopped Supplements screen, listing species with their animal counts.' }] }
+            shots: [{ src: 'status-stopped', title: 'Stopped', desc: 'Halted supplements, kept on record and re-schedulable.' }] }
         ]
       },
       {
@@ -1429,11 +1480,12 @@ window.ANTZ_GUIDES = {
         label: 'Part 03 · Add',
         title: 'Schedule or direct administer',
         lede: 'Adding a supplement gives you two paths. Plan one for later, or record one you are giving right now: both capture the same medicine and date details. Direct administer adds the recording step covered next.',
+        chain: true,
         cards: [
           { id: 'schedule', title: 'Schedule supplement', icon: 'add', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.',
-            shots: [{ src: 'add-schedule', title: 'Schedule Supplements', desc: 'The Schedule Supplements form, with the selected animals, prescription and clinical notes.' }] },
+            shots: [{ src: 'add-schedule', title: 'Schedule supplement', desc: 'Plan ahead: set the medicine, date and site. It lands in Upcoming and moves to Pending as it comes due.' }] },
           { id: 'direct', title: 'Direct administer', icon: 'medicine', desc: 'Record a supplement you are giving now, or one given in the past, and capture dosage and batch on the spot. It goes straight to Completed.',
-            shots: [{ src: 'add-administer', title: 'Direct Supplements', desc: 'The Direct Supplements form, with the selected animal, prescription and clinical notes.' }] }
+            shots: [{ src: 'add-administer', title: 'Direct administer', desc: 'Record a supplement you are giving now, or one given in the past, and capture dosage and batch on the spot. It goes straight to Completed.' }] }
         ]
       },
       {
@@ -1458,13 +1510,14 @@ window.ANTZ_GUIDES = {
         label: 'Part 05 · Skip & stop',
         title: 'Skip, stop & administer',
         lede: 'Plans change. Postpone a dose or halt a course entirely: both always require a reason, so the history stays complete. Skip and stop follow the same flow: select the dose, add the reason (required), then reschedule or stop.',
+        chain: true,
         cards: [
           { id: 'reschedule', title: 'Reschedule', icon: 'edit', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.',
-            shots: [{ src: 'action-reschedule', title: 'Reschedule date', desc: 'The skip screen with Reschedule date selected.' }] },
+            shots: [{ src: 'action-reschedule', title: 'Reschedule', desc: 'Postpone this dose. Add a mandatory reason and a follow-up date; it moves to Skipped, then back when due.' }] },
           { id: 'stop', title: 'Stop', icon: 'alert', desc: 'Halt the supplement with a reason. It moves to Stopped and can be rescheduled later if needed.',
-            shots: [{ src: 'action-stop', title: 'Stop this supplement', desc: 'The stop screen with Stop this supplements selected.' }] },
+            shots: [{ src: 'action-stop', title: 'Stop', desc: 'Halt the supplement with a reason. It moves to Stopped and can be rescheduled later if needed.' }] },
           { id: 'administer', title: 'Administer', icon: 'approve', desc: 'Record it on the spot, or as given in the past, and the supplement moves straight to Completed.',
-            shots: [{ src: 'action-administer', title: 'Administer Supplements', desc: 'The Administer Supplements form, with note, batch number and optional wastage.' }] }
+            shots: [{ src: 'action-administer', title: 'Administer', desc: 'Record it on the spot, or as given in the past, and the supplement moves straight to Completed.' }] }
         ]
       }
     ],
@@ -1577,21 +1630,22 @@ window.ANTZ_GUIDES = {
         label: 'Part 01 · The module',
         title: 'Mortality at a glance',
         lede: 'Everything around an animal death lives in one module: the live dashboard, the listings, the full record, and the controls to correct it. It improves transparency, speeds up decisions and supports better welfare monitoring.',
+        chain: true,
         cards: [
           { id: 'dashboard', title: 'Mortality dashboard', icon: 'report', desc: 'Totals for deaths, affected species and causes.',
-            shots: [{ src: 'dashboard', title: 'Mortality dashboard', desc: 'The totals for animals, species and reasons, highlighted at the top of the dashboard.' }] },
+            shots: [{ src: 'dashboard', title: 'Mortality dashboard', desc: 'Totals for deaths, affected species and causes.' }] },
           { id: 'listings', title: 'Multi-view listings', icon: 'species', desc: 'Records by animal, species or cause, linked to profiles.',
-            shots: [{ src: 'listings', title: 'Multi-view listings', desc: 'The Animals, Species and Reasons totals, with the multi-view toggle for the list.' }] },
+            shots: [{ src: 'listings', title: 'Multi-view listings', desc: 'Records by animal, species or cause, linked to profiles.' }] },
           { id: 'search', title: 'Advanced search & filters', icon: 'filter', desc: 'Search by species, cause, location, date or keyword.',
-            shots: [{ src: 'search', title: 'Search & filters', desc: 'The date and site selectors, search bar and advanced filters, highlighted.' }] },
+            shots: [{ src: 'search', title: 'Advanced search & filters', desc: 'Search by species, cause, location, date or keyword.' }] },
           { id: 'record', title: 'Deceased animal records', icon: 'note', desc: 'Full death detail: cause, ID, enclosure, site and sex.',
-            shots: [{ src: 'record', title: 'Deceased animal record', desc: 'A deceased animal record card in the mortality list, highlighted.' }] },
+            shots: [{ src: 'record', title: 'Deceased animal records', desc: 'Full death detail: cause, ID, enclosure, site and sex.' }] },
           { id: 'edit', title: 'Edit records', icon: 'edit', desc: 'Edit mortality reports after entry to keep them accurate.',
-            shots: [{ src: 'edit', title: 'Edit a mortality report', desc: 'The edit button on the Mortality Report in the animal record.' }] },
+            shots: [{ src: 'edit', title: 'Edit records', desc: 'Edit mortality reports after entry to keep them accurate.' }] },
           { id: 'revoke', title: 'Revoke records', icon: 'alert', desc: 'Revoke incorrect records to restore active status.',
-            shots: [{ src: 'revoke', title: 'Revoke mortality', desc: 'The Revoke Mortality option in the animal record menu.' }] },
+            shots: [{ src: 'revoke', title: 'Revoke records', desc: 'Revoke incorrect records to restore active status.' }] },
           { id: 'carcass', title: 'Carcass transfer', icon: 'transfer', desc: 'View and track carcass movement between locations.',
-            shots: [{ src: 'carcass', title: 'Carcass Transfers', desc: 'The Carcass Transfers list, with transfers by status.' }] }
+            shots: [{ src: 'carcass', title: 'Carcass transfer', desc: 'View and track carcass movement between locations.' }] }
         ]
       },
       {
@@ -1618,17 +1672,18 @@ window.ANTZ_GUIDES = {
         title: 'Carcass transfer',
         lede: 'Track and record carcass movement between sites and necropsy centres, with status at every stage and a comment thread to keep the team in step. It improves transparency, ensures compliance and supports efficient post-mortality management.',
         /* The deck also draws a Loading Checklist phone screen in HTML, but no tile opens it and it is not a capture, so it is left out */
+        chain: true,
         cards: [
           { id: 'status', title: 'Status tracking', icon: 'manage', desc: 'Monitor transfer stages: Pending, In Transit, Completed and Canceled.',
-            shots: [{ src: 'transfer-status', title: 'Status tracking', desc: 'The Carcass Transfers list with its status tabs highlighted.' }] },
+            shots: [{ src: 'transfer-status', title: 'Status tracking', desc: 'Monitor transfer stages: Pending, In Transit, Completed and Canceled.' }] },
           { id: 'search', title: 'Search & filters', icon: 'filter', desc: 'Easily search and filter transfers by status.',
-            shots: [{ src: 'transfer-search', title: 'Search & filters', desc: 'The Carcass Transfers list with the search bar and filter button highlighted.' }] },
+            shots: [{ src: 'transfer-search', title: 'Search & filters', desc: 'Easily search and filter transfers by status.' }] },
           { id: 'record', title: 'Carcass transfer', icon: 'transfer', desc: 'Track and record carcass movement between sites or necropsy centres.',
-            shots: [{ src: 'transfer-form', title: 'Carcass Transfer form', desc: 'Choose the location and destination, select the carcass and submit the request.' }] },
+            shots: [{ src: 'transfer-form', title: 'Carcass transfer', desc: 'Track and record carcass movement between sites or necropsy centres.' }] },
           { id: 'updates', title: 'Real-time status updates', icon: 'bell', desc: 'Update the status: Transfer Initiated, Checklist Filled, Loading Pending.',
-            shots: [{ src: 'transfer-updates', title: 'Status updates', desc: 'The carcass transfer status timeline, with each update timestamped.' }] },
+            shots: [{ src: 'transfer-updates', title: 'Real-time status updates', desc: 'Update the status: Transfer Initiated, Checklist Filled, Loading Pending.' }] },
           { id: 'comments', title: 'Comments & communication', icon: 'chat', desc: 'Add comments for coordination and record-keeping.',
-            shots: [{ src: 'transfer-comments', title: 'Comments', desc: 'The carcass transfer detail with its comments thread.' }] }
+            shots: [{ src: 'transfer-comments', title: 'Comments & communication', desc: 'Add comments for coordination and record-keeping.' }] }
         ]
       }
     ],
@@ -1659,21 +1714,22 @@ window.ANTZ_GUIDES = {
         label: 'Part 01 · The module',
         title: 'Inside the module',
         lede: 'The Necropsy module documents post-mortem examinations with detailed observations, organ-specific findings and medical conclusions. Seven surfaces carry it, from finding a record to reading its full timeline.',
+        chain: true,
         cards: [
           { id: 'search', title: 'Search & filters', icon: 'filter', desc: 'Search by animal or species; filter by site, date and priority.',
-            shots: [{ src: 'search', title: 'Search & filters', desc: 'The necropsy list on the Pending tab, with the search bar highlighted.' }] },
+            shots: [{ src: 'search', title: 'Search & filters', desc: 'Search by animal or species; filter by site, date and priority.' }] },
           { id: 'status', title: 'Status tracking', icon: 'manage', desc: 'Monitor stages: Incoming, Pending, Draft and Completed.',
-            shots: [{ src: 'status', title: 'Status tracking', desc: 'The necropsy list with its status tabs highlighted and Pending active.' }] },
+            shots: [{ src: 'status', title: 'Status tracking', desc: 'Monitor stages: Incoming, Pending, Draft and Completed.' }] },
           { id: 'card', title: 'Animal card & request info', icon: 'tag', desc: 'AID, species, location, cause, requester and priority.',
-            shots: [{ src: 'animal-card', title: 'Animal card', desc: 'A necropsy request card with the animal profile highlighted.' }] },
+            shots: [{ src: 'animal-card', title: 'Animal card & request info', desc: 'AID, species, location, cause, requester and priority.' }] },
           { id: 'carcass', title: 'Carcass transfer', icon: 'transfer', desc: 'View transfer requests: Pending Acceptance and Received.',
-            shots: [{ src: 'carcass-list', title: 'Carcass Transfers', desc: 'The Carcass Transfers list with the Received tab active.' }] },
+            shots: [{ src: 'carcass-list', title: 'Carcass transfer', desc: 'View transfer requests: Pending Acceptance and Received.' }] },
           { id: 'request', title: 'Detailed request view', icon: 'note', desc: 'The full report: cause, condition and notes. Update, draft or submit.',
-            shots: [{ src: 'request', title: 'Necropsy request', desc: 'The request detail: mortality report, cause, carcass condition and Pending status.' }] },
+            shots: [{ src: 'request', title: 'Detailed request view', desc: 'The full report: cause, condition and notes. Update, draft or submit.' }] },
           { id: 'download', title: 'Download report', icon: 'report', desc: 'Export reports or drafts as PDFs for records and offline use.',
-            shots: [{ src: 'download', title: 'Download report', desc: 'The necropsy report with the download action highlighted.' }] },
+            shots: [{ src: 'download', title: 'Download report', desc: 'Export reports or drafts as PDFs for records and offline use.' }] },
           { id: 'timeline', title: 'Timeline', icon: 'eye', desc: 'Every action tracked with the user and a timestamp.',
-            shots: [{ src: 'timeline', title: 'History timeline', desc: 'The necropsy history: completed, draft discarded and saved as draft, each with its user and time.' }] }
+            shots: [{ src: 'timeline', title: 'Timeline', desc: 'Every action tracked with the user and a timestamp.' }] }
         ]
       },
       {
@@ -1687,7 +1743,7 @@ window.ANTZ_GUIDES = {
           shots: [
             { src: 'req-header', title: 'Animal & mortality header', desc: 'AID, species, enclosure, site, time since death and requester.' },
             { src: 'req-report', title: 'Mortality report', desc: 'Suspected cause, date and time of death, and carcass condition.' },
-            { src: 'req-status', title: 'Current status', desc: 'Where the record sits: here, Pending, with the date.' },
+            { src: 'req-status', title: 'Current status', desc: 'Displays the record\'s current status along with date.' },
             { src: 'req-add', title: 'Add necropsy', desc: 'Begin the examination entry from the Update Necropsy action at the bottom.' },
             { src: 'req-update', title: 'Update, draft & submit', desc: 'Update the necropsy details, then save as draft or submit when finalised.' }
           ]
@@ -1698,11 +1754,12 @@ window.ANTZ_GUIDES = {
         label: 'Part 03 · Carcass transfer',
         title: 'Finding transfers, fast',
         lede: 'Carcass Transfer streamlines carcass movement tracking from the originating site to the necropsy centre. Across the transfer list, two controls keep the right requests in front of you.',
+        chain: true,
         cards: [
           { id: 'search', title: 'Search & filters', icon: 'filter', desc: 'Search transfers by animal ID and filter by status, such as Pending Acceptance and Received, to focus on what needs action now.',
-            shots: [{ src: 'find-search', title: 'Search by animal ID', desc: 'The Carcass Transfers list with search by animal ID and the filter highlighted.' }] },
+            shots: [{ src: 'find-search', title: 'Search & filters', desc: 'Search transfers by animal ID and filter by status, such as Pending Acceptance and Received, to focus on what needs action now.' }] },
           { id: 'centre', title: 'Necropsy centre filtering', icon: 'lab', desc: 'View and monitor only the transfers bound for a selected necropsy centre: ideal when one team owns a single destination.',
-            shots: [{ src: 'find-centre', title: 'Necropsy centre filter', desc: 'The Carcass Transfers list with the necropsy centre dropdown highlighted.' }] }
+            shots: [{ src: 'find-centre', title: 'Necropsy centre filtering', desc: 'View and monitor only the transfers bound for a selected necropsy centre: ideal when one team owns a single destination.' }] }
         ]
       },
       {
@@ -1824,18 +1881,20 @@ window.ANTZ_GUIDES = {
         label: 'Part 04 · Live view',
         title: 'Egg status tabs',
         lede: 'Six lifecycle tabs, six different views of the same eggs. The sixth, All, shows every egg, at every stage, in one unfiltered list.',
-        /* No capture of the All tab exists in the kit, so it is described in the lede */
+        chain: true,
         cards: [
           { id: 'received', title: 'Received', icon: 'add', desc: 'Every egg just collected, with species, site, nursery and who brought it in.',
-            shots: [{ src: 'tab-received', device: 'web', title: 'Received', desc: 'The Received tab: species, egg identifier, condition, site, nursery, collection date and collector.' }] },
+            shots: [{ src: 'tab-received', device: 'web', title: 'Received', desc: 'Every egg just collected, with species, site, nursery and who brought it in.' }] },
           { id: 'incubation', title: 'Incubation', icon: 'egg', desc: 'Days in incubation, weight and size, tracked per egg.',
-            shots: [{ src: 'tab-incubation', device: 'web', title: 'Incubation', desc: 'The Incubation tab: state and stage, days in incubation, initial and current weight, length and width.' }] },
+            shots: [{ src: 'tab-incubation', device: 'web', title: 'Incubation', desc: 'Days in incubation, weight and size, tracked per egg.' }] },
           { id: 'hatched', title: 'Hatched', icon: 'pets', desc: 'Gender and identifier once known, plus a link to create the chick\'s Animal ID.',
-            shots: [{ src: 'tab-hatched', device: 'web', title: 'Hatched', desc: 'The Hatched tab, with gender, identifier and the Create Animal ID link.' }] },
+            shots: [{ src: 'tab-hatched', device: 'web', title: 'Hatched', desc: 'Gender and identifier once known, plus a link to create the chick\'s Animal ID.' }] },
           { id: 'to-be-discarded', title: 'To Be Discarded', icon: 'alert', desc: 'Eggs flagged with a reason, selectable for a batch discard request.',
-            shots: [{ src: 'tab-to-be-discarded', device: 'web', title: 'To Be Discarded', desc: 'The To Be Discarded tab: each egg with its reason and a checkbox to select it.' }] },
+            shots: [{ src: 'tab-to-be-discarded', device: 'web', title: 'To Be Discarded', desc: 'Eggs flagged with a reason, selectable for a batch discard request.' }] },
           { id: 'discarded', title: 'Discarded', icon: 'shield', desc: 'Batch discard requests, each held for a security check before it is final.',
-            shots: [{ src: 'tab-discarded', device: 'web', title: 'Discarded', desc: 'The Batch Discarded view, with each request and its pending security check.' }] }
+            shots: [{ src: 'tab-discarded', device: 'web', title: 'Discarded', desc: 'Batch discard requests, each held for a security check before it is final.' }] },
+          { id: 'all', title: 'All', icon: 'egg', desc: 'Provides a consolidated view of all egg records across different stages, regardless of their current status.',
+            shots: [{ src: 'tab-all', device: 'web', title: 'All', desc: 'Provides a consolidated view of all egg records across different stages, regardless of their current status.' }] }
         ]
       },
       {
@@ -1843,16 +1902,16 @@ window.ANTZ_GUIDES = {
         label: 'Part 05 · Single record',
         title: 'Egg details',
         lede: 'Open any egg from the list to see its full record: where it is, where it came from, and how it is tracked over time.',
-        /* One screen in the deck: each point opens the same Egg Details capture */
+        /* One screen in the deck: each point opens the Egg Details capture with its own part highlighted */
         glance: {
           title: 'Egg details at a glance',
           desc: 'Five parts of one egg record. Pick a part to see it on the screen.',
           shots: [
-            { src: 'egg-details', device: 'web', icon: 'tag', title: 'Identity strip', desc: 'Egg ID, age, current weight and condition, plus who last updated it.' },
-            { src: 'egg-details', device: 'web', icon: 'home', title: 'Incubator location', desc: 'Current room and incubator, with temperature and humidity, and Transfer to move eggs to another incubator.' },
-            { src: 'egg-details', device: 'web', icon: 'note', title: 'Egg history', desc: 'Site, section and clutch, parentage links, collection date and initial measurements.' },
-            { src: 'egg-details', device: 'web', icon: 'report', title: 'Weight tracking', desc: 'A growth chart plotted from every logged weigh-in, with the log itself alongside.' },
-            { src: 'egg-details', device: 'web', icon: 'chat', title: 'Comments', desc: 'Leave a note on the record for the next keeper to see.' }
+            { src: 'egg-details-identity', device: 'web', icon: 'tag', title: 'Identity strip', desc: 'Egg ID, age, current weight and condition, plus who last updated it.' },
+            { src: 'egg-details-incubator', device: 'web', icon: 'home', title: 'Incubator location', desc: 'Current room and incubator, with temperature and humidity, and Transfer to move eggs to another incubator.' },
+            { src: 'egg-details-history', device: 'web', icon: 'note', title: 'Egg history', desc: 'Site, section and clutch, parentage links, collection date and initial measurements.' },
+            { src: 'egg-details-weight', device: 'web', icon: 'report', title: 'Weight tracking', desc: 'A growth chart plotted from every logged weigh-in, with the log itself alongside.' },
+            { src: 'egg-details-comments', device: 'web', icon: 'chat', title: 'Comments', desc: 'Leave a note on the record for the next keeper to see.' }
           ]
         }
       },
@@ -1903,6 +1962,7 @@ window.ANTZ_GUIDES = {
             { src: 'status-approved', title: 'Approved', desc: 'Requests approved and ready to move to the next stage of the workflow.' },
             { src: 'status-rejected', title: 'Rejected', desc: 'Requests declined during approval. Open one to read the reason and take corrective action if needed.' },
             { src: 'status-cancelled', title: 'Cancelled', desc: 'Requests no longer active. A new request is needed to proceed.' },
+            { src: 'status-deleted', title: 'Deleted', desc: 'View deleted requests.' },
             { src: 'status-all', title: 'All', desc: 'Every request across all statuses, regardless of its stage.' }
           ]
         }
@@ -2111,6 +2171,142 @@ window.ANTZ_GUIDES = {
         { icon: 'filter', title: 'Filter to what matters', desc: 'Date range, site and species narrow every report; gender-wise and show / hide columns reshape the view.' },
         { icon: 'database', title: 'Download anything', desc: 'Every report exports for offline use, sharing or compliance in a click.' },
         { icon: 'users', title: 'Open to all roles', desc: 'Available to every role; individual reports appear as their permissions are enabled.' }
+      ]
+    }
+  },
+  /* From References/Pharmacy Interactive Kit Design (Pharmacy Web Kit). The deck's tablet captures are cropped to the screen.
+     Dashboard points 6 (Doctor-wise Report) and 8 (Fast Moving Products) have no capture in the kit, so they are in the lede */
+  'pharmacy-web': {
+    source: 'Pharmacy Interactive Kit Design · Pharmacy Web Kit',
+    title: 'Pharmacy (Web)',
+    kicker: 'Operations & Oversight',
+    sub: 'The web console for running a pharmacy end to end: masters and storage, inventory and products, requests and shipments, dispensing, adjustments and reporting.',
+    audience: ['Pharmacists', 'Store admins', 'Logistics', 'New users'],
+    area: 'operations',
+    back: 'pharmacy-web',
+    parts: [
+      {
+        id: 'dashboard',
+        label: 'Part 01 · Real-time view',
+        title: 'Dashboard',
+        lede: 'Real-time insights on stock issues, shipments, purchases, requests, usage, expiries and fast-moving products, with visual trends for quick action. The dashboard also carries a Doctor-wise Report of product requests by user, doctor or store, and a list of Fast Moving Products shipped most often.',
+        actions: {
+          title: 'On this screen', numbered: true,
+          desc: 'Six parts of the pharmacy dashboard, each highlighted on the screen.',
+          shots: [
+            { src: 'dash-critical', device: 'tablet', title: 'Critical info', desc: 'Expired and out-of-stock medicines, flagged for quick resolution.' },
+            { src: 'dash-daily', device: 'tablet', title: 'Daily overview', desc: 'Today\'s requests, shipments and dispatched value.' },
+            { src: 'dash-month', device: 'tablet', title: 'Month-wise dispatch & purchase', desc: 'Charts of dispatch and purchase by month, to monitor supply trends.' },
+            { src: 'dash-stores', device: 'tablet', title: 'Top 5 stores', desc: 'The top stores by usage, with product, quantity and value data.' },
+            { src: 'dash-recent', device: 'tablet', title: 'Recent requests', desc: 'The latest purchase and transfer requests, completed and pending.' },
+            { src: 'dash-expired', device: 'tablet', title: 'Top 10 expired products', desc: 'The most expired items, listed for quick action.' }
+          ]
+        }
+      },
+      {
+        id: 'stock-report',
+        label: 'Part 02 · Visibility',
+        title: 'Stock report',
+        lede: 'Track batch-wise stock with value and expiry, flag low or expired items, monitor upcoming expiries and manage escrow with dispute resolution.',
+        actions: {
+          title: 'The stock report tabs', numbered: true,
+          desc: 'Five views of your stock. Point at a tab to see it on the screen.',
+          shots: [
+            { src: 'sr-batch', device: 'tablet', title: 'Batch-wise stock', desc: 'Quantity, price, value, batch and expiry for every product.' },
+            { src: 'sr-low', device: 'tablet', title: 'Low stock', desc: 'Items running out, with reorder levels, so you restock in time.' },
+            { src: 'sr-expired', device: 'tablet', title: 'Expired stock', desc: 'A clear list of expired items with batch and expiry dates.' },
+            { src: 'sr-about', device: 'tablet', title: 'About to expire', desc: 'What expires soon, so you can use or return it before it goes to waste.' },
+            { src: 'sr-escrow', device: 'tablet', title: 'Escrow', desc: 'Stock packed and moving between stores. Use the Dispute filter to fix short or mismatched deliveries.' }
+          ]
+        }
+      },
+      {
+        id: 'requests',
+        label: 'Part 03 · Store-to-store',
+        title: 'Requests',
+        lede: 'Manage product requests, store-wise requirements, pending items and direct dispatches from one centralised view.',
+        actions: {
+          title: 'The request views', numbered: true,
+          desc: 'Three ways to follow requests. Point at one to see it on the screen.',
+          shots: [
+            { src: 'req-all', device: 'tablet', title: 'All requests', desc: 'Every pending, shipped and disputed request, with its age, pharmacy details and resolution tools.' },
+            { src: 'req-store', device: 'tablet', title: 'Store-wise requests', desc: 'Totals, availability and emergencies per store, with drill-downs.' },
+            { src: 'req-new', device: 'tablet', title: 'New product requests', desc: 'Requests for new products, tracked as Approved, Pending, Cancelled and Rejected.' }
+          ]
+        }
+      },
+      {
+        id: 'movement',
+        label: 'Part 04 · Movement',
+        title: 'Returns, dispatch, shipments and dispensing',
+        lede: 'How stock moves: back from stores, out without a request when it is urgent, in and out as shipments, and on to patients.',
+        chain: true,
+        cards: [
+          { id: 'returns', title: 'Returns', icon: 'undo', desc: 'Manage product returns from stores, with the reason, status and delivery tracked for every return.',
+            shots: [{ src: 'returns', device: 'tablet', title: 'Returns', desc: 'Manage product returns from stores, with the reason, status and delivery tracked for every return.' }] },
+          { id: 'direct-dispatch', title: 'Dispatch without request', icon: 'priority', desc: 'Bypass traditional requests to dispatch products directly when urgent needs arise.',
+            shots: [{ src: 'direct-dispatch', device: 'tablet', title: 'Dispatch without request', desc: 'Bypass traditional requests to dispatch products directly when urgent needs arise.' }] },
+          { id: 'ship-incoming', title: 'Incoming shipments', icon: 'transfer', desc: 'Track shipments of medicines coming in from suppliers, and fulfil them.',
+            shots: [{ src: 'ship-incoming', device: 'tablet', title: 'Incoming shipments', desc: 'Track shipments of medicines coming in from suppliers, and fulfil them.' }] },
+          { id: 'ship-outgoing', title: 'Outgoing shipments', icon: 'transfer', desc: 'Track shipments of medicines going out to stores, with the fulfilment status of each.',
+            shots: [{ src: 'ship-outgoing', device: 'tablet', title: 'Outgoing shipments', desc: 'Track shipments of medicines going out to stores, with the fulfilment status of each.' }] },
+          { id: 'dispense', title: 'Dispense medicine', icon: 'medicine', desc: 'Doctors can prescribe and dispense medicines, or patients collect them directly from the pharmacy.',
+            shots: [{ src: 'dispense', device: 'tablet', title: 'Dispense medicine', desc: 'Doctors can prescribe and dispense medicines, or patients collect them directly from the pharmacy.' }] }
+        ]
+      },
+      {
+        id: 'stock',
+        label: 'Part 05 · Catalogue and stock',
+        title: 'Products, inventory and storage',
+        lede: 'The catalogue, the stock that comes in, the changes that keep it accurate, and where it all sits.',
+        chain: true,
+        cards: [
+          { id: 'product', title: 'Product management', icon: 'manage', desc: 'Create and manage products, track inventory and expiry, keep a unified ledger, and handle substitutes, variants and reference info.',
+            shots: [{ src: 'product', device: 'tablet', title: 'Product management', desc: 'Create and manage products, track inventory and expiry, keep a unified ledger, and handle substitutes, variants and reference info.' }] },
+          { id: 'inventory', title: 'Inventory', icon: 'add', desc: 'Add and import stock, auto-fill from invoices, view purchase history, and review batch, pricing and quantity details.',
+            shots: [{ src: 'inventory', device: 'tablet', title: 'Inventory', desc: 'Add and import stock, auto-fill from invoices, view purchase history, and review batch, pricing and quantity details.' }] },
+          { id: 'add-existing', title: 'Add existing inventory', icon: 'history', desc: 'Quickly log stock you already have with minimal inputs: ideal for corrections or backfills.',
+            shots: [{ src: 'add-existing', device: 'tablet', title: 'Add existing inventory', desc: 'Quickly log stock you already have with minimal inputs: ideal for corrections or backfills.' }] },
+          { id: 'stock-adjustment', title: 'Stock adjustment', icon: 'edit', desc: 'Record stock that is missing, broken or expired, with a full audit history of every change.',
+            shots: [{ src: 'stock-adjustment', device: 'tablet', title: 'Stock adjustment', desc: 'Record stock that is missing, broken or expired, with a full audit history of every change.' }] },
+          { id: 'rts', title: 'Return to supplier', icon: 'discard', desc: 'Return unwanted, expired or excess stock to suppliers, with every request tracked, to save storage space and holding costs.',
+            shots: [{ src: 'rts', device: 'tablet', title: 'Return to supplier', desc: 'Return unwanted, expired or excess stock to suppliers, with every request tracked, to save storage space and holding costs.' }] },
+          { id: 'stock-location', title: 'Master, rack & shelves', icon: 'home', desc: 'Organise storage by rack and shelf for quick access, with custom packaging, UOM, salts, drivers and manufacturers.',
+            shots: [{ src: 'stock-location', device: 'tablet', title: 'Master, rack & shelves', desc: 'Organise storage by rack and shelf for quick access, with custom packaging, UOM, salts, drivers and manufacturers.' }] }
+        ]
+      },
+      {
+        id: 'reports',
+        label: 'Part 06 · Insight',
+        title: 'Report management',
+        lede: 'Track consumption, returns, shipments, purchases, dispensing and requests with filters and downloads, for supplier, finance and demand insights.',
+        actions: {
+          title: 'Ten reports', numbered: true,
+          desc: 'Every report filters by date and downloads. Point at one to see it on the screen.',
+          shots: [
+            { src: 'rep-consumption', device: 'tablet', title: 'Consumption report', desc: 'What each product consumed, by medicine, store and drug type.' },
+            { src: 'rep-return', device: 'tablet', title: 'Return report', desc: 'Returns by return and shipment number, with an Expired filter.' },
+            { src: 'rep-shipment', device: 'tablet', title: 'Shipment report', desc: 'Outgoing stock by shipment and request number.' },
+            { src: 'rep-dispense', device: 'tablet', title: 'Dispense report', desc: 'Every dispense with its product and batch number.' },
+            { src: 'rep-reconciliation', device: 'tablet', title: 'Reconciliation report', desc: 'Current balance against purchased quantity, month by month, batch-wise if needed.' },
+            { src: 'rep-purchase', device: 'tablet', title: 'Purchase report', desc: 'Purchases by number, product and batch, for audits.' },
+            { src: 'rep-pending', device: 'tablet', title: 'Pending request report', desc: 'Requests still pending, with their priority, for audits.' },
+            { src: 'rep-rts', device: 'tablet', title: 'Return to supplier report', desc: 'Every return to a supplier, by request and date.' },
+            { src: 'rep-all-req', device: 'tablet', title: 'All requested items report', desc: 'Every requested item, with its priority and request number.' },
+            { src: 'rep-price', device: 'tablet', title: 'Product price by supplier', desc: 'Each product\'s type, category and unit price from a selected supplier.' }
+          ]
+        }
+      }
+    ],
+    close: {
+      label: 'Get started',
+      title: 'Ready to dispense',
+      lede: 'That is the Pharmacy module end to end. Open the console and start with your requests; the rest of the lifecycle follows from there.',
+      items: [
+        { icon: 'eye', title: 'See it at a glance', desc: 'A real-time dashboard and stock report flag expiries, low stock and disputes first.' },
+        { icon: 'transfer', title: 'Move stock with a trail', desc: 'Requests, returns, direct dispatches and shipments, each tracked from start to finish.' },
+        { icon: 'manage', title: 'Keep the catalogue right', desc: 'Products, inventory, adjustments and supplier returns, in their racks and shelves.' },
+        { icon: 'report', title: 'Report on everything', desc: 'Ten filterable, downloadable reports for supplier, finance and demand insights.' }
       ]
     }
   }

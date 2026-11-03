@@ -502,7 +502,7 @@
     },
     {
      "title": "Registro de transferências",
-     "desc": "Histórico completo de status com data, hora e usuários.",
+     "desc": "Histórico completo de status com data e hora.",
      "alt": "Cronologia da transferência que termina em Transferência concluída"
     }
    ]
@@ -1100,7 +1100,7 @@
     },
     {
      "title": "Gestão de solicitações",
-     "desc": "Abra, edite, cancele ou rejeite solicitações com prioridades.",
+     "desc": "Abra, edite, clone, cancele, rejeite ou exclua solicitações conforme necessário.",
      "alt": "Pedido de carpintaria de caixas-ninho de madeira em South Aviary Dome: fornecedor, detalhes do pedido, custo estimado, custo real e estado atual Em andamento"
     },
     {

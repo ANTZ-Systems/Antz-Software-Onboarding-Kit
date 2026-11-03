@@ -502,7 +502,7 @@
     },
     {
      "title": "Záznam přesunu",
-     "desc": "Úplná historie stavů s časovými razítky a uživateli.",
+     "desc": "Úplná historie stavů s časovými razítky.",
      "alt": "Časová osa přesunu končící stavem Přesun dokončen"
     }
    ]
@@ -1100,7 +1100,7 @@
     },
     {
      "title": "Správa požadavků",
-     "desc": "Zadávejte, upravujte, rušte nebo zamítejte požadavky s prioritami.",
+     "desc": "Zadávejte, upravujte, klonujte, rušte, zamítejte nebo mažte požadavky podle potřeby.",
      "alt": "Truhlářský požadavek na dřevěné budky v South Aviary Dome: dodavatel, podrobnosti požadavku, odhad nákladů, skutečné náklady a aktuální stav Probíhá"
     },
     {

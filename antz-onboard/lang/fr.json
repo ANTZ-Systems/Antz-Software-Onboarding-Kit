@@ -502,7 +502,7 @@
     },
     {
      "title": "Journal des transferts",
-     "desc": "Historique complet des statuts avec horodatages et utilisateurs.",
+     "desc": "Historique complet des statuts avec horodatages.",
      "alt": "Chronologie du transfert se terminant par Transfert terminé"
     }
    ]
@@ -1100,7 +1100,7 @@
     },
     {
      "title": "Gestion des demandes",
-     "desc": "Créez, modifiez, annulez ou rejetez des demandes avec des priorités.",
+     "desc": "Créez, modifiez, dupliquez, annulez, rejetez ou supprimez des demandes selon les besoins.",
      "alt": "Demande de menuiserie pour des nichoirs en bois à South Aviary Dome : fournisseur, détails de la demande, coût estimé, coût réel et statut actuel En cours"
     },
     {

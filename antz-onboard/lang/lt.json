@@ -502,7 +502,7 @@
     },
     {
      "title": "Perkėlimų žurnalas",
-     "desc": "Visa būsenų istorija su laiko žymomis ir naudotojais.",
+     "desc": "Visa būsenų istorija su laiko žymomis.",
      "alt": "Perkėlimo laiko juosta, kuri baigiasi būsena Perkėlimas baigtas"
     }
    ]
@@ -1100,7 +1100,7 @@
     },
     {
      "title": "Užklausų valdymas",
-     "desc": "Pateikite, redaguokite, atšaukite ar atmeskite užklausas su prioritetais.",
+     "desc": "Pagal poreikį pateikite, redaguokite, klonuokite, atšaukite, atmeskite ar ištrinkite užklausas.",
      "alt": "Dailidės darbų prašymas dėl medinių inkilų South Aviary Dome: tiekėjas, prašymo informacija, sąmata, faktinė kaina ir dabartinė būsena Vykdoma"
     },
     {

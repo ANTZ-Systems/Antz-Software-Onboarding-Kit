@@ -502,7 +502,7 @@
     },
     {
      "title": "Registro de traslados",
-     "desc": "Historial completo de estados con fecha, hora y usuarios.",
+     "desc": "Historial completo de estados con fecha y hora.",
      "alt": "Cronología del traslado que termina en Traslado completado"
     }
    ]
@@ -1100,7 +1100,7 @@
     },
     {
      "title": "Gestión de solicitudes",
-     "desc": "Cree, edite, cancele o rechace solicitudes con prioridades.",
+     "desc": "Cree, edite, clone, cancele, rechace o elimine solicitudes según sea necesario.",
      "alt": "Solicitud de carpintería de cajas nido de madera en South Aviary Dome: proveedor, detalles de la solicitud, coste estimado, coste real y estado actual En curso"
     },
     {

@@ -502,7 +502,7 @@
     },
     {
      "title": "Pārvietošanas žurnāls",
-     "desc": "Pilna statusu vēsture ar laika zīmogiem un lietotājiem.",
+     "desc": "Pilna statusu vēsture ar laika zīmogiem.",
      "alt": "Pārvietošanas laika josla, kas beidzas ar Pārvietošana pabeigta"
     }
    ]
@@ -1100,7 +1100,7 @@
     },
     {
      "title": "Pieprasījumu pārvaldība",
-     "desc": "Iesniedziet, rediģējiet, atceliet vai noraidiet pieprasījumus ar prioritātēm.",
+     "desc": "Pēc vajadzības iesniedziet, rediģējiet, klonējiet, atceliet, noraidiet vai dzēsiet pieprasījumus.",
      "alt": "Galdniecības pieprasījums koka ligzdu būrīšiem South Aviary Dome: piegādātājs, pieprasījuma informācija, izmaksu tāme, faktiskās izmaksas un pašreizējais statuss Procesā"
     },
     {

@@ -32,6 +32,7 @@
     'brand.home': 'Antz Systems, home',
     'meta.description': 'A short, visual guide to the Antz platform for animal care teams.',
     'nav.primary': 'Primary',
+    'top.back': 'Back to top',
     'nav.menu': 'Menu',
     'nav.modules': 'Modules',
     'nav.why': 'Why Antz',
