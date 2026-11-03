@@ -1207,6 +1207,15 @@ a.mcard-face { text-decoration: none; color: inherit; }
    faded in behind the content */
 .mtab { isolation: isolate; }
 .mtab::before, .mtab::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .45s ease; }
+/* The film sits in the bottom-right corner and fades out towards the top-left */
+.mtab::before, .mtab::after {
+  -webkit-mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+  mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+}
+[dir="rtl"] .mtab::before, [dir="rtl"] .mtab::after {
+  -webkit-mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+  mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+}
 .mtab::before {
   background: linear-gradient(115deg, #FFD9EC 0%, #E3D9FF 16%, #CDEBFF 32%, #C8F7E6 48%, #F6F7C8 64%, #FFDCCF 80%, #FFD9EC 100%) 0 50% / 300% 100%;
   animation: nav-cta-holo 2.4s linear infinite;
