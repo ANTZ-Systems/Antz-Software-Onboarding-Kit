@@ -6,6 +6,7 @@
 !/Caddyfile
 !/Staticfile
 !/antz-onboard/
+!/feedback-service/
 !/audit/
 !/.claude/
 /.claude/*

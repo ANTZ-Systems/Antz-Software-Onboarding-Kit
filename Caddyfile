@@ -11,6 +11,8 @@
 
 	servers {
 		trusted_proxies static private_ranges
+		# read X-Forwarded-For right to left, so a client can't pick its own IP for the feedback rate limit
+		trusted_proxies_strict
 	}
 }
 
@@ -33,10 +35,14 @@
 	root * {{.StaticFileRoot}}
 
 	route {
+		# /api/* goes to the feedback service over Railway's private network (feedback-service/)
+		reverse_proxy /api/* {$FEEDBACK_UPSTREAM:feedback.railway.internal:8080} {
+			header_up X-Client-IP {client_ip}
+		}
 		# / serves the guide; /audit and /antz-onboard are served as-is;
 		# anything else is looked up inside antz-onboard/
 		rewrite / /antz-onboard/index.html
-		@site not path /health /audit /audit/* /antz-onboard /antz-onboard/*
+		@site not path /health /api/* /audit /audit/* /antz-onboard /antz-onboard/*
 		rewrite @site /antz-onboard{path}
 	}
 

@@ -776,9 +776,10 @@
   const EMAIL = 'info@antzsystems.com';
 
   /* ---------- Feedback page (#/feedback) ---------- */
-  /* Where the form posts its answers as JSON ({ rating, type, modules, notes, message, name, email, language, page, sent }).
-     Empty until the Railway service is up: until then Send completes the form on the page without sending it */
-  const FEEDBACK_ENDPOINT = '';
+  /* Where the form posts its answers as JSON ({ rating, type, modules, notes, message, name, email, language, page, sent, website }).
+     Caddy forwards /api/* to the feedback service (feedback-service/), which emails it through Brevo.
+     Opened from a file or serve.py there's no service, so Send completes the form on the page without sending it */
+  const FEEDBACK_ENDPOINT = location.protocol.startsWith('http') && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? '/api/feedback' : '';
   const FEEDBACK_TYPES = ['suggestion', 'bug', 'content'];
   function renderFeedback() {
     let bannerOffset;
@@ -840,6 +841,8 @@
                 <label class="fb-field"><span class="fb-label">${esc(t('fb.name'))}</span><input type="text" name="name" autocomplete="name"></label>
                 <label class="fb-field"><span class="fb-label">${esc(t('fb.email'))}</span><input type="email" name="email" autocomplete="email"></label>
               </div>
+              <!-- Honeypot: hidden from people and screen readers; a bot that fills it is dropped by the service -->
+              <div class="fb-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
               <p class="fb-note">${esc(t('fb.optional'))}</p>
               <div class="fb-actions">
                 <button class="btn btn-primary" type="submit">${esc(t('fb.send'))}</button>
@@ -955,7 +958,7 @@
         rating: Number(f.rating.value) || null, type: f.type.value, modules: picked.map((id) => byId[id].title),
         notes: Object.fromEntries([...notes.querySelectorAll('.fb-note-row')].map((r) => [byId[r.dataset.id].title, r.querySelector('textarea').value.trim()]).filter(([, v]) => v)),
         message: msg.value.trim(), name: f.name.value.trim(), email: f.email.value.trim(),
-        language: LANG, page: location.href, sent: new Date().toISOString()
+        language: LANG, page: location.href, sent: new Date().toISOString(), website: f.website.value
       };
       const btn = form.querySelector('[type=submit]');
       btn.disabled = true; status.textContent = t('fb.sending');

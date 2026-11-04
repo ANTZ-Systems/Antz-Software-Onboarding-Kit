@@ -2284,6 +2284,8 @@ body.fwin-open { overflow: hidden; }
   display: grid; gap: 26px; padding: 40px 44px; border-radius: var(--radius-lg); background: var(--surface);
   border: 1px solid var(--line); box-shadow: var(--shadow);
 }
+/* Honeypot field: off-screen, never shown to people */
+.fb-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .fb-field { display: grid; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
 .fb-field legend, .fb-label { padding: 0; font-size: 15px; font-weight: 600; color: var(--ink); }
 .fb-field legend { margin-bottom: 10px; }
