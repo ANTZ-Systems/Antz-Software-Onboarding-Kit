@@ -80,7 +80,7 @@
   "faq.q4": "Wir betreiben mehr als einen Standort. Funktioniert das?",
   "faq.a4": "Antz führt die Daten aller Standorte und Abteilungen an einem Ort zusammen. Die Haltung ist nach Standort, Bereich und Gehege gegliedert, und Verlegungen zwischen Standorten durchlaufen eine Genehmigung und einen Sicherheits-Check-out.",
   "faq.q5": "Wie fangen wir an?",
-  "faq.a5": "Beginnen Sie mit dem Leitfaden „Erste Schritte“ und öffnen Sie dann die Module, die Ihre Rolle nutzt. Wenn etwas unklar ist, schreiben Sie an hello@antz.systems.",
+  "faq.a5": "Beginnen Sie mit dem Leitfaden „Erste Schritte“ und öffnen Sie dann die Module, die Ihre Rolle nutzt. Wenn etwas unklar ist, schreiben Sie an info@antzsystems.com.",
   "pager.prev": "Zurück",
   "pager.next": "Weiter",
   "pager.modules": "Module entdecken",
@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Sicherheit",
-   "intro": "Das Sicherheitsmodul verwaltet standortspezifische Berechtigungen und beaufsichtigt Eiertransfers und das Verwerfen von Eiern sowie jeden Tier- oder Kliniktransfer. So sind kontrollierte Bewegungen und eine lückenlose Nachvollziehbarkeit gewährleistet, wer was wann bearbeitet hat.",
-   "summary": "Standortberechtigungen und Aufsicht über Eier-, Tier- und Kliniktransfers",
+   "intro": "Das Sicherheitsmodul beaufsichtigt standortspezifische Eiertransfers und das Verwerfen von Eiern sowie jeden Tier-, Kadaver- oder Kliniktransfer. So sind kontrollierte Bewegungen und eine lückenlose Nachvollziehbarkeit gewährleistet, wer was wann bearbeitet hat.",
+   "summary": "Aufsicht über Eier-, Tier-, Kadaver- und Kliniktransfers",
    "features": [
     {
      "title": "Filterfunktion",

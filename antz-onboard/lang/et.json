@@ -80,7 +80,7 @@
   "faq.q4": "Meil on mitu asukohta. Kas see sobib?",
   "faq.a4": "Antz hoiab kõigi asukohtade ja osakondade andmeid ühes kohas. Paigutus on korraldatud asukoha, sektsiooni ja aediku kaupa ning asukohtadevahelised üleviimised läbivad kinnitamise ja turvakontrolliga väljaregistreerimise.",
   "faq.q5": "Kuidas alustada?",
-  "faq.a5": "Alustage juhendist „Alustamine“ ja avage seejärel moodulid, mida Teie roll kasutab. Kui midagi jääb ebaselgeks, kirjutage aadressile hello@antz.systems.",
+  "faq.a5": "Alustage juhendist „Alustamine“ ja avage seejärel moodulid, mida Teie roll kasutab. Kui midagi jääb ebaselgeks, kirjutage aadressile info@antzsystems.com.",
   "pager.prev": "Eelmine",
   "pager.next": "Järgmine",
   "pager.modules": "Tutvuge moodulitega",
@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Turvalisus",
-   "intro": "Turvamoodul haldab asukohapõhiseid õigusi ning jälgib munade üleviimise ja hävitamise protsesse ning kõiki loomade ja haiglasse üleviimisi, et tagada kontrollitud liikumine ja täielik vastutus selle eest, kes mida ja millal käsitles.",
-   "summary": "Haldab asukohapõhiseid õigusi ning jälgib munade üleviimist ja hävitamist ning kõiki loomade ja haiglasse üleviimisi",
+   "intro": "Turvamoodul jälgib asukohapõhiseid munade üleviimise ja hävitamise protsesse ning kõiki loomade, korjuste ja haiglasse üleviimisi, et tagada kontrollitud liikumine ja täielik vastutus selle eest, kes mida ja millal käsitles.",
+   "summary": "Jälgib asukohapõhist munade üleviimist ja hävitamist ning kõiki loomade, korjuste ja haiglasse üleviimisi",
    "features": [
     {
      "title": "Filtreerimine",

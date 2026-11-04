@@ -592,7 +592,8 @@
         ${outerLens(c.title)}
         </div>`;
     };
-    /* A phone beside a grid of tiles, each opening its screen. With an overview, the phone shows it and the
+    /* A phone beside a grid of tiles, each opening its screen. A part can hold several tours (part.tours); qa.flip
+       puts the screen on the right and qa.kicker adds an eyebrow above the title. With an overview, the phone shows it and the
        tiles follow it in the set; without one, the phone shows the first tile's screen, and pointing at a tile
        (numbered when qa.numbered) brings its screen up on the phone. */
     const actionsHTML = (qa, key) => {
@@ -601,7 +602,7 @@
       const items = qa.overview ? [qa.overview, ...qa.shots] : qa.shots;
       const set = addSet(key, head.title, qa.overview ? 'add' : 'note', items);
       return `
-        <div class="gqa reveal${qa.overview ? '' : ' gqa-tour'}">
+        <div class="gqa reveal${qa.overview ? '' : ' gqa-tour'}${qa.flip ? ' gqa-flip' : ''}">
           <div class="gqa-stage-wrap">
           <button class="gqa-stage" type="button" data-set="${set}" data-i="0" aria-label="${esc(t('guide.view'))}: ${esc(head.title)}">
             ${deviceHTML({ src: srcOf(items[0]), alt: '', device: items[0].device || 'phone' }, { lens: false })}
@@ -609,6 +610,7 @@
           ${outerLens(head.title)}
           </div>
           <div class="gqa-side">
+            ${qa.kicker ? `<span class="gqa-kicker">${esc(qa.kicker)}</span>` : ''}
             <h3>${esc(head.title)}</h3>
             <p>${esc(head.desc)} ${esc(t(qa.overview ? 'guide.qaHint' : canHover() ? 'guide.tourHint' : 'guide.tourHintTap'))}.</p>
             <ul class="gqa-grid${qa.numbered ? ' numbered' : ''}">${qa.shots.map((s, i) => `
@@ -668,6 +670,7 @@
           ${p.glance ? glanceHTML(p.glance) : ''}
           ${p.cards ? `<div class="ggrid reveal" data-n="${p.cards.length}"${p.chain ? ' data-chain' : ''}>${p.cards.map((c) => cardHTML(c, ++n, p.notes)).join('')}</div>` : ''}
           ${p.actions ? actionsHTML(p.actions, p.id) : ''}
+          ${p.tours ? p.tours.map((qa, i) => actionsHTML(qa, `${p.id}-${i}`)).join('') : ''}
           ${p.flow ? flowHTML(p.flow) : ''}
           ${p.compare ? compareHTML(p.compare) : ''}
           ${p.hierarchy ? hierarchyHTML(p.hierarchy) : ''}
@@ -767,6 +770,208 @@
     sizeBorders();
     bindParallax();
     document.title = `${g.title} · ${t('brand.title')}`;
+  }
+
+  /* The support address opens the visitor's own mail app wherever it appears */
+  const EMAIL = 'info@antzsystems.com';
+
+  /* ---------- Feedback page (#/feedback) ---------- */
+  /* Where the form posts its answers as JSON ({ rating, type, modules, notes, message, name, email, language, page, sent }).
+     Empty until the Railway service is up: until then Send completes the form on the page without sending it */
+  const FEEDBACK_ENDPOINT = '';
+  const FEEDBACK_TYPES = ['suggestion', 'bug', 'content'];
+  function renderFeedback() {
+    let bannerOffset;
+    do bannerOffset = Math.floor(Math.random() * GUIDE_ORDER.length);
+    while (GUIDE_ORDER.length > 1 && bannerNow(GUIDE_ORDER, bannerOffset) === lastGuideBanner);
+    lastGuideBanner = bannerNow(GUIDE_ORDER, bannerOffset);
+    const star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/></svg>';
+    app.innerHTML = `
+      <div class="guidepage feedbackpage tint-guide">
+        <section class="hero guide-hero" data-banners="guide" data-offset="${bannerOffset}">
+          <div class="hero-media"><div class="hero-slides">${((b) => `<div class="hero-bg" style="background-image:url('${bannerSrc(b)}');--x:${b.x};--y:${b.y}"></div>`)(bannerNow(GUIDE_ORDER, bannerOffset))}</div></div>
+          <div class="container hero-inner">
+            <span class="hero-leaf hero-icon drawn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H9.5L5 20.5v-3.5h-.5a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1Z"/><path d="m12 7.9 1.15 2.33 2.57.37-1.86 1.82.44 2.56L12 13.77l-2.3 1.21.44-2.56-1.86-1.82 2.57-.37Z"/></svg></span>
+            <span class="guide-kicker">${esc(t('fb.kicker'))}</span>
+            ${heroTitle(t('fb.title'))}
+            <p class="hero-sub">${esc(t('fb.sub'))}</p>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <form class="fb-form reveal" novalidate>
+              <fieldset class="fb-field">
+                <legend>${esc(t('fb.rating'))}</legend>
+                <!-- 5 to 1 in the markup, shown 1 to 5 (row-reverse), so a hovered star fills those before it -->
+                <div class="fb-stars" role="radiogroup" aria-label="${esc(t('fb.rating'))}">${[5, 4, 3, 2, 1].map((n) => `
+                  <label><input type="radio" name="rating" value="${n}"><span title="${esc(t('fb.stars', { n }))}">${star}</span><b class="sr">${esc(t('fb.stars', { n }))}</b></label>`).join('')}
+                </div>
+              </fieldset>
+              <fieldset class="fb-field">
+                <legend>${esc(t('fb.type'))}</legend>
+                <div class="fb-types">${FEEDBACK_TYPES.map((k, i) => `
+                  <label><input type="radio" name="type" value="${k}"${i ? '' : ' checked'}><span>${esc(t(`fb.type.${k}`))}</span></label>`).join('')}
+                </div>
+              </fieldset>
+              <!-- Modules: a multi-select whose picks sit as removable chips in the field; none picked means the guide in general -->
+              <div class="fb-field">
+                <span class="fb-label" id="fb-mod-label">${esc(t('fb.module'))}</span>
+                <div class="fb-multi">
+                  <div class="fb-multi-box">
+                    <span class="fb-chips"></span>
+                    <input class="fb-multi-input" type="text" role="combobox" aria-expanded="false" aria-controls="fb-mod-list" aria-autocomplete="list"
+                      aria-labelledby="fb-mod-label" autocomplete="off" placeholder="${esc(t('fb.module.ph'))}">
+                    <svg class="fb-multi-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </div>
+                  <ul class="fb-multi-list" id="fb-mod-list" role="listbox" aria-multiselectable="true" aria-labelledby="fb-mod-label" hidden>
+                    ${areas.map((a) => `<li class="fb-multi-group" role="presentation">${esc(a.label)}</li>${a.modules.map((m) => `
+                    <li class="fb-multi-opt" role="option" id="fb-mod-${esc(m.id)}" data-id="${esc(m.id)}" aria-selected="false"><span class="tick" aria-hidden="true"></span>${esc(m.title)}</li>`).join('')}`).join('')}
+                    <li class="fb-multi-empty" role="presentation" hidden>${esc(t('fb.module.none'))}</li>
+                  </ul>
+                </div>
+                <div class="fb-notes"></div>
+              </div>
+              <label class="fb-field">
+                <span class="fb-label">${esc(t('fb.message'))} <em>*</em></span>
+                <textarea name="message" rows="6" required placeholder="${esc(t('fb.message.ph'))}"></textarea>
+                <span class="fb-error" hidden>${esc(t('fb.message.req'))}</span>
+              </label>
+              <div class="fb-row">
+                <label class="fb-field"><span class="fb-label">${esc(t('fb.name'))}</span><input type="text" name="name" autocomplete="name"></label>
+                <label class="fb-field"><span class="fb-label">${esc(t('fb.email'))}</span><input type="email" name="email" autocomplete="email"></label>
+              </div>
+              <p class="fb-note">${esc(t('fb.optional'))}</p>
+              <div class="fb-actions">
+                <button class="btn btn-primary" type="submit">${esc(t('fb.send'))}</button>
+                <p class="fb-status" role="status" aria-live="polite"></p>
+              </div>
+            </form>
+            <div class="fb-done reveal" hidden>
+              <h2 class="section-title">${esc(t('fb.thanks'))}</h2>
+              <p class="section-lede">${esc(t('fb.thanks.sub'))}</p>
+              <a class="btn btn-primary" href="#/" data-scroll="index">${esc(t('cta.back'))}</a>
+            </div>
+          </div>
+        </section>
+      </div>`;
+    const form = app.querySelector('.fb-form');
+    const done = app.querySelector('.fb-done');
+    const status = form.querySelector('.fb-status');
+    const msg = form.elements.message;
+    const err = form.querySelector('.fb-error');
+    msg.addEventListener('input', () => { if (msg.value.trim()) { err.hidden = true; msg.removeAttribute('aria-invalid'); } });
+    /* Module multi-select: typing filters the list, a pick toggles its chip, a chip's cross (or Backspace in an
+       empty field) removes it, arrows and Enter work the list, Escape or a click elsewhere closes it */
+    const multi = form.querySelector('.fb-multi');
+    const box = multi.querySelector('.fb-multi-box');
+    const chips = multi.querySelector('.fb-chips');
+    const input = multi.querySelector('.fb-multi-input');
+    const list = multi.querySelector('.fb-multi-list');
+    const opts = [...list.querySelectorAll('.fb-multi-opt')];
+    const picked = [];
+    let active = -1;
+    const shown = () => opts.filter((o) => !o.hidden);
+    const setActive = (o) => {
+      opts.forEach((x) => x.classList.toggle('active', x === o));
+      active = o ? shown().indexOf(o) : -1;
+      if (o) { input.setAttribute('aria-activedescendant', o.id); o.scrollIntoView({ block: 'nearest' }); } else input.removeAttribute('aria-activedescendant');
+    };
+    const open = (on) => { list.hidden = !on; input.setAttribute('aria-expanded', String(on)); multi.classList.toggle('open', on); if (!on) setActive(null); };
+    const filter = () => {
+      const q = input.value.trim().toLowerCase();
+      opts.forEach((o) => { o.hidden = !!q && !o.textContent.toLowerCase().includes(q); });
+      list.querySelectorAll('.fb-multi-group').forEach((g) => {
+        let n = g.nextElementSibling, any = false;
+        while (n && n.classList.contains('fb-multi-opt')) { if (!n.hidden) any = true; n = n.nextElementSibling; }
+        g.hidden = !any;
+      });
+      list.querySelector('.fb-multi-empty').hidden = shown().length > 0;
+      setActive(q ? shown()[0] : null);
+    };
+    const draw = () => {
+      chips.innerHTML = picked.map((id) => `<span class="fb-chip">${esc(byId[id].title)}<button type="button" data-id="${esc(id)}" aria-label="${esc(t('fb.module.remove', { x: byId[id].title }))}">${CLOSE_SVG}</button></span>`).join('');
+      input.placeholder = picked.length ? '' : t('fb.module.ph');
+      opts.forEach((o) => o.setAttribute('aria-selected', String(picked.includes(o.dataset.id))));
+      syncNotes();
+    };
+    /* An optional note per picked module: a link that opens its own box. Rows are kept (not redrawn) so typed
+       notes survive other picks; removing a module removes its note */
+    const notes = multi.parentElement.querySelector('.fb-notes');
+    function syncNotes() {
+      notes.querySelectorAll('.fb-note-row').forEach((r) => { if (!picked.includes(r.dataset.id)) r.remove(); });
+      picked.forEach((id) => {
+        if (notes.querySelector(`.fb-note-row[data-id="${id}"]`)) return;
+        const title = byId[id].title;
+        const row = document.createElement('div');
+        row.className = 'fb-note-row'; row.dataset.id = id;
+        row.innerHTML = `<button class="fb-note-add" type="button" aria-expanded="false" aria-controls="fb-note-${esc(id)}"><span class="plus" aria-hidden="true"></span>${esc(t('fb.module.note', { x: title }))}</button>
+          <div class="fb-note-box" hidden><textarea id="fb-note-${esc(id)}" rows="3" aria-label="${esc(t('fb.module.note', { x: title }))}" placeholder="${esc(t('fb.module.notePh', { x: title }))}"></textarea></div>`;
+        notes.append(row);
+      });
+    }
+    notes.addEventListener('click', (e) => {
+      const b = e.target.closest('.fb-note-add'); if (!b) return;
+      const box = b.nextElementSibling, on = box.hidden;
+      box.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.closest('.fb-note-row').classList.toggle('open', on);
+      if (on) box.querySelector('textarea').focus();
+    });
+    const toggle = (id) => {
+      const i = picked.indexOf(id);
+      if (i < 0) picked.push(id); else picked.splice(i, 1);
+      input.value = ''; filter(); draw(); input.focus();
+    };
+    box.addEventListener('click', (e) => { if (!e.target.closest('.fb-chip button')) { input.focus(); open(true); } });
+    let quiet = false; // focus moved back to the field by a chip's removal: leave the list closed
+    input.addEventListener('focus', () => { if (!quiet) open(true); });
+    input.addEventListener('input', () => { open(true); filter(); });
+    input.addEventListener('keydown', (e) => {
+      const vis = shown();
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault(); open(true);
+        const n = vis.length; if (!n) return;
+        setActive(vis[(active + (e.key === 'ArrowDown' ? 1 : n - 1) + (active < 0 && e.key === 'ArrowUp' ? 1 : 0)) % n]);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!list.hidden && vis[active]) toggle(vis[active].dataset.id);
+      } else if (e.key === 'Escape') { if (!list.hidden) { e.stopPropagation(); open(false); } }
+      else if (e.key === 'Backspace' && !input.value && picked.length) { picked.pop(); draw(); }
+      else if (e.key === 'Tab') open(false);
+    });
+    list.addEventListener('mousedown', (e) => e.preventDefault());
+    list.addEventListener('click', (e) => { const o = e.target.closest('.fb-multi-opt'); if (o) toggle(o.dataset.id); });
+    chips.addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      picked.splice(picked.indexOf(b.dataset.id), 1); draw(); open(false);
+      quiet = true; input.focus(); quiet = false;
+    });
+    const outside = (e) => { if (!multi.contains(e.target)) open(false); };
+    document.addEventListener('pointerdown', outside);
+    pageTeardown = () => { document.removeEventListener('pointerdown', outside); pageTeardown = null; };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!msg.value.trim()) { err.hidden = false; msg.setAttribute('aria-invalid', 'true'); msg.focus(); return; }
+      const f = form.elements;
+      const data = {
+        rating: Number(f.rating.value) || null, type: f.type.value, modules: picked.map((id) => byId[id].title),
+        notes: Object.fromEntries([...notes.querySelectorAll('.fb-note-row')].map((r) => [byId[r.dataset.id].title, r.querySelector('textarea').value.trim()]).filter(([, v]) => v)),
+        message: msg.value.trim(), name: f.name.value.trim(), email: f.email.value.trim(),
+        language: LANG, page: location.href, sent: new Date().toISOString()
+      };
+      const btn = form.querySelector('[type=submit]');
+      btn.disabled = true; status.textContent = t('fb.sending');
+      try {
+        /* No endpoint yet (before the Railway service): the form completes on the page, and nothing is sent */
+        if (FEEDBACK_ENDPOINT) {
+          const r = await fetch(FEEDBACK_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+          if (!r.ok) throw new Error(r.status);
+        }
+        form.hidden = true; done.hidden = false; done.classList.add('in');
+      } catch (_) {
+        status.textContent = t('fb.failed', { email: EMAIL });
+        btn.disabled = false;
+      }
+    });
+    document.title = `${t('fb.title')} · ${t('brand.title')}`;
   }
 
   function renderHome(returning) {
@@ -887,7 +1092,7 @@
             <div class="actions" data-depth="0.45">
               <button class="btn btn-primary" type="button" data-scroll="index">${esc(t('cta.back'))}</button>
             </div>
-            <p class="or" data-depth="0.3">${esc(t('cta.or', { email: '\u0000' })).replace('\u0000', '<b>hello@antz.systems</b>')}</p>
+            <p class="or" data-depth="0.3">${esc(t('cta.or', { email: '\u0000' })).replace('\u0000', `<a href="mailto:${EMAIL}">${EMAIL}</a>`)}</p>
           </div>
         </div>
       </section>
@@ -899,7 +1104,7 @@
             <h2 class="section-title">${esc(t('faq.title'))}</h2>
           </div>
           <div class="faq">
-            ${faqs.map(([q, a]) => `<details class="reveal"><summary>${esc(q)}</summary><p class="answer">${esc(a)}</p></details>`).join('')}
+            ${faqs.map(([q, a]) => `<details class="reveal"><summary>${esc(q)}</summary><p class="answer">${esc(a).replace(EMAIL, `<a href="mailto:${EMAIL}">${EMAIL}</a>`)}</p></details>`).join('')}
           </div>
         </div>
       </section>`;
@@ -1001,6 +1206,7 @@
           <span class="mcard-sum">${esc(summary(m))}</span>
           <span class="mcard-foot"><span>${esc(t('modules.features', { n: m.features.length }))}</span><span class="mcard-plus" aria-hidden="true"><svg width="16" height="16" viewBox="0 -960 960 960" fill="currentColor"><path d="M665.08-450H210q-12.77 0-21.38-8.62Q180-467.23 180-480t8.62-21.38Q197.23-510 210-510h455.08L458.31-716.77q-8.92-8.92-8.81-20.88.12-11.96 9.42-21.27 9.31-8.69 21.08-9 11.77-.31 21.08 9l253.61 253.61q5.62 5.62 7.92 11.85 2.31 6.23 2.31 13.46t-2.31 13.46q-2.3 6.23-7.92 11.85L501.08-201.08q-8.31 8.31-20.58 8.5-12.27.19-21.58-8.5-9.3-9.31-9.3-21.38 0-12.08 9.3-21.39L665.08-450Z"/></svg></span></span>
         </span>
+        <span class="mcard-holo" aria-hidden="true"></span>
         <svg class="drawn-border" aria-hidden="true"></svg>
       </a>
     </article>`;
@@ -1200,14 +1406,17 @@
       /* Housing's level cards draw a finer 1px border */
       ...[...app.querySelectorAll('.ghier-level')].map((el) => [el, { ...CARD_BORDER, stroke: 1, bleed: 0,
         isOn: () => (el.matches(':hover') && canHover()) || el.matches(':focus-visible') }]),
-      ...[...app.querySelectorAll('.mcard-face, .bento-card')].map((el) => [el, { ...CARD_BORDER,
+      /* Home module cards draw a 1.5px border */
+      ...[...app.querySelectorAll('.mcard-face:not(.gcard)')].map((el) => [el, { ...CARD_BORDER, stroke: 1.5,
+        isOn: () => (el.matches(':hover') && canHover()) || el.matches(':focus-visible') }]),
+      ...[...app.querySelectorAll('.gcard.mcard-face, .bento-card')].map((el) => [el, { ...CARD_BORDER,
         isOn: () => (el.matches(':hover') && canHover()) || el.matches(':focus-visible') }]),
       /* Feature rows on module pages draw the same border as the home cards, in the area colour */
       ...[...app.querySelectorAll('.mfeat-row')].map((el) => [el, { ...CARD_BORDER, stroke: 1, bleed: 0, over: true,
         /* Hover, or keyboard focus on its button (a mouse click leaves focus behind, which must not keep it drawn) */
         isOn: () => (el.matches(':hover') && canHover()) || !!el.querySelector(':focus-visible') }]),
-      /* Area tabs on module pages: the home chips' drawn border, in each area's colour (not on the selected tab) */
-      ...[...app.querySelectorAll('.mtab')].map((el) => [el, { ...CHIP_BORDER, feather: 40,
+      /* Area tabs on module pages: the home chips' drawn border, a 1px line in each area's colour (not on the selected tab) */
+      ...[...app.querySelectorAll('.mtab')].map((el) => [el, { ...CHIP_BORDER, stroke: 1, feather: 40,
         isOn: () => !el.hasAttribute('aria-current') && ((el.matches(':hover') && canHover()) || el.matches(':focus-visible')) }]),
       ...[...app.querySelectorAll('.mfilter, .hero-chips .chip')].map((el) => [el, { ...CHIP_BORDER,
         isOn: () => el.matches(':hover') || el.matches(':focus-visible') }])
@@ -1925,6 +2134,7 @@
     };
     const w = document.createElement('div');
     w.className = `fwin tint-${AREA_TINT[m.track]}`;
+    w.dataset.module = m.module || m.id;
     w.innerHTML = `
       <div class="fwin-backdrop" data-close></div>
       <button class="fwin-arrow prev" type="button" aria-label="${esc(t('win.prev'))}">${CHEV_L}</button>
@@ -2388,7 +2598,13 @@
     closeNav();
     if (closeFeatureWindow) closeFeatureWindow(true);
     if (pageTeardown) pageTeardown();
-    if ((name === 'm' || name === 'kit' || name === 'guide') && id) {
+    if (name === 'feedback') {
+      if (onHome) homeY = window.scrollY;
+      onHome = false; lastKit = null;
+      if (parallaxOff) parallaxOff();
+      renderFeedback();
+      window.scrollTo(0, 0);
+    } else if ((name === 'm' || name === 'kit' || name === 'guide') && id) {
       if (onHome) homeY = window.scrollY;
       onHome = false;
       if (parallaxOff) parallaxOff();
@@ -2411,6 +2627,16 @@
     syncTopFab();
     observeReveal();
   }
+
+  /* Every page but its own: a Feedback tab fixed to the right edge, halfway down, opening the feedback page */
+  const fbTab = document.createElement('a');
+  fbTab.className = 'fb-tab';
+  fbTab.href = '#/feedback';
+  fbTab.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H9.5L5 20.5v-3.5h-.5a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1Z"/></svg><span>${esc(t('nav.feedback'))}</span>`;
+  document.body.append(fbTab);
+  const syncFbTab = () => fbTab.classList.toggle('hide', location.hash.split('/')[1] === 'feedback');
+  window.addEventListener('hashchange', syncFbTab);
+  syncFbTab();
 
   /* Every page: a floating button back to the top, in the app's FAB gradient, once the banner is scrolled past */
   const topFab = document.createElement('button');

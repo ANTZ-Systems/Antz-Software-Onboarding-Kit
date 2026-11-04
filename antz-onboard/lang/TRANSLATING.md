@@ -5,7 +5,7 @@ Source: `lang/en.json`. Output: `lang/<code>.json` with exactly the same structu
 ## Rules
 1. Translate every string value. Never change keys, never add or remove entries, keep arrays the same length and order.
 2. Keep placeholders exactly as written: `{x}`, `{n}`, `{i}`, `{q}`, `{email}`. Move them wherever the grammar needs them (e.g. Japanese `{x}を検索`).
-3. Do not translate: "Antz", "Antz Systems", "hello@antz.systems", file paths (the keys inside `shots`), IDs and codes such as "AID 425990", "MED29-18846", person names, place and site names (e.g. "Central Reserve Kingdom", "Pride Rock Enclosure"), scientific species names.
+3. Do not translate: "Antz", "Antz Systems", "info@antzsystems.com", file paths (the keys inside `shots`), IDs and codes such as "AID 425990", "MED29-18846", person names, place and site names (e.g. "Central Reserve Kingdom", "Pride Rock Enclosure"), scientific species names.
 4. Keep the separators " · " and the suffixes " · App" / " · Web" / "(App)" / "(Web)" in module titles; translate the rest of the title.
 5. Audience: staff at zoos and animal-care institutions (keepers, vets, curators, admins) learning software they already use. Use the register normal for professional software in your language (e.g. German "Sie", French "vous").
 6. Use correct zoo, veterinary and animal-management terms (enclosure, necropsy, deworming, carcass, fetal death, nursery, incubator, hospitalisation, prescription, dosage, batch number).

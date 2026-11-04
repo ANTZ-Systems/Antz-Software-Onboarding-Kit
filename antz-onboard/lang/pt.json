@@ -80,7 +80,7 @@
   "faq.q4": "Temos mais de uma unidade. Isso funciona?",
   "faq.a4": "A Antz mantém os dados de todas as unidades e departamentos em um só lugar. Os alojamentos são organizados por unidade, setor e recinto, e as movimentações entre unidades passam por aprovação e por uma liberação de saída pela segurança.",
   "faq.q5": "Como começamos?",
-  "faq.a5": "Comece pelo guia Primeiros passos e depois abra os módulos que o seu perfil utiliza. Se algo não estiver claro, escreva para hello@antz.systems.",
+  "faq.a5": "Comece pelo guia Primeiros passos e depois abra os módulos que o seu perfil utiliza. Se algo não estiver claro, escreva para info@antzsystems.com.",
   "pager.prev": "Anterior",
   "pager.next": "Próximo",
   "pager.modules": "Explore os módulos",
@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Segurança",
-   "intro": "O Módulo de Segurança gerencia as permissões específicas de cada unidade e supervisiona os processos de transferência e descarte de ovos e qualquer transferência de animais ou para o hospital, garantindo movimentação controlada e total responsabilização sobre quem manuseou o quê e quando.",
-   "summary": "Gerencia permissões por unidade e supervisiona transferências de ovos, animais e para o hospital, com total responsabilização",
+   "intro": "O Módulo de Segurança supervisiona os processos de transferência e descarte de ovos de cada unidade e qualquer transferência de animais, de carcaças ou para o hospital, garantindo movimentação controlada e total responsabilização sobre quem manuseou o quê e quando.",
+   "summary": "Supervisiona transferências de ovos por unidade, de animais, de carcaças e para o hospital, com total responsabilização",
    "features": [
     {
      "title": "Filtros",

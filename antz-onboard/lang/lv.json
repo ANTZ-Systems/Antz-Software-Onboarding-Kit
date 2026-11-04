@@ -80,7 +80,7 @@
   "faq.q4": "Mums ir vairākas vietas. Vai tas darbojas?",
   "faq.a4": "Antz glabā visu vietu un nodaļu datus vienuviet. Izmitināšana ir sakārtota pēc vietas, sekcijas un aploka, un pārvietošana starp vietām notiek ar apstiprināšanu un apsardzes izrakstīšanu.",
   "faq.q5": "Kā sākt darbu?",
-  "faq.a5": "Sāciet ar ceļvedi „Darba sākšana”, pēc tam atveriet moduļus, ko izmanto Jūsu loma. Ja kaut kas nav skaidrs, rakstiet uz hello@antz.systems.",
+  "faq.a5": "Sāciet ar ceļvedi „Darba sākšana”, pēc tam atveriet moduļus, ko izmanto Jūsu loma. Ja kaut kas nav skaidrs, rakstiet uz info@antzsystems.com.",
   "pager.prev": "Iepriekšējā",
   "pager.next": "Nākamā",
   "pager.modules": "Izpētiet moduļus",
@@ -1117,8 +1117,8 @@
   },
   "security": {
    "title": "Apsardze",
-   "intro": "Apsardzes modulis pārvalda vietai specifiskas atļaujas un pārrauga olu pārvietošanas un iznīcināšanas procesus, kā arī jebkuru dzīvnieku vai slimnīcas pārvietošanu, lai nodrošinātu kontrolētu pārvietošanu un pilnu pārskatatbildību par to, kurš ar ko rīkojās un kad.",
-   "summary": "Pārvalda vietai specifiskas atļaujas un pārrauga olu pārvietošanas un iznīcināšanas procesus, kā arī jebkuru dzīvnieku vai slimnīcas pārvietošanu, nodrošinot kontrolētu pārvietošanu un pilnu pārskatatbildību par to, kurš ar ko rīkojās un kad",
+   "intro": "Apsardzes modulis pārrauga vietai specifiskus olu pārvietošanas un iznīcināšanas procesus, kā arī jebkuru dzīvnieku, līķu vai slimnīcas pārvietošanu, lai nodrošinātu kontrolētu pārvietošanu un pilnu pārskatatbildību par to, kurš ar ko rīkojās un kad.",
+   "summary": "Pārrauga vietai specifiskus olu pārvietošanas un iznīcināšanas procesus, kā arī jebkuru dzīvnieku, līķu vai slimnīcas pārvietošanu, nodrošinot kontrolētu pārvietošanu un pilnu pārskatatbildību par to, kurš ar ko rīkojās un kad",
    "features": [
     {
      "title": "Filtrēšanas funkcija",

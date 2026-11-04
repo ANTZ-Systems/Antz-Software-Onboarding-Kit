@@ -882,13 +882,36 @@ button { font: inherit; color: inherit; }
 }
 .mcard-face:hover, .mcard-face:focus-visible { transform: translateY(-4px); box-shadow: 0 22px 44px -22px rgba(14,40,34,.38), 0 2px 6px rgba(14,23,21,.05); }
 .mcard-face:focus-visible { outline: none; }
-/* Holographic mesh, from the LSET Foundation site's content area: eight pastel blobs, each circling its own
+.mcard-face { isolation: isolate; }
+/* Home module cards: the area tabs' holographic film, drifting foil and a passing sheen at 94%, in the bottom-right
+   corner and fading towards the top-left, under the card's content while it is hovered or focused */
+.mcard-holo { position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; overflow: hidden; }
+.mcard-holo::before, .mcard-holo::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: 0; transition: opacity .45s ease;
+  -webkit-mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+  mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+}
+.mcard-holo::before {
+  background: linear-gradient(115deg, #FFD9EC 0%, #E3D9FF 16%, #CDEBFF 32%, #C8F7E6 48%, #F6F7C8 64%, #FFDCCF 80%, #FFD9EC 100%) 0 50% / 300% 100%;
+  animation: nav-cta-holo 2.4s linear infinite;
+}
+.mcard-holo::after {
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.95) 50%, transparent 65%) -150% 0 / 60% 100% no-repeat;
+  mix-blend-mode: soft-light; animation: nav-cta-sheen 3.6s cubic-bezier(.4,0,.2,1) infinite;
+}
+.mcard-face:hover > .mcard-holo::before, .mcard-face:hover > .mcard-holo::after,
+.mcard-face:focus-visible > .mcard-holo::before, .mcard-face:focus-visible > .mcard-holo::after { opacity: .94; }
+[dir="rtl"] .mcard-holo::before, [dir="rtl"] .mcard-holo::after {
+  -webkit-mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+  mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+}
+@media (prefers-reduced-motion: reduce) { .mcard-holo::before, .mcard-holo::after { animation: none; } }
+/* Know more cards: a holographic mesh, from the LSET Foundation site's content area: eight pastel blobs, each circling its own
    small orbit at its own phase, so the wash turns rather than slides. It sits on a layer under the card's
    content and appears only while the card is hovered or focused; at rest the card keeps its usual face.
    Leaving pauses the turn where it is, so the next hover picks up from there instead of jumping back. */
 @property --mesh-turn { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
-.mcard-face { isolation: isolate; }
-.mcard-face::before {
+.gcard.mcard-face::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   /* How strong the wash is: 1 is the Foundation site's full strength */
   --mesh-strength: .45;
@@ -904,15 +927,15 @@ button { font: inherit; color: inherit; }
     radial-gradient(ellipse 47% 55% at calc(46% + 15% * cos(var(--mesh-turn) + 195deg)) calc(6% + 15% * sin(var(--mesh-turn) + 195deg)), rgb(204 228 255 / calc(70% * var(--mesh-strength))), rgb(204 228 255 / 0%) 100%);
   opacity: 0; transition: opacity .5s ease;
 }
-.mcard-face:hover::before, .mcard-face:focus-visible::before { opacity: 1; }
+.gcard.mcard-face:hover::before, .gcard.mcard-face:focus-visible::before { opacity: 1; }
 @keyframes meshTurn { to { --mesh-turn: 360deg; } }
 @media (prefers-reduced-motion: no-preference) {
-  .mcard-face::before { animation: meshTurn 10s linear infinite paused; }
+  .gcard.mcard-face::before { animation: meshTurn 10s linear infinite paused; }
   .mcard-face:hover::before, .mcard-face:focus-visible::before { animation-play-state: running; }
   /* Neighbouring cards start at different points of the turn */
-  .mcard:nth-child(4n+2) .mcard-face::before { animation-delay: -3s; }
-  .mcard:nth-child(4n+3) .mcard-face::before { animation-delay: -6s; }
-  .mcard:nth-child(4n+4) .mcard-face::before { animation-delay: -8s; }
+  .mcard:nth-child(4n+2) .gcard.mcard-face::before { animation-delay: -3s; }
+  .mcard:nth-child(4n+3) .gcard.mcard-face::before { animation-delay: -6s; }
+  .mcard:nth-child(4n+4) .gcard.mcard-face::before { animation-delay: -8s; }
   .ggrid > .mcard-face:nth-child(odd)::before { animation-delay: -4s; }
 }
 /* The resting 1px edge sits under the drawn border, so the drawn line covers it completely */
@@ -1127,7 +1150,12 @@ a.mcard-face { text-decoration: none; color: inherit; }
 .cta .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .cta .or { margin: 18px 0 0; font-size: 15px; color: rgba(255,255,255,.85); }
 .cta [data-depth] { will-change: transform; }
-.cta .or b { color: #fff; font-weight: 600; user-select: all; }
+.cta .or a { color: #fff; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(255,255,255,.45); text-underline-offset: 3px; }
+/* The address lifts a little on hover, easing in */
+.cta .or a { display: inline-block; transition: transform .35s ease-in, text-decoration-color .35s ease-in; }
+.cta .or a:hover, .cta .or a:focus-visible { text-decoration-color: #fff; transform: translateY(-3px); }
+@media (prefers-reduced-motion: reduce) { .cta .or a { transition: none; } .cta .or a:hover { transform: none; } }
+.answer a { color: var(--green-strong); font-weight: 600; }
 @media (max-width: 640px) { .cta-inner { padding: 80px 0; } .cta p { font-size: 16px; } }
 
 /* ---------- FAQ ---------- */
@@ -1198,7 +1226,30 @@ a.mcard-face { text-decoration: none; color: inherit; }
   background: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px -10px rgba(14,40,34,.35), 0 2px 4px rgba(14,40,34,.06);
   transition: background .45s ease, border-color .45s ease, transform .55s cubic-bezier(.34,1.56,.64,1), box-shadow .55s cubic-bezier(.22,.8,.24,1);
 }
-.mtab > .drawn-border path { stroke: var(--tint-line); }
+/* Hovered tabs take on the Ready to Onboard? pill's holographic film: the same drifting foil and passing sheen,
+   faded in behind the content */
+.mtab { isolation: isolate; }
+.mtab::before, .mtab::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .45s ease; }
+/* The film sits in the bottom-right corner and fades out towards the top-left */
+.mtab::before, .mtab::after {
+  -webkit-mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+  mask-image: linear-gradient(to top left, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+}
+[dir="rtl"] .mtab::before, [dir="rtl"] .mtab::after {
+  -webkit-mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+  mask-image: linear-gradient(to top right, #000 0%, rgba(0,0,0,.55) 30%, transparent 68%);
+}
+.mtab::before {
+  background: linear-gradient(115deg, #FFD9EC 0%, #E3D9FF 16%, #CDEBFF 32%, #C8F7E6 48%, #F6F7C8 64%, #FFDCCF 80%, #FFD9EC 100%) 0 50% / 300% 100%;
+  animation: nav-cta-holo 2.4s linear infinite;
+}
+.mtab::after {
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.95) 50%, transparent 65%) -150% 0 / 60% 100% no-repeat;
+  mix-blend-mode: soft-light; animation: nav-cta-sheen 3.6s cubic-bezier(.4,0,.2,1) infinite;
+}
+.mtab:not([aria-current]):hover::before, .mtab:not([aria-current]):hover::after { opacity: .94; }
+@media (prefers-reduced-motion: reduce) { .mtab::before, .mtab::after { animation: none; } }
+.mtab > .drawn-border path { stroke: var(--line-grad, var(--tint-line)); }
 /* Tabs stop 10px above the bottom line; the selected outline curves down to it and runs beneath its neighbours */
 .mtab { margin-bottom: 10px; }
 /* Selected: the page colour shows through; its outline is drawn by .mtab-ind, which glides between tabs */
@@ -1488,6 +1539,10 @@ body.fwin-open { overflow: hidden; }
 .fwin-device .device-web img { display: block; width: auto; max-width: 100%; max-height: calc(100vh - 230px); }
 /* Tablets are taller than they are wide, so a little narrower keeps them clear of the close button */
 .fwin-device .device-tablet { width: min(350px, 100%); }
+/* Pharmacy (Web) screens are dense, so its tablets are a quarter larger (350 to 438px) in a wider window,
+   still held to the window's height */
+.fwin[data-module="pharmacy-web"] .fwin-card:has(.device-tablet) { width: min(1160px, calc(100vw - 200px)); grid-template-columns: minmax(0, 50fr) minmax(0, 50fr); }
+.fwin[data-module="pharmacy-web"] .fwin-device .device-tablet { width: min(438px, 100%, calc((100vh - 200px) * .74)); }
 .fwin-empty { color: var(--muted); font-size: 15px; }
 .fwin-info { background: linear-gradient(160deg, #fff 55%, var(--tint-soft2) 100%); display: flex; flex-direction: column; padding: 56px 44px 40px 52px; min-height: 0; overflow-y: auto; }
 .fwin-head { display: flex; align-items: center; gap: 12px; margin: 22px 0 14px; }
@@ -2005,6 +2060,11 @@ body.fwin-open { overflow: hidden; }
 .gqa-tour .gqa-grid button.on { border-color: color-mix(in srgb, var(--tint-line) 55%, #fff); box-shadow: 0 12px 22px -14px rgba(14,40,34,.35); }
 .gqa-tour .gqa-grid button.on .n { background: linear-gradient(135deg, var(--tint-line) 0%, var(--tint-line2) 100%); color: #fff; }
 .gqa-tour .gqa-stage img { transition: opacity .25s var(--ease); }
+/* Several tours in one part (Reports): spaced apart; flipped ones keep the list on the left and the screen on the right */
+.gqa + .gqa { margin-top: 72px; }
+.gqa-flip { grid-template-columns: 1.2fr .8fr; }
+.gqa-flip > .gqa-side { order: -1; }
+.gqa-kicker { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--tint-ink, var(--green-strong)); }
 
 /* Flow: open steps (no boxes), each with its icon in a circle in the area's colours, joined by one line;
    the step number sits beside the title. Across on wide screens, down on phones. */
@@ -2195,6 +2255,8 @@ body.fwin-open { overflow: hidden; }
 
 @media (max-width: 900px) {
   .gqa { grid-template-columns: 1fr; }
+  .gqa-flip > .gqa-side { order: 0; }
+  .gqa-stage .device-tablet { width: 250px; } /* fits the shorter stage */
   .gqa-stage { position: relative; top: 0; height: 440px; }
   .gqa-stage-wrap { position: relative; top: 0; }
   .gqa-stage .device-phone { width: 190px; }
@@ -2214,4 +2276,166 @@ body.fwin-open { overflow: hidden; }
   .guide-kicker { animation: none; }
   .guidepage .reveal, .guidepage .reveal:not(.in) { transition: none; transform: none; opacity: 1; }
   .gcard-thumb .device-phone, .gqa-grid button { transition: none; }
+}
+
+/* ---------- Feedback page (#/feedback): one card holding the form, in the guide pages' style ---------- */
+.fb-form, .fb-done { max-width: 760px; margin: 0 auto; }
+.fb-form {
+  display: grid; gap: 26px; padding: 40px 44px; border-radius: var(--radius-lg); background: var(--surface);
+  border: 1px solid var(--line); box-shadow: var(--shadow);
+}
+.fb-field { display: grid; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.fb-field legend, .fb-label { padding: 0; font-size: 15px; font-weight: 600; color: var(--ink); }
+.fb-field legend { margin-bottom: 10px; }
+.fb-label em { color: var(--green-strong); font-style: normal; }
+.fb-form input[type=text], .fb-form input[type=email], .fb-form select, .fb-form textarea {
+  width: 100%; padding: 12px 14px; border: 1px solid var(--outline); border-radius: 10px; background: #fff;
+  font: inherit; font-size: 15px; color: var(--text); transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.fb-form textarea { resize: vertical; min-height: 140px; line-height: 1.5; }
+.fb-form input:focus, .fb-form select:focus, .fb-form textarea:focus { outline: 0; border-color: var(--green); box-shadow: 0 0 0 3px rgba(55,189,105,.18); }
+.fb-form textarea[aria-invalid] { border-color: #D65A5A; }
+.fb-error { font-size: 13px; color: #B84040; }
+.fb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.fb-note { margin: -12px 0 0; font-size: 13px; color: var(--muted-2); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Stars (optional): hovering or picking one fills it and those before it */
+.fb-stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 6px; }
+.fb-stars label { position: relative; cursor: pointer; }
+.fb-stars input { position: absolute; opacity: 0; pointer-events: none; }
+.fb-stars svg { display: block; width: 34px; height: 34px; fill: #fff; stroke: var(--outline); stroke-width: 1.4; stroke-linejoin: round; transition: fill .2s var(--ease), stroke .2s var(--ease), transform .25s cubic-bezier(.34,1.56,.64,1); }
+.fb-stars label:hover svg, .fb-stars label:hover ~ label svg,
+.fb-stars label:has(input:checked) svg, .fb-stars label:has(input:checked) ~ label svg { fill: #F4B740; stroke: #E0A021; }
+.fb-stars label:hover svg { transform: scale(1.12); }
+.fb-stars label:has(input:focus-visible) svg { outline: 2px solid var(--green); outline-offset: 2px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) { .fb-stars svg { transition: none; } .fb-stars label:hover svg { transform: none; } }
+/* Type: pill choices like the module filters */
+.fb-types { display: flex; flex-wrap: wrap; gap: 8px; }
+.fb-types label { position: relative; cursor: pointer; }
+.fb-types input { position: absolute; opacity: 0; pointer-events: none; }
+.fb-types span {
+  display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--outline);
+  font-size: 14px; font-weight: 500; color: var(--text); background: #fff; transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.fb-types label:hover span { border-color: var(--green); }
+.fb-types input:checked + span { background: var(--green); border-color: var(--green); color: #fff; }
+.fb-types input:focus-visible + span { box-shadow: 0 0 0 3px rgba(55,189,105,.3); }
+/* Modules multi-select: chips inside the field, a grouped list below it */
+.fb-multi { position: relative; }
+.fb-multi-box {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 48px; padding: 6px 40px 6px 8px; cursor: text;
+  border: 1px solid var(--outline); border-radius: 10px; background: #fff; position: relative;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.fb-multi.open .fb-multi-box, .fb-multi-box:focus-within { border-color: var(--green); box-shadow: 0 0 0 3px rgba(55,189,105,.18); }
+.fb-chips { display: contents; }
+.fb-chip {
+  display: inline-flex; align-items: center; gap: 4px; height: 32px; padding: 0 4px 0 12px; border-radius: 999px;
+  background: var(--green-tint); color: var(--green-strong); font-size: 14px; font-weight: 500; animation: fbChip .25s var(--ease);
+}
+.fb-chip button { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: none; color: inherit; cursor: pointer; }
+.fb-chip button svg { width: 16px; height: 16px; }
+.fb-chip button:hover, .fb-chip button:focus-visible { background: rgba(42,157,85,.16); outline: 0; }
+@keyframes fbChip { from { transform: scale(.85); opacity: 0; } }
+.fb-form input.fb-multi-input { flex: 1 1 160px; min-width: 120px; height: 34px; padding: 0 6px; border: 0; box-shadow: none; background: transparent; font: inherit; font-size: 15px; color: var(--text); }
+.fb-form input.fb-multi-input:focus { border: 0; box-shadow: none; }
+.fb-multi-caret { position: absolute; right: 14px; top: 50%; width: 18px; height: 18px; margin-top: -9px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; transition: transform .25s var(--ease); }
+.fb-multi.open .fb-multi-caret { transform: rotate(180deg); }
+.fb-multi-list {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 20; max-height: 300px; overflow-y: auto; margin: 0; padding: 6px;
+  list-style: none; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-lg);
+}
+.fb-multi-group { padding: 10px 10px 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-2); }
+.fb-multi-opt { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 14.5px; color: var(--text); cursor: pointer; }
+.fb-multi-opt:hover, .fb-multi-opt.active { background: var(--surface-soft); }
+.fb-multi-opt .tick { flex: none; width: 18px; height: 18px; border: 1.5px solid var(--outline); border-radius: 5px; transition: background .15s, border-color .15s; }
+.fb-multi-opt[aria-selected="true"] { color: var(--green-strong); font-weight: 500; }
+.fb-multi-opt[aria-selected="true"] .tick {
+  border-color: var(--green); background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center / 13px no-repeat;
+}
+.fb-multi-group[hidden], .fb-multi-opt[hidden], .fb-multi-empty[hidden] { display: none; }
+.fb-multi-empty { padding: 12px 10px; font-size: 14px; color: var(--muted-2); }
+/* Per-module notes under the field: a quiet link each, opening its own small box */
+.fb-notes { display: grid; gap: 6px; }
+.fb-notes:empty { display: none; }
+.fb-note-add {
+  display: inline-flex; align-items: center; gap: 8px; padding: 4px 0; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: 14px; font-weight: 500; color: var(--green-strong);
+}
+.fb-note-add:hover { text-decoration: underline; text-underline-offset: 3px; }
+.fb-note-add .plus { position: relative; width: 16px; height: 16px; border-radius: 50%; background: var(--green-tint); }
+.fb-note-add .plus::before, .fb-note-add .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 1.5px; margin: -.75px 0 0 -4px; background: currentColor; border-radius: 1px; transition: transform .25s var(--ease); }
+.fb-note-add .plus::after { transform: rotate(90deg); }
+.fb-note-row.open .fb-note-add .plus::after { transform: rotate(0deg); }
+.fb-note-box { padding: 4px 0 8px; animation: fbChip .25s var(--ease); }
+.fb-form .fb-note-box textarea { min-height: 76px; font-size: 14.5px; }
+[dir="rtl"] .fb-multi-box { padding: 6px 8px 6px 40px; }
+[dir="rtl"] .fb-multi-caret { right: auto; left: 14px; }
+@media (prefers-reduced-motion: reduce) { .fb-chip { animation: none; } }
+.fb-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.fb-actions .btn[disabled] { opacity: .6; cursor: progress; }
+.fb-status { margin: 0; font-size: 14px; color: var(--muted); }
+.fb-form[hidden], .fb-done[hidden] { display: none; }
+.fb-done { text-align: center; padding: 40px 0; }
+.fb-done .section-title { width: fit-content; margin-inline: auto; }
+.fb-done .section-lede { margin: 12px auto 28px; }
+@media (max-width: 640px) {
+  .fb-form { padding: 26px 20px; gap: 22px; }
+  .fb-row { grid-template-columns: 1fr; }
+}
+
+/* Feedback tab: a small raised pill in the brand green (#37BD69) floating just off the right edge, halfway down,
+   reading bottom to top. A 1px gleam with a feathered tail runs round its border to draw the eye; it lifts on hover.
+   The pill is turned 180deg so its text reads upwards, so in its own frame "bottom" is the top on screen: the
+   lighter end of the gradient, the highlight and the drop shadow are all written upside down (RTL is not turned) */
+@property --fb-gleam { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.fb-tab {
+  --lit: #6FD896; --base: #37BD69; --deep: #239A51;
+  position: fixed; right: 12px; top: 50%; z-index: 60; display: flex; align-items: center; gap: 6px; isolation: isolate;
+  padding: 14px 8px 15px; border-radius: 999px; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg);
+  background: linear-gradient(to left, rgba(0,0,0,.06), rgba(255,255,255,.08) 45%, rgba(0,0,0,.08)),
+              linear-gradient(to top, var(--lit) 0%, var(--base) 48%, var(--deep) 100%);
+  color: #fff; text-decoration: none; font-size: 12.5px; font-weight: 700; letter-spacing: .03em; text-shadow: 0 -1px 1px rgba(0,60,25,.35);
+  box-shadow:
+    inset 0 -1.5px 0 rgba(255,255,255,.55), inset 0 2px 3px rgba(0,70,30,.35),
+    0 -2px 3px rgba(14,60,32,.18), 0 -12px 22px -8px rgba(20,110,55,.55);
+  transition: transform .45s cubic-bezier(.4,0,.2,1), box-shadow .45s cubic-bezier(.4,0,.2,1), filter .3s, opacity .3s var(--ease), visibility .3s;
+}
+/* The gleam: a bright head with its tail fading out behind it, circling on a faint 1px light edge */
+.fb-tab::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1px; pointer-events: none;
+  background:
+    conic-gradient(from var(--fb-gleam), transparent 0deg, transparent 220deg, rgba(255,255,255,.18) 290deg, rgba(225,255,236,.75) 340deg, #fff 358deg, transparent 360deg),
+    linear-gradient(rgba(255,255,255,.28), rgba(255,255,255,.1));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: fbGleam 2.8s linear infinite;
+}
+@keyframes fbGleam { to { --fb-gleam: 360deg; } }
+.fb-tab svg { width: 14px; height: 14px; transform: rotate(90deg); fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; filter: drop-shadow(0 -1px 1px rgba(0,60,25,.3)); }
+.fb-tab:hover, .fb-tab:focus-visible {
+  transform: translateY(calc(-50% - 4px)) rotate(180deg); filter: brightness(1.05);
+  box-shadow:
+    inset 0 -1.5px 0 rgba(255,255,255,.6), inset 0 2px 3px rgba(0,70,30,.35),
+    0 -4px 6px rgba(14,60,32,.2), 0 -20px 30px -10px rgba(20,110,55,.6);
+  transition: transform .55s cubic-bezier(.34,1.56,.64,1), box-shadow .55s cubic-bezier(.22,.8,.24,1), filter .3s, opacity .3s, visibility .3s;
+}
+.fb-tab:active { filter: brightness(.97); }
+.fb-tab:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.fb-tab.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+[dir="rtl"] .fb-tab {
+  right: auto; left: 12px; transform: translateY(-50%); text-shadow: 0 1px 1px rgba(0,60,25,.35);
+  background: linear-gradient(to right, rgba(0,0,0,.06), rgba(255,255,255,.08) 45%, rgba(0,0,0,.08)),
+              linear-gradient(to bottom, var(--lit) 0%, var(--base) 48%, var(--deep) 100%);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.55), inset 0 -2px 3px rgba(0,70,30,.35), 0 2px 3px rgba(14,60,32,.18), 0 12px 22px -8px rgba(20,110,55,.55);
+}
+[dir="rtl"] .fb-tab svg { transform: rotate(-90deg); filter: drop-shadow(0 1px 1px rgba(0,60,25,.3)); }
+[dir="rtl"] .fb-tab:hover, [dir="rtl"] .fb-tab:focus-visible {
+  transform: translateY(calc(-50% - 4px));
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.6), inset 0 -2px 3px rgba(0,70,30,.35), 0 4px 6px rgba(14,60,32,.2), 0 20px 30px -10px rgba(20,110,55,.6);
+}
+@media (max-width: 560px) { .fb-tab { right: 8px; padding: 11px 7px 12px; font-size: 11.5px; } [dir="rtl"] .fb-tab { left: 8px; } }
+@media (prefers-reduced-motion: reduce) {
+  .fb-tab::before { animation: none; }
+  .fb-tab, .fb-tab:hover { transition: opacity .3s, visibility .3s; } .fb-tab:hover { transform: translateY(-50%) rotate(180deg); }
 }

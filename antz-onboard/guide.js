@@ -1940,7 +1940,7 @@ window.ANTZ_GUIDES = {
   },
   /* From References/Module Details Pages/Help desk interactive kit (Help Desk Kit) */
   'helpdesk-module': {
-    source: 'Help desk interactive kit · Help Desk Kit',
+    source: 'Help desk interactive kit · Help Desk Kit (updated copy in References/Help desk interactive kit)',
     title: 'Helpdesk Module',
     kicker: 'Operations & Oversight',
     sub: 'The Request module for raising and tracking requests for resources, maintenance and services, with accountability, faster resolution and coordination across every department.',
@@ -1949,8 +1949,22 @@ window.ANTZ_GUIDES = {
     back: 'helpdesk-module',
     parts: [
       {
+        id: 'lifecycle',
+        label: 'Part 01 · Workflow',
+        title: 'The request lifecycle',
+        lede: 'Every request moves along one path, from raised to completed. Approval, costing and fulfilment are the gates between stages. A rejected request can be corrected and resubmitted; a cancelled one needs a new request; a completed one can be reverted to finish or fix the work.',
+        flow: [
+          { icon: 'add', title: 'Raise Request', desc: 'A new request is created with full details.' },
+          { icon: 'cost', title: 'Add Costing', desc: 'Estimates are added for the items and services.' },
+          { icon: 'approve', title: 'Approve / Reject', desc: 'Approvers review and approve or reject it.' },
+          { icon: 'progress', title: 'Move to In-progress', desc: 'The approved request moves into active work.' },
+          { icon: 'done', title: 'Completed', desc: 'Work is done and the request is closed.' },
+          { icon: 'undo', title: 'Move back to In-progress', desc: 'Sent back to In Progress when more work is needed.' }
+        ]
+      },
+      {
         id: 'home',
-        label: 'Part 01 · The screen',
+        label: 'Part 02 · The screen',
         title: 'The Help Desk home',
         lede: 'One place to raise, track and resolve every request. Every request lives on one screen, organised by status, so you can track pending, approved, rejected, cancelled, in-progress and completed requests in one transparent view.',
         /* Tab counts differ between the slide's tiles, the image alts and the screenshots, so no counts are quoted */
@@ -1969,17 +1983,19 @@ window.ANTZ_GUIDES = {
       },
       {
         id: 'capabilities',
-        label: 'Part 02 · The module',
+        label: 'Part 03 · The module',
         title: 'Raise it, cost it, decide, close it out',
         lede: 'The Request module brings accountability to every ask, speeds up resolution, and keeps departments coordinated, from the moment a request is raised to the moment it is fulfilled.',
         cards: [
-          { id: 'requests', title: 'Request management', icon: 'help', desc: 'Raise a new request with full detail, edit it before it is processed, cancel it when it is no longer needed, or reject it with a reason.',
+          { id: 'requests', title: 'Request management', icon: 'help', desc: 'Raise a new request with full detail, edit it before it is processed, clone it for reuse, cancel it when it is no longer needed, reject it with a reason, or delete it.',
             shots: [
               { src: 'request-raise', title: 'Raise Request', desc: 'Create and submit a new request with all the required details.' },
               { src: 'request-edit', title: 'Edit Request', desc: 'Update an existing request before it is processed.' },
+              { src: 'request-clone', title: 'Clone Request', desc: 'Create a copy of an existing request for reuse.' },
               { src: 'request-cancel', title: 'Cancel Request', desc: 'Withdraw a request that is no longer needed, giving a reason.' },
               /* The slide says "after approval"; the deck's source text says "during approval", which matches the rest of the deck */
-              { src: 'request-reject', title: 'Reject Request', desc: 'Decline a request during approval and provide a reason.' }
+              { src: 'request-reject', title: 'Reject Request', desc: 'Decline a request during approval and provide a reason.' },
+              { src: 'request-delete', title: 'Delete Requests', desc: 'Remove requests that are no longer required.' }
             ] },
           { id: 'costs', title: 'Cost management', icon: 'database', desc: 'Build the budget for a request before you commit: add, edit, duplicate or delete cost estimates.',
             shots: [
@@ -2003,7 +2019,7 @@ window.ANTZ_GUIDES = {
       },
       {
         id: 'roles',
-        label: 'Part 03 · Roles',
+        label: 'Part 04 · Roles',
         title: 'Everyone raises, permissions decide the rest',
         lede: 'The Help Desk is open to all user roles. Who can approve, cost and fulfil is governed by permissions, so each person sees only the actions that belong to them.',
         /* Built from the deck's three role lists; a cross means the action is not in that role's list */
@@ -2017,30 +2033,22 @@ window.ANTZ_GUIDES = {
           rows: [
             { title: 'Raise a request', desc: 'Open to all user roles.', icon: 'add',
               cells: [{ ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }] },
-            { title: 'Edit, cancel, track status', desc: 'Manage your own request.', icon: 'edit',
+            { title: 'Edit or delete', desc: 'Manage your own request.', icon: 'edit',
               cells: [{ ok: true, text: 'Yes' }, { ok: false, text: 'Not in role' }, { ok: false, text: 'Not in role' }] },
-            { title: 'Approve or reject', desc: 'From the My Approvals queue.', icon: 'approve',
+            { title: 'Cancel a request', desc: 'Withdraw it with a reason.', icon: 'undo',
+              cells: [{ ok: true, text: 'Yes' }, { ok: false, text: 'Not in role' }, { ok: true, text: 'Yes' }] },
+            { title: 'Clone a request', desc: 'Copy an existing request for reuse.', icon: 'link',
+              cells: [{ ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }] },
+            { title: 'Approve', desc: 'From the My Approvals queue.', icon: 'approve',
               cells: [{ ok: false, text: 'Not in role' }, { ok: true, text: 'Yes', note: 'Approval rights' }, { ok: false, text: 'Not in role' }] },
+            { title: 'Reject', desc: 'Decline it with a reason.', icon: 'alert',
+              cells: [{ ok: false, text: 'Not in role' }, { ok: true, text: 'Yes' }, { ok: true, text: 'Yes' }] },
             { title: 'Cost estimates', desc: 'Add, edit, duplicate or delete.', icon: 'database',
               cells: [{ ok: false, text: 'Not in role' }, { ok: false, text: 'Not in role' }, { ok: true, text: 'Yes' }] },
             { title: 'Complete or revert', desc: 'Mark as Completed, Revert to In Progress.', icon: 'priority',
               cells: [{ ok: false, text: 'Not in role' }, { ok: false, text: 'Not in role' }, { ok: true, text: 'Yes' }] }
           ]
         }
-      },
-      {
-        id: 'lifecycle',
-        label: 'Part 04 · Workflow',
-        title: 'The request lifecycle',
-        lede: 'Every request moves along one path, from raised to completed. Approval, costing and fulfilment are the gates between stages. A rejected request can be corrected and resubmitted; a cancelled one needs a new request; a completed one can be reverted to finish or fix the work.',
-        flow: [
-          { icon: 'add', title: 'Raise Request', desc: 'A new request is created with full details.' },
-          { icon: 'cost', title: 'Add Costing', desc: 'Estimates are added for the items and services.' },
-          { icon: 'approve', title: 'Approve / Reject', desc: 'Approvers review and approve or reject it.' },
-          { icon: 'progress', title: 'Move to In-progress', desc: 'The approved request moves into active work.' },
-          { icon: 'done', title: 'Completed', desc: 'Work is done and the request is closed.' },
-          { icon: 'undo', title: 'Move back to In-progress', desc: 'Sent back to In Progress when more work is needed.' }
-        ]
       }
     ],
     close: {
@@ -2049,7 +2057,7 @@ window.ANTZ_GUIDES = {
       lede: 'Raise it, route it, resolve it: every request accounted for, from the first tap to the final tick. Good data, good coordination, better care.',
       items: [
         { icon: 'filter', title: 'View requests by status', desc: 'One transparent list across pending, approved, rejected, cancelled, in-progress and completed, with My Approvals, Awaiting Costing and All filters on top.' },
-        { icon: 'manage', title: 'Request management', desc: 'Raise, edit, cancel or reject. Every request carries its details and priority, and a clear reason when it is declined.' },
+        { icon: 'manage', title: 'Request management', desc: 'Raise, edit, clone, cancel, reject or delete. Every request carries its details and priority, and a clear reason when it is declined.' },
         { icon: 'cost', title: 'Cost management', desc: 'Add, edit, duplicate or delete estimates so the budget for items and services is set before the work begins.' },
         { icon: 'done', title: 'Fulfilment & reversion', desc: 'Mark work completed when it is done, or revert it to in-progress when more work or a correction is needed.' }
       ]
@@ -2070,11 +2078,12 @@ window.ANTZ_GUIDES = {
         label: 'Part 01 · The module',
         title: 'What Security covers',
         lede: 'The Security module oversees site permissions and every egg, animal, hospital and carcass transfer, ensuring controlled movement and full accountability for who handled what, and when.',
+        chain: true,
         cards: [
           { id: 'filter', title: 'Filter functionality', icon: 'filter', desc: 'Filter records by status for focused review: Show All, Checkout Pending or Security Checkout Cleared.',
-            shots: [{ src: 'filter', title: 'Filter By dialog', desc: 'The Filter By dialog with Show All selected, above Checkout Pending and Security Checkout Cleared.' }] },
+            shots: [{ src: 'filter', title: 'Filter functionality', desc: 'Filter records by status for focused review: Show All, Checkout Pending or Security Checkout Cleared.' }] },
           { id: 'checkout', title: 'Check-in & check-out', icon: 'shield', desc: 'Authorised security checks records in and out across every transfer type.',
-            shots: [{ src: 'check-in-out', title: 'Security check-in', desc: 'A hospital transfer cleared at checkout, ready for security check-in at the hospital.' }] }
+            shots: [{ src: 'check-in-out', title: 'Check-in & check-out', desc: 'Authorised security checks records in and out across every transfer type.' }] }
         ]
       },
       {
@@ -2119,13 +2128,31 @@ window.ANTZ_GUIDES = {
         /* The overview slide has no screens, so its three features are folded into this lede.
            The deck's live report explorer (slides 4 and 5) is an HTML mock-up, not a capture, so it is not used */
         lede: 'The Reports module presents categorised data on key animal events under clear headings. Refine any report by date range, site or species, customise the view with show / hide columns, gender-wise toggles and site selection, and download it for offline use, sharing or compliance.',
-        cards: [
-          { id: 'species', title: 'Species General Report', icon: 'species', desc: 'Population by species, with a clear male / female breakdown.',
-            shots: [{ src: 'species', device: 'tablet', title: 'Species General Report', desc: 'Male, female, indeterminate and undetermined counts per species, with a site filter, show / hide columns and Download report.' }] },
-          { id: 'daily', title: 'Daily Report', icon: 'report', desc: 'A day of activity: natality, transfers, mortality and assessments.',
-            shots: [{ src: 'daily', device: 'tablet', title: 'Daily Report', desc: 'Past and upcoming reports, grouped by natality, accession, mortality, assessment and transfer, with a download for each row.' }] },
-          { id: 'list', title: 'Animal Report List', icon: 'batch', desc: 'Detailed animal records, filterable by species, site and attributes.',
-            shots: [{ src: 'animal-list', device: 'tablet', title: 'Animal Report List', desc: 'Each animal\'s age, breed, variant, enclosure, section and site, with Antz animal ID, microchip and ring number columns, filters and show / hide.' }] }
+        /* As the kit's report pages: one tour per report, its points beside a screen that highlights each in turn */
+        tours: [
+          { kicker: 'Population & Activity', title: 'Species General Report', numbered: true, flip: true,
+            desc: 'Population by species with a clear male / female breakdown.',
+            shots: [
+              { src: 'species-gender', device: 'tablet', title: 'Gender split, Indeterminate and Undetermined', desc: 'Male counts in mint, female counts in pink, per species, at a glance.' },
+              { src: 'species-site', device: 'tablet', title: 'Filter by site', desc: 'Scope the population to any of your sites.' },
+              { src: 'species-hide', device: 'tablet', title: 'Show / hide columns', desc: 'Tailor the table to only the columns you care about.' },
+              { src: 'species-download', device: 'tablet', title: 'Download report', desc: 'Export the full species report for offline use, sharing or compliance.' }
+            ] },
+          { kicker: 'Population & Activity', title: 'Daily Report', numbered: true, flip: true,
+            desc: 'A day of activity: natality, transfers, mortality and assessments.',
+            shots: [
+              { src: 'daily-past', device: 'tablet', title: 'Past & upcoming reports', desc: 'Switch between historical reports and scheduled ones.' },
+              { src: 'daily-grouped', device: 'tablet', title: 'Grouped by activity', desc: 'Natality, accession, mortality and assessment, neatly grouped.' },
+              { src: 'daily-download', device: 'tablet', title: 'Download any section', desc: 'Each row exports on its own with one tap.' }
+            ] },
+          { kicker: 'Population & Activity', title: 'Animal Report List', numbered: true, flip: true,
+            desc: 'Detailed animal records, filterable by species, site and attributes.',
+            shots: [
+              { src: 'list-full', device: 'tablet', title: 'Full animal record', desc: 'Age, breed, variant, enclosure, section and site, all in one card.' },
+              { src: 'list-filter', device: 'tablet', title: 'Filter & show / hide', desc: 'Narrow the list and choose which columns appear.' },
+              { src: 'list-ids', device: 'tablet', title: 'IDs and record columns', desc: 'Antz Animal ID, microchip, ring number, gender, animal type and count, site, section, enclosure, morph, breed, weight, age, accession date and type, organisation, and taxonomy from class to species.' },
+              { src: 'list-download', device: 'tablet', title: 'Download report', desc: 'Export the full animal list for offline use, sharing or compliance.' }
+            ] }
         ]
       },
       {
@@ -2133,13 +2160,31 @@ window.ANTZ_GUIDES = {
         label: 'Part 02 · Care & observations',
         title: 'Care and observation reports',
         lede: 'Welfare assessments, keeper assignments and the observation log for an individual animal, each ready to filter and download.',
-        cards: [
-          { id: 'assessment', title: 'Animal Assessment Report', icon: 'medical', desc: 'Body-condition assessments that surface welfare concerns early.',
-            shots: [{ src: 'assessment', device: 'tablet', title: 'Animal Assessment Report', desc: 'Pick the species and assessment type, then generate each animal\'s body condition (Overweight, Ideal or N/A) with dates.' }] },
-          { id: 'keeper', title: 'Animal Keeper Report', icon: 'users', desc: 'Keepers assigned to each animal, animal-wise or keeper-wise.',
-            shots: [{ src: 'keeper', device: 'tablet', title: 'Animal Keeper Report', desc: 'Animal-wise or keeper-wise views showing where each animal lives, its caretaker count and primary keeper, ready to download.' }] },
-          { id: 'observation', title: 'Animal Observation Report', icon: 'eye', desc: 'Every observation recorded for one individual animal.',
-            shots: [{ src: 'observation', device: 'tablet', title: 'Animal Observation Report', desc: 'The animal in focus, filters by observation type, sub-type, date range or free text, and the exportable observation log.' }] }
+        tours: [
+          { kicker: 'Care & Observations', title: 'Animal Assessment Report', numbered: true, flip: true,
+            desc: 'Body-condition assessments that surface welfare concerns early.',
+            shots: [
+              { src: 'assessment-pick', device: 'tablet', title: 'Pick species & type', desc: 'Choose the species and the assessment type to run.' },
+              { src: 'assessment-body', device: 'tablet', title: 'Body-condition results', desc: 'Each animal\'s condition, Overweight, Ideal or N/A, with dates.' },
+              { src: 'assessment-generate', device: 'tablet', title: 'Generate the report', desc: 'Build the assessment on demand.' }
+            ] },
+          { kicker: 'Care & Observations', title: 'Animal Keeper Report', numbered: true, flip: true,
+            desc: 'Keepers assigned to each animal, animal-wise or keeper-wise.',
+            shots: [
+              { src: 'keeper-wise', device: 'tablet', title: 'Animal-wise or keeper-wise', desc: 'Two views of the same assignment data, 2,174 animals here.' },
+              { src: 'keeper-lives', device: 'tablet', title: 'Where each animal lives', desc: 'Enclosure, section and site for every record.' },
+              { src: 'keeper-caretaker', device: 'tablet', title: 'Caretaker count', desc: 'How many keepers look after each animal.' },
+              { src: 'keeper-primary', device: 'tablet', title: 'Primary keeper', desc: 'The lead keeper assigned to each animal.' },
+              { src: 'keeper-download', device: 'tablet', title: 'Download report', desc: 'Export the full keeper assignment report for offline use or sharing.' }
+            ] },
+          { kicker: 'Care & Observations', title: 'Animal Observation Report', numbered: true, flip: true,
+            desc: 'Every observation recorded for one individual animal.',
+            shots: [
+              { src: 'observation-focus', device: 'tablet', title: 'Animal in focus', desc: 'The individual whose observations you\'re viewing.' },
+              { src: 'observation-filter', device: 'tablet', title: 'Filter observations', desc: 'By observation type, sub-type, date range or free text.' },
+              { src: 'observation-log', device: 'tablet', title: 'Observation log', desc: 'Every recorded observation, listed and exportable.' },
+              { src: 'observation-download', device: 'tablet', title: 'Download Report', desc: 'Tap "Download Report" to export the full observation log for offline use or sharing.' }
+            ] }
         ]
       },
       {
@@ -2147,18 +2192,37 @@ window.ANTZ_GUIDES = {
         label: 'Part 03 · Diaries & site',
         title: 'Diaries, counts and site reports',
         lede: 'What each keeper and biologist recorded, how many animals each enclosure holds, and every observation logged across a site.',
-        cards: [
-          { id: 'keeper-diary', title: 'Keeper\'s Diary', icon: 'note', desc: 'Every observation a keeper recorded, to view and download.',
-            shots: [{ src: 'keeper-diary', device: 'tablet', title: 'Keeper\'s Diary', desc: 'Pick whose diary to review, drill into an observation type and sub-type such as Feeding and Diet, and download all entries.' }] },
-          /* The deck's Biologist's Diary capture shows a veterinarian's diary with no rows */
-          { id: 'biologist-diary', title: 'Biologist\'s Diary', icon: 'lab', desc: 'Every observation a biologist recorded, to view and download.',
-            shots: [{ src: 'biologist-diary', device: 'tablet', title: 'Biologist\'s Diary', desc: 'Pick whose diary to review, filter by observation type, sub-type and date range, and download all entries.' }] },
-          /* The capture's on-screen title reads Animal Count Register */
-          { id: 'enclosure', title: 'Enclosure Count Report', icon: 'home', desc: 'Animal- or species-wise counts for an enclosure within a site.',
-            shots: [{ src: 'enclosure-count', device: 'tablet', title: 'Enclosure Count Report', desc: 'Search by species, see the site, section and enclosure count summary, and list each animal with its enclosure and gender.' }] },
-          /* The capture's on-screen title reads Daily Report */
-          { id: 'daily-site', title: 'Daily Site Report', icon: 'areas', desc: 'All observations recorded for a whole site, ready to download.',
-            shots: [{ src: 'daily-site', device: 'tablet', title: 'Daily Site Report', desc: 'The sites in scope, filters by AID, observation type, sub-type or date range, and the date, entity and type of every entry.' }] }
+        tours: [
+          { kicker: 'Diaries & Site', title: 'Keeper\'s Diary', numbered: true, flip: true,
+            desc: 'Every observation a keeper recorded, to view and download.',
+            shots: [
+              { src: 'keeperdiary-whose', device: 'tablet', title: 'Whose diary', desc: 'The keeper whose entries you\'re reviewing.' },
+              { src: 'keeperdiary-filter', device: 'tablet', title: 'Filter by observation type', desc: 'Drill into a type and sub-type, such as Feeding and Diet.' },
+              { src: 'keeperdiary-download', device: 'tablet', title: 'Download the diary', desc: 'Export all entries for the selected filters.' }
+            ] },
+          { kicker: 'Diaries & Site', title: 'Biologist\'s Diary', numbered: true, flip: true,
+            desc: 'Every observation a biologist recorded, to view and download.',
+            shots: [
+              { src: 'biologistdiary-whose', device: 'tablet', title: 'Whose diary', desc: 'The biologist whose entries you\'re reviewing.' },
+              { src: 'biologistdiary-filter', device: 'tablet', title: 'Filter observations', desc: 'By observation type, sub-type and date range.' },
+              { src: 'biologistdiary-download', device: 'tablet', title: 'Download the diary', desc: 'Export all entries for the selected filters.' }
+            ] },
+          { kicker: 'Diaries & Site', title: 'Enclosure Count Report', numbered: true, flip: true,
+            desc: 'Animal- or species-wise counts for an enclosure within a site.',
+            shots: [
+              { src: 'enclosure-search', device: 'tablet', title: 'Search by species', desc: 'Find any animal in the enclosure by species name.' },
+              { src: 'enclosure-summary', device: 'tablet', title: 'Enclosure summary', desc: 'Site, section and total enclosure count for the selection.' },
+              { src: 'enclosure-counts', device: 'tablet', title: 'Animal counts', desc: 'Each animal listed with its enclosure name and gender.' },
+              { src: 'enclosure-downloadreport', device: 'tablet', title: 'Download Report', desc: 'Tap "Download Report" to export the enclosure count for offline use or sharing.' }
+            ] },
+          { kicker: 'Diaries & Site', title: 'Daily Site Report', numbered: true, flip: true,
+            desc: 'All observations recorded for a whole site, ready to download.',
+            shots: [
+              { src: 'dailysite-sites', device: 'tablet', title: 'Sites in scope', desc: 'Every site included in this daily report, listed up top.' },
+              { src: 'dailysite-filter', device: 'tablet', title: 'Filter observations', desc: 'By AID, observation type, sub-type or date range.' },
+              { src: 'dailysite-log', device: 'tablet', title: 'Observation log', desc: 'Date, entity and observation type for every entry across the sites.' },
+              { src: 'dailysite-download', device: 'tablet', title: 'Download Report', desc: 'Tap "Download Report" to export the site-wide daily log for offline use or sharing.' }
+            ] }
         ]
       }
     ],
