@@ -2384,27 +2384,58 @@ body.fwin-open { overflow: hidden; }
   .fb-row { grid-template-columns: 1fr; }
 }
 
-/* Feedback tab: a small rounded tab floating just off the right edge, halfway down, reading bottom to top;
-   it lifts a little on hover */
+/* Feedback tab: a small raised pill in the brand green (#37BD69) floating just off the right edge, halfway down,
+   reading bottom to top. A 1px gleam with a feathered tail runs round its border to draw the eye; it lifts on hover.
+   The pill is turned 180deg so its text reads upwards, so in its own frame "bottom" is the top on screen: the
+   lighter end of the gradient, the highlight and the drop shadow are all written upside down (RTL is not turned) */
+@property --fb-gleam { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .fb-tab {
-  position: fixed; right: 12px; top: 50%; z-index: 60; display: flex; align-items: center; gap: 6px;
-  padding: 11px 7px 12px; border-radius: 10px; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg);
-  /* 45deg in the tab's own (rotated) frame: green at the top, teal at the bottom as seen */
-  background: linear-gradient(45deg, var(--green) 0%, var(--teal) 100%); color: #fff; text-decoration: none;
-  font-size: 12.5px; font-weight: 600; letter-spacing: .03em;
-  box-shadow: 0 2px 4px rgba(14,40,34,.12), 0 10px 22px -6px rgba(14,40,34,.38);
-  transition: transform .45s cubic-bezier(.4,0,.2,1), box-shadow .45s cubic-bezier(.4,0,.2,1), opacity .3s var(--ease), visibility .3s;
+  --lit: #6FD896; --base: #37BD69; --deep: #239A51;
+  position: fixed; right: 12px; top: 50%; z-index: 60; display: flex; align-items: center; gap: 6px; isolation: isolate;
+  padding: 14px 8px 15px; border-radius: 999px; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg);
+  background: linear-gradient(to left, rgba(0,0,0,.06), rgba(255,255,255,.08) 45%, rgba(0,0,0,.08)),
+              linear-gradient(to top, var(--lit) 0%, var(--base) 48%, var(--deep) 100%);
+  color: #fff; text-decoration: none; font-size: 12.5px; font-weight: 700; letter-spacing: .03em; text-shadow: 0 -1px 1px rgba(0,60,25,.35);
+  box-shadow:
+    inset 0 -1.5px 0 rgba(255,255,255,.55), inset 0 2px 3px rgba(0,70,30,.35),
+    0 -2px 3px rgba(14,60,32,.18), 0 -12px 22px -8px rgba(20,110,55,.55);
+  transition: transform .45s cubic-bezier(.4,0,.2,1), box-shadow .45s cubic-bezier(.4,0,.2,1), filter .3s, opacity .3s var(--ease), visibility .3s;
 }
-.fb-tab svg { width: 14px; height: 14px; transform: rotate(90deg); fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+/* The gleam: a bright head with its tail fading out behind it, circling on a faint 1px light edge */
+.fb-tab::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1px; pointer-events: none;
+  background:
+    conic-gradient(from var(--fb-gleam), transparent 0deg, transparent 220deg, rgba(255,255,255,.18) 290deg, rgba(225,255,236,.75) 340deg, #fff 358deg, transparent 360deg),
+    linear-gradient(rgba(255,255,255,.28), rgba(255,255,255,.1));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: fbGleam 2.8s linear infinite;
+}
+@keyframes fbGleam { to { --fb-gleam: 360deg; } }
+.fb-tab svg { width: 14px; height: 14px; transform: rotate(90deg); fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; filter: drop-shadow(0 -1px 1px rgba(0,60,25,.3)); }
 .fb-tab:hover, .fb-tab:focus-visible {
-  transform: translateY(calc(-50% - 4px)) rotate(180deg);
-  box-shadow: 0 4px 8px rgba(14,40,34,.14), 0 18px 30px -8px rgba(14,40,34,.45);
-  transition: transform .55s cubic-bezier(.34,1.56,.64,1), box-shadow .55s cubic-bezier(.22,.8,.24,1), opacity .3s, visibility .3s;
+  transform: translateY(calc(-50% - 4px)) rotate(180deg); filter: brightness(1.05);
+  box-shadow:
+    inset 0 -1.5px 0 rgba(255,255,255,.6), inset 0 2px 3px rgba(0,70,30,.35),
+    0 -4px 6px rgba(14,60,32,.2), 0 -20px 30px -10px rgba(20,110,55,.6);
+  transition: transform .55s cubic-bezier(.34,1.56,.64,1), box-shadow .55s cubic-bezier(.22,.8,.24,1), filter .3s, opacity .3s, visibility .3s;
 }
-.fb-tab:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.fb-tab:active { filter: brightness(.97); }
+.fb-tab:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .fb-tab.hide { opacity: 0; visibility: hidden; pointer-events: none; }
-[dir="rtl"] .fb-tab { right: auto; left: 12px; transform: translateY(-50%); }
-[dir="rtl"] .fb-tab svg { transform: rotate(-90deg); }
-[dir="rtl"] .fb-tab:hover, [dir="rtl"] .fb-tab:focus-visible { transform: translateY(calc(-50% - 4px)); }
-@media (max-width: 560px) { .fb-tab { right: 8px; padding: 9px 6px 10px; font-size: 11.5px; } [dir="rtl"] .fb-tab { left: 8px; } }
-@media (prefers-reduced-motion: reduce) { .fb-tab, .fb-tab:hover { transition: opacity .3s, visibility .3s; } .fb-tab:hover { transform: translateY(-50%) rotate(180deg); } }
+[dir="rtl"] .fb-tab {
+  right: auto; left: 12px; transform: translateY(-50%); text-shadow: 0 1px 1px rgba(0,60,25,.35);
+  background: linear-gradient(to right, rgba(0,0,0,.06), rgba(255,255,255,.08) 45%, rgba(0,0,0,.08)),
+              linear-gradient(to bottom, var(--lit) 0%, var(--base) 48%, var(--deep) 100%);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.55), inset 0 -2px 3px rgba(0,70,30,.35), 0 2px 3px rgba(14,60,32,.18), 0 12px 22px -8px rgba(20,110,55,.55);
+}
+[dir="rtl"] .fb-tab svg { transform: rotate(-90deg); filter: drop-shadow(0 1px 1px rgba(0,60,25,.3)); }
+[dir="rtl"] .fb-tab:hover, [dir="rtl"] .fb-tab:focus-visible {
+  transform: translateY(calc(-50% - 4px));
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.6), inset 0 -2px 3px rgba(0,70,30,.35), 0 4px 6px rgba(14,60,32,.2), 0 20px 30px -10px rgba(20,110,55,.6);
+}
+@media (max-width: 560px) { .fb-tab { right: 8px; padding: 11px 7px 12px; font-size: 11.5px; } [dir="rtl"] .fb-tab { left: 8px; } }
+@media (prefers-reduced-motion: reduce) {
+  .fb-tab::before { animation: none; }
+  .fb-tab, .fb-tab:hover { transition: opacity .3s, visibility .3s; } .fb-tab:hover { transform: translateY(-50%) rotate(180deg); }
+}
