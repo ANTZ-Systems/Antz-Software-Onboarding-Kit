@@ -781,7 +781,8 @@
      Opened from a file or serve.py there's no service, so Send completes the form on the page without sending it */
   const FEEDBACK_ENDPOINT = location.protocol.startsWith('http') && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? '/api/feedback' : '';
   const FEEDBACK_TYPES = ['suggestion', 'bug', 'content'];
-  function renderFeedback() {
+  /* thanks: open straight on the thank-you screen (#/feedback/thanks), to preview it */
+  function renderFeedback(thanks = false) {
     let bannerOffset;
     do bannerOffset = Math.floor(Math.random() * GUIDE_ORDER.length);
     while (GUIDE_ORDER.length > 1 && bannerNow(GUIDE_ORDER, bannerOffset) === lastGuideBanner);
@@ -792,7 +793,7 @@
         <section class="hero guide-hero" data-banners="guide" data-offset="${bannerOffset}">
           <div class="hero-media"><div class="hero-slides">${((b) => `<div class="hero-bg" style="background-image:url('${bannerSrc(b)}');--x:${b.x};--y:${b.y}"></div>`)(bannerNow(GUIDE_ORDER, bannerOffset))}</div></div>
           <div class="container hero-inner">
-            <span class="hero-leaf hero-icon drawn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H9.5L5 20.5v-3.5h-.5a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1Z"/><path d="m12 7.9 1.15 2.33 2.57.37-1.86 1.82.44 2.56L12 13.77l-2.3 1.21.44-2.56-1.86-1.82 2.57-.37Z"/></svg></span>
+            <span class="hero-leaf hero-icon drawn" aria-hidden="true"><svg viewBox="3.1 3.3 17.8 17.8" fill="none" stroke="currentColor" stroke-width=".85" stroke-linejoin="round" stroke-linecap="round"><path d="M12 4.25c4.56 0 8.25 3.02 8.25 6.75S16.56 17.75 12 17.75c-.98 0-1.92-.14-2.79-.4L5.2 19.25l1.05-3.36C4.85 14.68 3.75 12.94 3.75 11c0-3.73 3.69-6.75 8.25-6.75Z"/><path fill="currentColor" stroke="none" d="M12 7.6c.28 1.68 1.05 2.45 2.73 2.73-1.68.28-2.45 1.05-2.73 2.73-.28-1.68-1.05-2.45-2.73-2.73 1.68-.28 2.45-1.05 2.73-2.73Z"/></svg></span>
             <span class="guide-kicker">${esc(t('fb.kicker'))}</span>
             ${heroTitle(t('fb.title'))}
             <p class="hero-sub">${esc(t('fb.sub'))}</p>
@@ -850,6 +851,11 @@
               </div>
             </form>
             <div class="fb-done reveal" hidden>
+              <!-- The Antz logo on a white disc, ringed by a turning band of holographic foil with a soft glow -->
+              <div class="fb-seal" aria-hidden="true">
+                <span class="fb-seal-glow"></span><span class="fb-seal-ring"></span>
+                <span class="fb-seal-disc"><img src="assets/logo-horizontal.svg" alt=""></span>
+              </div>
               <h2 class="section-title">${esc(t('fb.thanks'))}</h2>
               <p class="section-lede">${esc(t('fb.thanks.sub'))}</p>
               <a class="btn btn-primary" href="#/" data-scroll="index">${esc(t('cta.back'))}</a>
@@ -974,6 +980,7 @@
         btn.disabled = false;
       }
     });
+    if (thanks) { form.hidden = true; done.hidden = false; }
     document.title = `${t('fb.title')} · ${t('brand.title')}`;
   }
 
@@ -2605,7 +2612,7 @@
       if (onHome) homeY = window.scrollY;
       onHome = false; lastKit = null;
       if (parallaxOff) parallaxOff();
-      renderFeedback();
+      renderFeedback(id === 'thanks');
       window.scrollTo(0, 0);
     } else if ((name === 'm' || name === 'kit' || name === 'guide') && id) {
       if (onHome) homeY = window.scrollY;

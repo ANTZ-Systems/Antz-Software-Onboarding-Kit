@@ -2381,6 +2381,31 @@ body.fwin-open { overflow: hidden; }
 .fb-done { text-align: center; padding: 40px 0; }
 .fb-done .section-title { width: fit-content; margin-inline: auto; }
 .fb-done .section-lede { margin: 12px auto 28px; }
+/* Thank-you seal: the logo on a white disc inside a ring of holographic foil (the banner titles' pastel hues)
+   that turns slowly, with a blurred copy of the ring glowing behind it and breathing in and out */
+@property --seal-turn { syntax: '<angle>'; inherits: true; initial-value: 0deg; }
+.fb-seal { position: relative; width: 260px; height: 260px; margin: 8px auto 40px; --seal-turn: 0deg; animation: sealTurn 6s linear infinite, sealIn .9s cubic-bezier(.34,1.56,.64,1) both; }
+.fb-seal-ring, .fb-seal-glow {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from var(--seal-turn), #FFD9EC, #E3D9FF, #BFF3FF, #C8F7E6, #F6F7C8, #FFDCCF, #FFC8DC, #CDEBFF, #C8FFE4, #FFD9EC);
+}
+.fb-seal-ring { padding: 6px; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.fb-seal-ring::after {
+  /* A bright glint riding round the ring */
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from calc(var(--seal-turn) * -1.6), transparent 0deg 300deg, rgba(255,255,255,.95) 345deg, transparent 360deg);
+}
+.fb-seal-glow { inset: -14px; filter: blur(28px); opacity: .85; animation: sealBreathe 3.2s ease-in-out infinite; }
+.fb-seal-disc {
+  position: absolute; inset: 15px; display: grid; place-items: center; border-radius: 50%; background: #fff;
+  box-shadow: inset 0 2px 10px rgba(14,40,34,.06), 0 10px 30px -12px rgba(14,40,34,.35);
+}
+.fb-seal-disc img { width: 62%; height: auto; }
+@keyframes sealTurn { to { --seal-turn: 360deg; } }
+@keyframes sealBreathe { 0%, 100% { opacity: .55; transform: scale(.96); } 50% { opacity: .95; transform: scale(1.04); } }
+@keyframes sealIn { from { opacity: 0; transform: scale(.8); } }
+@media (prefers-reduced-motion: reduce) { .fb-seal, .fb-seal-glow { animation: none; } }
+@media (max-width: 560px) { .fb-seal { width: 200px; height: 200px; } }
 @media (max-width: 640px) {
   .fb-form { padding: 26px 20px; gap: 22px; }
   .fb-row { grid-template-columns: 1fr; }
