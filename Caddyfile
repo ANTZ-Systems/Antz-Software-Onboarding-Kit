@@ -10,7 +10,8 @@
 	}
 
 	servers {
-		trusted_proxies static private_ranges
+		# private_ranges plus 100.64.0.0/10, the range Railway's edge proxies connect from
+		trusted_proxies static private_ranges 100.64.0.0/10
 		# read X-Forwarded-For right to left, so a client can't pick its own IP for the feedback rate limit
 		trusted_proxies_strict
 	}
