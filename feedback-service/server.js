@@ -126,15 +126,82 @@ function compose(f, ip) {
     `Received: ${new Date().toISOString()} from ${ip}`,
   );
   const subject = `Guide feedback: ${f.type}${f.rating ? ` (${f.rating}/5)` : ''}${f.modules.length ? ` · ${f.modules.slice(0, 3).join(', ')}` : ''}`.slice(0, 180);
-  return { subject, textContent: out.join('\n') };
+  return { subject, textContent: out.join('\n'), htmlContent: composeHtml(f, ip, subject) };
+}
+
+/* HTML version: tables and inline styles only, so it renders the same in Gmail, Outlook and Apple Mail.
+   Every visitor value goes through esc(); nothing they send becomes a link except the Reply button's mailto. */
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const para = (s) => esc(s).replace(/\r?\n/g, '<br>');
+const C = { green: '#37BD69', greenStrong: '#2A9D55', tint: '#E8F6EE', teal: '#1F515B', tealDeep: '#173E46', ink: '#0E1715', text: '#2B3833', muted: '#7A8684', line: '#E4EAE7', soft: '#F5F8F7' };
+const TYPE_LABEL = { suggestion: 'Suggestion', bug: 'Something isn’t working', content: 'Content issue' };
+const TYPE_COLOR = { suggestion: [C.tint, C.greenStrong], bug: ['#FDECEC', '#C0392B'], content: ['#FFF4E0', '#A86400'] };
+
+function composeHtml(f, ip, subject) {
+  const font = "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;";
+  const label = (t) => `<div style="${font}font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${C.muted};margin:0 0 8px">${t}</div>`;
+  const [typeBg, typeFg] = TYPE_COLOR[f.type];
+  const stars = f.rating
+    ? `<span style="font-size:22px;letter-spacing:2px;color:#F5B301">${'★'.repeat(f.rating)}</span><span style="font-size:22px;letter-spacing:2px;color:${C.line}">${'★'.repeat(5 - f.rating)}</span><span style="${font}font-size:13px;color:${C.muted};padding-left:8px">${f.rating}/5</span>`
+    : `<span style="${font}font-size:14px;color:${C.muted}">Not rated</span>`;
+  const chips = f.modules.length
+    ? f.modules.map((m) => `<span style="display:inline-block;${font}font-size:13px;color:${C.teal};background:${C.soft};border:1px solid ${C.line};border-radius:999px;padding:4px 12px;margin:0 6px 6px 0">${esc(m)}</span>`).join('')
+    : `<span style="${font}font-size:14px;color:${C.muted}">The guide in general</span>`;
+  const notes = f.notes.length
+    ? `<tr><td style="padding:0 32px 24px">${label('Notes per module')}${f.notes.map(([k, v]) => `
+        <div style="border-left:3px solid ${C.green};background:${C.soft};border-radius:0 8px 8px 0;padding:12px 16px;margin:0 0 8px">
+          <div style="${font}font-size:13px;font-weight:700;color:${C.teal};margin:0 0 4px">${esc(k)}</div>
+          <div style="${font}font-size:14px;line-height:1.55;color:${C.text}">${para(v)}</div>
+        </div>`).join('')}</td></tr>`
+    : '';
+  const row = (k, v) => `<tr><td style="${font}font-size:13px;color:${C.muted};padding:4px 16px 4px 0;white-space:nowrap;vertical-align:top">${k}</td><td style="${font}font-size:13px;color:${C.text};padding:4px 0;word-break:break-word">${v}</td></tr>`;
+  const who = f.name || f.email ? esc(f.name || f.email) : 'An anonymous visitor';
+  const reply = f.email
+    ? `<tr><td style="padding:0 32px 28px"><a href="mailto:${encodeURIComponent(f.email)}?subject=${encodeURIComponent(`Re: ${subject}`)}" style="display:inline-block;${font}font-size:14px;font-weight:600;color:#ffffff;background:${C.green};border-radius:999px;padding:11px 24px;text-decoration:none">Reply to ${esc(f.name || f.email)}</a></td></tr>`
+    : '';
+  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(subject)}</title></head>
+<body style="margin:0;padding:0;background:${C.soft}">
+<div style="display:none;max-height:0;overflow:hidden">${esc(f.message.slice(0, 120))}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.soft}"><tr><td align="center" style="padding:32px 12px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border:1px solid ${C.line};border-radius:16px;overflow:hidden">
+  <tr><td style="background:${C.tealDeep};background-image:linear-gradient(135deg,${C.tealDeep},${C.teal});padding:28px 32px">
+    <div style="${font}font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${C.green}">Antz Onboarding Guide</div>
+    <div style="${font}font-size:22px;font-weight:700;color:#ffffff;margin-top:6px">New feedback from ${who}</div>
+  </td></tr>
+  <tr><td style="padding:28px 32px 8px">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td style="vertical-align:top;padding-bottom:20px">${label('Type')}<span style="display:inline-block;${font}font-size:13px;font-weight:600;color:${typeFg};background:${typeBg};border-radius:999px;padding:5px 12px">${TYPE_LABEL[f.type]}</span></td>
+      <td style="vertical-align:top;padding-bottom:20px">${label('Rating')}${stars}</td>
+    </tr></table>
+  </td></tr>
+  <tr><td style="padding:0 32px 20px">${label('Modules')}${chips}</td></tr>
+  <tr><td style="padding:0 32px 24px">${label('Message')}
+    <div style="${font}font-size:15px;line-height:1.6;color:${C.ink};background:${C.tint};border-radius:12px;padding:18px 20px">${para(f.message)}</div>
+  </td></tr>
+  ${notes}
+  ${reply}
+  <tr><td style="padding:20px 32px 24px;border-top:1px solid ${C.line};background:${C.soft}">
+    <table role="presentation" cellpadding="0" cellspacing="0">
+      ${row('Name', f.name ? esc(f.name) : '—')}
+      ${row('Email', f.email ? esc(f.email) : f.emailRaw ? `${esc(f.emailRaw)} <span style="color:#C0392B">(not a valid address)</span>` : '—')}
+      ${row('Language', f.language ? esc(f.language) : '—')}
+      ${row('Page', f.page ? esc(f.page) : '—')}
+      ${row('Received', `${esc(new Date().toUTCString())} · ${esc(ip)}`)}
+    </table>
+  </td></tr>
+</table>
+<div style="${font}font-size:12px;color:${C.muted};padding-top:16px">Sent by the feedback form on the Antz Onboarding Guide.</div>
+</td></tr></table>
+</body></html>`;
 }
 
 async function send(f, ip) {
-  const { subject, textContent } = compose(f, ip);
+  const { subject, textContent, htmlContent } = compose(f, ip);
   const body = {
     sender: { name: FROM_NAME, email: FROM },
     to: [{ email: TO }],
     subject,
+    htmlContent,
     textContent,
   };
   /* The visitor's address is only ever a Reply-To, never the sender */
