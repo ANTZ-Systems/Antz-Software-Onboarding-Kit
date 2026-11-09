@@ -5,7 +5,16 @@
 'use strict';
 const http = require('node:http');
 
-const env = (k, d) => (process.env[k] || d || '').trim();
+/* One JSON line per event; Railway shows `message` and `level`, and the rest as attributes */
+const log = (level, message, attrs = {}) => console.log(JSON.stringify({ level, message, ...attrs }));
+
+/* Trimmed; a value pasted with surrounding quotes has them removed (and a warning logged at startup) */
+const quoted = [];
+const env = (k, d) => {
+  let v = (process.env[k] || d || '').trim();
+  if (/^(['"]).*\1$/.test(v)) { v = v.slice(1, -1).trim(); quoted.push(k); }
+  return v;
+};
 const PORT = Number(env('PORT', '8080'));
 const BREVO_API_KEY = env('BREVO_API_KEY');
 const TO = env('FEEDBACK_TO', 'info@antzsystems.com');
@@ -17,8 +26,37 @@ const RATE_WINDOW_MS = Number(env('RATE_LIMIT_WINDOW_MIN', '60')) * 60_000;
 const MAX_BODY = 16 * 1024;
 
 if (!BREVO_API_KEY || !FROM) {
-  console.error('BREVO_API_KEY and FEEDBACK_FROM must be set');
+  log('error', 'BREVO_API_KEY and FEEDBACK_FROM must be set');
   process.exit(1);
+}
+
+/* ---------- startup self-check: config summary (never the key itself), then ask Brevo whether key and sender work ---------- */
+const keyHint = `${BREVO_API_KEY.slice(0, 8)}…${BREVO_API_KEY.slice(-4)} (${BREVO_API_KEY.length} chars)`;
+log('info', 'config', { from: FROM, to: TO, allowedOrigins: ORIGINS.length ? ORIGINS : 'any', key: keyHint, rateLimit: `${RATE_MAX} per ${RATE_WINDOW_MS / 60_000} min` });
+if (quoted.length) log('warn', 'removed quotes around variable values', { vars: quoted });
+if (BREVO_API_KEY.startsWith('xsmtpsib-')) log('error', 'BREVO_API_KEY is an SMTP key; use an API key (starts with xkeysib-) from Brevo > SMTP & API > API Keys');
+else if (!BREVO_API_KEY.startsWith('xkeysib-')) log('warn', 'BREVO_API_KEY does not start with xkeysib-; Brevo API keys normally do');
+if (/\s/.test(BREVO_API_KEY)) log('error', 'BREVO_API_KEY contains whitespace');
+const badOrigins = ORIGINS.filter((o) => o.endsWith('/') || !/^https?:\/\/[^/]+$/.test(o));
+if (badOrigins.length) log('warn', 'ALLOWED_ORIGINS entries should look like https://guide.antzsystems.com (no path, no trailing slash)', { badOrigins });
+
+async function brevoCheck() {
+  const get = (path) => fetch(`https://api.brevo.com/v3${path}`, { headers: { 'api-key': BREVO_API_KEY, accept: 'application/json' }, signal: AbortSignal.timeout(10_000) });
+  try {
+    const a = await get('/account');
+    if (!a.ok) return log('error', 'brevo check: key rejected', { status: a.status, brevo: (await a.text()).slice(0, 300) });
+    const acct = await a.json();
+    log('info', 'brevo check: key ok', { account: acct.email, company: acct.companyName });
+    const s = await get('/senders');
+    if (!s.ok) return log('warn', 'brevo check: could not list senders', { status: s.status });
+    const senders = (await s.json()).senders || [];
+    const me = senders.find((x) => (x.email || '').toLowerCase() === FROM.toLowerCase());
+    if (!me) log('error', 'brevo check: FEEDBACK_FROM is not a sender in Brevo; add it under Senders, Domains & Dedicated IPs > Senders', { from: FROM, senders: senders.map((x) => x.email) });
+    else if (me.active === false) log('error', 'brevo check: FEEDBACK_FROM is in Brevo but not verified yet', { from: FROM });
+    else log('info', 'brevo check: sender ok', { from: FROM });
+  } catch (e) {
+    log('error', 'brevo check: could not reach Brevo', { err: String(e.message || e) });
+  }
 }
 
 const TYPES = new Set(['suggestion', 'bug', 'content']);
@@ -110,6 +148,7 @@ async function send(f, ip) {
 
 /* ---------- http ---------- */
 function reply(res, code, obj) {
+  res.reason = obj.error || 'sent';
   res.writeHead(code, { 'content-type': 'application/json', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' });
   res.end(JSON.stringify(obj));
 }
@@ -120,6 +159,11 @@ const clientIp = (req) => line(req.headers['x-client-ip'], 64) || req.socket.rem
 const server = http.createServer((req, res) => {
   const url = req.url.split('?')[0];
   if (url === '/health') return reply(res, 200, { ok: true });
+  /* One line per request: what came in and how it ended */
+  res.on('finish', () => log(res.statusCode < 400 ? 'info' : 'warn', 'request', {
+    method: req.method, path: url, status: res.statusCode, result: res.reason,
+    ip: clientIp(req), origin: req.headers.origin || '-', forwardedFor: req.headers['x-forwarded-for'] || '-',
+  }));
   if (url !== '/api/feedback') return reply(res, 404, { error: 'not_found' });
   if (req.method !== 'POST') { res.setHeader('allow', 'POST'); return reply(res, 405, { error: 'method_not_allowed' }); }
   if (!(req.headers['content-type'] || '').toLowerCase().startsWith('application/json')) return reply(res, 415, { error: 'unsupported_media_type' });
@@ -141,14 +185,14 @@ const server = http.createServer((req, res) => {
     let body;
     try { body = JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { return reply(res, 400, { error: 'bad_request' }); }
     /* Honeypot: a field people never see; a bot that fills it gets a success it doesn't earn */
-    if (body && typeof body.website === 'string' && body.website.trim()) return reply(res, 200, { ok: true });
+    if (body && typeof body.website === 'string' && body.website.trim()) { reply(res, 200, { ok: true }); res.reason = 'honeypot, not sent'; return; }
     const f = validate(body);
     if (!f) return reply(res, 400, { error: 'bad_request' });
     try {
       await send(f, ip);
       reply(res, 200, { ok: true });
     } catch (e) {
-      console.error(JSON.stringify({ level: 'error', msg: 'send failed', err: String(e.message || e), ip }));
+      log('error', 'send failed', { err: String(e.message || e), ip });
       reply(res, 502, { error: 'send_failed' });
     }
   });
@@ -158,4 +202,4 @@ const server = http.createServer((req, res) => {
 server.requestTimeout = 15_000;
 server.headersTimeout = 10_000;
 /* '::' listens on IPv6 and IPv4, which Railway's private network needs */
-server.listen(PORT, '::', () => console.log(`feedback service on :${PORT}`));
+server.listen(PORT, '::', () => { log('info', `feedback service on :${PORT}`); brevoCheck(); });
