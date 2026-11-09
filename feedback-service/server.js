@@ -31,7 +31,9 @@ if (!BREVO_API_KEY || !FROM) {
 }
 
 /* ---------- startup self-check: config summary (never the key itself), then ask Brevo whether key and sender work ---------- */
-const keyHint = `${BREVO_API_KEY.slice(0, 8)}…${BREVO_API_KEY.slice(-4)} (${BREVO_API_KEY.length} chars)`;
+/* The key's type, length and a short SHA-256 fingerprint: enough to tell whether it changed, none of its characters */
+const keyType = BREVO_API_KEY.startsWith('xkeysib-') ? 'api key (xkeysib)' : BREVO_API_KEY.startsWith('xsmtpsib-') ? 'smtp key (xsmtpsib)' : 'unknown type';
+const keyHint = `${keyType}, ${BREVO_API_KEY.length} chars, sha256 ${require('node:crypto').createHash('sha256').update(BREVO_API_KEY).digest('hex').slice(0, 8)}`;
 log('info', 'config', { from: FROM, to: TO, allowedOrigins: ORIGINS.length ? ORIGINS : 'any', key: keyHint, rateLimit: `${RATE_MAX} per ${RATE_WINDOW_MS / 60_000} min` });
 if (quoted.length) log('warn', 'removed quotes around variable values', { vars: quoted });
 if (BREVO_API_KEY.startsWith('xsmtpsib-')) log('error', 'BREVO_API_KEY is an SMTP key; use an API key (starts with xkeysib-) from Brevo > SMTP & API > API Keys');
