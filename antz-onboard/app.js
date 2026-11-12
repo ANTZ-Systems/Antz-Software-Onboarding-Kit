@@ -778,8 +778,9 @@
   /* ---------- Feedback page (#/feedback) ---------- */
   /* Where the form posts its answers as JSON ({ rating, type, modules, notes, message, name, email, language, page, sent, website }).
      Caddy forwards /api/* to the feedback service (feedback-service/), which emails it through Brevo.
+     The address is relative, so the form also works when the guide is served under a path (onboarding site, /guide/).
      Opened from a file or serve.py there's no service, so Send completes the form on the page without sending it */
-  const FEEDBACK_ENDPOINT = location.protocol.startsWith('http') && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? '/api/feedback' : '';
+  const FEEDBACK_ENDPOINT = location.protocol.startsWith('http') && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'api/feedback' : '';
   const FEEDBACK_TYPES = ['suggestion', 'bug', 'content'];
   /* thanks: open straight on the thank-you screen (#/feedback/thanks), to preview it */
   function renderFeedback(thanks = false) {
